@@ -17,32 +17,28 @@ export default function LibraryPage() {
   return (
     <main className="min-h-screen bg-white text-gray-800">
       {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#0e4a6e] via-[#1b6fa0] to-[#2589bf] text-white px-6 py-10 md:py-14">
-        {/* Decorative circles */}
-        <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-white/5" />
-        <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-white/5" />
-
-        <div className="relative max-w-4xl mx-auto flex flex-col md:flex-row items-center md:gap-10 text-center md:text-left">
+      <section className="bg-gradient-to-b from-[#c4dff0] to-white px-6 pt-10 pb-14 md:pt-14 md:pb-18">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:gap-10 text-center md:text-left">
           <Image
             src="/library/logo.png"
             alt="ESPS Library Project logo"
             width={160}
             height={200}
-            className="w-20 md:w-32 h-auto mb-4 md:mb-0 drop-shadow-lg shrink-0"
+            className="w-20 md:w-32 h-auto mb-4 md:mb-0 shrink-0"
             priority
           />
           <div>
-            <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.2em] mb-1 text-sky-200/80">
+            <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.2em] mb-1" style={{ color: coral }}>
               National Year of Reading 2026
             </p>
-            <h1 className="font-[family-name:var(--font-caveat)] text-4xl md:text-6xl font-bold leading-tight mb-3">
+            <h1 className="font-[family-name:var(--font-caveat)] text-4xl md:text-6xl font-bold leading-tight mb-3" style={{ color: blue }}>
               The Library Project
             </h1>
             <div
               className="w-12 h-1 rounded-full mb-3 mx-auto md:mx-0"
               style={{ backgroundColor: coral }}
             />
-            <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-base md:text-lg text-sky-100 leading-relaxed">
+            <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-base md:text-lg text-gray-600 leading-relaxed">
               We are working with the school on ambitious plans to transform our
               libraries and support reading for pleasure across every year group.
             </p>
@@ -50,14 +46,22 @@ export default function LibraryPage() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="flex items-center justify-center gap-3 py-2">
+        <div className="h-px w-16 bg-gray-300" />
+        <span className="text-xl" style={{ color: coral }}>&#9830;</span>
+        <div className="h-px w-16 bg-gray-300" />
+      </div>
+
       {/* Vision Cards */}
-      <section className="max-w-5xl mx-auto px-6 py-16">
+      <section className="max-w-5xl mx-auto px-6 pt-10 pb-16">
         <h2
-          className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-12"
+          className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-3"
           style={{ color: blue }}
         >
           What&rsquo;s the big idea?
         </h2>
+        <div className="w-24 h-0.5 mx-auto mb-12" style={{ backgroundColor: coral }} />
         <div className="grid md:grid-cols-2 gap-8">
           <Card
             emoji="📚"
@@ -312,7 +316,7 @@ function Card({
 }) {
   return (
     <div className="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
-      <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 mb-2">
+      <div className="flex flex-col items-center text-center md:flex-row md:text-left md:items-center gap-1 md:gap-3 mb-2">
         <div className="text-3xl shrink-0">{emoji}</div>
         <h3 className="text-xl font-bold text-gray-900">{title}</h3>
       </div>
