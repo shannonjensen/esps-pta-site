@@ -312,7 +312,7 @@ function Card({
 }) {
   return (
     <div className="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
-      <div className="flex items-center gap-3 mb-2">
+      <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3 mb-2">
         <div className="text-3xl shrink-0">{emoji}</div>
         <h3 className="text-xl font-bold text-gray-900">{title}</h3>
       </div>
