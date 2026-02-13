@@ -17,41 +17,30 @@ export default function LibraryPage() {
   return (
     <main className="min-h-screen bg-white text-gray-800">
       {/* Hero */}
-      <section className="bg-gradient-to-b from-[#c4dff0] to-white px-6 pt-10 pb-14 md:pt-14 md:pb-18">
+      <section className="text-white px-6 py-10 md:py-14" style={{ backgroundColor: blue }}>
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:gap-10 text-center md:text-left">
           <Image
             src="/library/logo.png"
             alt="ESPS Library Project logo"
             width={160}
             height={200}
-            className="w-20 md:w-32 h-auto mb-4 md:mb-0 shrink-0"
+            className="w-20 md:w-32 h-auto mb-4 md:mb-0 drop-shadow-lg shrink-0"
             priority
           />
           <div>
-            <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.2em] mb-1" style={{ color: coral }}>
+            <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.2em] mb-1 text-sky-200/80">
               National Year of Reading 2026
             </p>
-            <h1 className="font-[family-name:var(--font-caveat)] text-4xl md:text-6xl font-bold leading-tight mb-3" style={{ color: blue }}>
+            <h1 className="font-[family-name:var(--font-caveat)] text-4xl md:text-6xl font-bold leading-tight mb-3">
               The Library Project
             </h1>
-            <div
-              className="w-12 h-1 rounded-full mb-3 mx-auto md:mx-0"
-              style={{ backgroundColor: coral }}
-            />
-            <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-base md:text-lg text-gray-600 leading-relaxed">
+            <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-base md:text-lg text-sky-100 leading-relaxed">
               We are working with the school on ambitious plans to transform our
               libraries and support reading for pleasure across every year group.
             </p>
           </div>
         </div>
       </section>
-
-      {/* Divider */}
-      <div className="flex items-center justify-center gap-3 py-2">
-        <div className="h-px w-16 bg-gray-300" />
-        <span className="text-xl" style={{ color: coral }}>&#9830;</span>
-        <div className="h-px w-16 bg-gray-300" />
-      </div>
 
       {/* Vision Cards */}
       <section className="max-w-5xl mx-auto px-6 pt-10 pb-16">
