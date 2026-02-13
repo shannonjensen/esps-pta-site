@@ -61,23 +61,23 @@ export default function LibraryPage() {
         <div className="grid md:grid-cols-2 gap-8">
           <Card
             emoji="📚"
-            title="KS1 & KS2 Library Transformation"
-            text="We're working with library designers to create inspiring spaces that encourage children to fall in love with reading. Design proposals will be shared and fundraising will launch this spring."
+            title="A Transformation of Both Libraries"
+            text="We're already working with library designers to create inspiring spaces that encourage children to fall in love with reading. We'll share design proposals and launch dedicated fundraising initiatives in the spring."
           />
           <Card
             emoji="📖"
-            title="1,000+ New Books"
-            text="Fewer than 20% of our books were published in the last decade, and 40% of non-fiction is over 20 years old. We're aiming for 1,000+ new books through donations and a curated Book Wishlist."
+            title="New Books!"
+            text="Our book stock is ready for a refresh. We're aiming to put more than 1,000 new books on the shelves, sourced from families' used book donations and a new 'Book-Buy' campaign in the summer term. Input from pupils, staff, and families will help make sure the shelves are full of books that children will fall in love with."
           />
           <Card
             emoji="👨‍👩‍👧"
             title="Opening the Library to Families"
-            text="After February half-term, the KS2 library will be open after school on Tuesdays and Wednesdays (3:20–4:15 pm), staffed by parent volunteers."
+            text="After the February half-term, our KS2 library will open after school on Tuesdays and Wednesdays (3:20–4:15pm, made possible by parent volunteers) — giving families time to choose books and read together."
           />
           <Card
             emoji="🎉"
-            title="World Book Day &mdash; March 5"
-            text="Every child will choose a free book to take home. Families can stock up at the Secondhand Book Sale the next day, with all funds supporting this campaign."
+            title="World Book Day Events (Thursday, March 5)"
+            text="Alongside the usual parade, every child will choose a free book to take home on World Book Day. Families can then stock up at our Secondhand Book Sale the next day, with all funds raised going towards this campaign."
           />
         </div>
       </section>
@@ -312,8 +312,10 @@ function Card({
 }) {
   return (
     <div className="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
-      <div className="text-3xl mb-3">{emoji}</div>
-      <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
+      <div className="flex items-center gap-3 mb-2">
+        <div className="text-3xl shrink-0">{emoji}</div>
+        <h3 className="text-xl font-bold text-gray-900">{title}</h3>
+      </div>
       <p className="text-gray-600 leading-relaxed">{text}</p>
     </div>
   );
