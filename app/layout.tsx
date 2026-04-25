@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next"
-import { Space_Grotesk, DM_Sans } from "next/font/google";
+import { Outfit, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
+      <body className={`${outfit.variable} ${dmSans.variable}`}>
         {children}
       </body>
     </html>
