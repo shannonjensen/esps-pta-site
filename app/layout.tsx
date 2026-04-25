@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next"
-import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
+import { Nunito, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const nunito = Nunito({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${plusJakarta.variable} ${dmSans.variable}`}>
+      <body className={`${nunito.variable} ${dmSans.variable}`}>
         {children}
       </body>
     </html>
