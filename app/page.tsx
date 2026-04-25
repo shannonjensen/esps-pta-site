@@ -57,41 +57,18 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-800 font-[family-name:var(--font-dm-sans)]">
       {/* ════════════ HERO ════════════ */}
-      <section className="relative overflow-hidden text-white px-6 pt-16 pb-24 md:pt-24 md:pb-32">
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(160deg, ${blueDark} 0%, ${blue} 50%, #2e7d4f 100%)`,
-          }}
-        />
-        {/* Decorative leaf shapes */}
-        <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 800 500">
-          <path d="M650 -20 Q700 80 620 160 Q580 100 650 -20Z" fill="white" opacity="0.04" />
-          <path d="M780 -10 Q820 60 760 120 Q730 70 780 -10Z" fill="white" opacity="0.05" />
-          <path d="M-20 350 Q60 280 140 360 Q60 400 -20 350Z" fill="white" opacity="0.04" />
-          <path d="M200 50 Q220 80 200 110 Q180 80 200 50Z" fill="white" opacity="0.04" />
-        </svg>
-        {/* Organic bottom edge */}
-        <svg
-          className="absolute bottom-0 left-0 w-full"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          style={{ height: "60px" }}
-        >
-          <path
-            d="M0 120 L0 60 Q80 30 180 50 Q300 75 420 40 Q540 10 680 45 Q820 80 960 35 Q1100 0 1240 40 Q1360 65 1440 45 L1440 120Z"
-            fill="white"
-          />
-        </svg>
-
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <p className="text-xs md:text-sm uppercase tracking-[0.25em] mb-3 text-sky-200/80">
+      <section className="bg-white px-6 pt-12 pb-10 md:pt-16 md:pb-14 border-b border-gray-100">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-xs md:text-sm uppercase tracking-[0.25em] mb-3 text-gray-400 font-medium">
             East Sheen Primary School
           </p>
-          <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-bold leading-tight mb-6 drop-shadow-md">
+          <h1
+            className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-bold leading-tight mb-5 tracking-tight"
+            style={{ color: blue }}
+          >
             PTA
           </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-sky-100 leading-relaxed">
+          <p className="max-w-xl mx-auto text-lg text-gray-500 leading-relaxed">
             We raise funds and bring our community together to enrich the
             education and school experience of every child at East Sheen
             Primary.
