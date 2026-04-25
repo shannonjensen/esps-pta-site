@@ -37,18 +37,10 @@ export default function LibraryPage() {
         <div className="absolute -bottom-32 -left-16 w-64 h-64 rounded-full opacity-5 bg-white" />
 
         <div className="relative max-w-4xl mx-auto flex flex-col items-center text-center">
-          <Image
-            src="/library/logo.png"
-            alt="ESPS Library Project logo"
-            width={160}
-            height={200}
-            className="w-24 md:w-36 h-auto mb-6 drop-shadow-lg"
-            priority
-          />
           <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.25em] mb-3 text-sky-200/80">
             East Sheen Primary School PTA
           </p>
-          <h1 className="font-[family-name:var(--font-caveat)] text-5xl md:text-7xl font-bold leading-tight mb-6">
+          <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-bold leading-tight mb-6">
             Love Our Libraries
           </h1>
           <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-lg md:text-xl text-sky-100 leading-relaxed mb-10">
@@ -103,7 +95,7 @@ export default function LibraryPage() {
       {/* ════════════ THE MISSION ════════════ */}
       <section className="max-w-3xl mx-auto px-6 py-16 md:py-20 text-center">
         <h2
-          className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold mb-6"
+          className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold mb-6"
           style={{ color: blue }}
         >
           &pound;50,000 to Transform Two Libraries
@@ -116,7 +108,7 @@ export default function LibraryPage() {
           Reading nooks that turn a quiet moment into an adventure.
         </p>
         <p
-          className="font-[family-name:var(--font-caveat)] text-2xl md:text-3xl font-bold mt-8"
+          className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold mt-8"
           style={{ color: coral }}
         >
           Every contribution &mdash; big or small &mdash; helps write the next chapter.
@@ -127,7 +119,7 @@ export default function LibraryPage() {
       <section className="bg-gray-50 px-6 py-16">
         <div className="max-w-5xl mx-auto">
           <h2
-            className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-4"
+            className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold text-center mb-4"
             style={{ color: blue }}
           >
             Imagine the Possibilities
@@ -183,7 +175,7 @@ export default function LibraryPage() {
       {/* ════════════ WHAT HAPPENS NEXT ════════════ */}
       <section className="max-w-3xl mx-auto px-6 py-16 md:py-20">
         <h2
-          className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-8"
+          className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold text-center mb-8"
           style={{ color: blue }}
         >
           What Happens Next?
@@ -206,7 +198,7 @@ export default function LibraryPage() {
       <section className="px-6 py-16 md:py-20" style={{ backgroundColor: blueLight }}>
         <div className="max-w-5xl mx-auto">
           <h2
-            className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-4"
+            className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold text-center mb-4"
             style={{ color: blue }}
           >
             How Can I Help?
@@ -293,7 +285,7 @@ export default function LibraryPage() {
           background: `linear-gradient(135deg, ${blueDark} 0%, ${blue} 100%)`,
         }}
       >
-        <h2 className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold mb-4">
+        <h2 className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold mb-4">
           Help Us Write the Next Chapter
         </h2>
         <p className="text-sky-100 text-lg max-w-xl mx-auto mb-8 leading-relaxed">

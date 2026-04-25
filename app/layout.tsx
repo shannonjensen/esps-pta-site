@@ -1,18 +1,11 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next"
-import { Caveat, Patrick_Hand, DM_Sans } from "next/font/google";
+import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const caveat = Caveat({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-caveat",
-  display: "swap",
-});
-
-const patrickHand = Patrick_Hand({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-patrick-hand",
+  variable: "--font-heading",
   display: "swap",
 });
 
@@ -34,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${caveat.variable} ${patrickHand.variable} ${dmSans.variable}`}>
+      <body className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
         {children}
       </body>
     </html>
