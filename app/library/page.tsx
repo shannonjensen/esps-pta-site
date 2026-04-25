@@ -77,27 +77,18 @@ export default function LibraryPage() {
           <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-bold leading-tight mb-6 drop-shadow-md">
             Love Our Libraries
           </h1>
-          <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-lg md:text-xl text-sky-100 leading-relaxed mb-10">
+          <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-lg md:text-xl text-sky-100 leading-relaxed">
             At East Sheen Primary, reading isn&rsquo;t just part of the
             curriculum &mdash; it&rsquo;s at the heart of how our children
             learn, imagine and grow. Our libraries are where that love of
             reading takes root: where children discover books, ideas and whole
             new worlds.
           </p>
-
-          {/* CTA */}
-          <a
-            href={DONATE_URL}
-            className="inline-block text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-transform"
-            style={{ backgroundColor: coral }}
-          >
-            Donate Now
-          </a>
         </div>
       </section>
 
       {/* ════════════ GROWING TREE PROGRESS ════════════ */}
-      <section className="max-w-3xl mx-auto px-6 -mt-8 relative z-10">
+      <section className="max-w-3xl mx-auto px-6 -mt-20 md:-mt-24 relative z-10">
         <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
           <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
             {/* Tree */}
@@ -128,6 +119,13 @@ export default function LibraryPage() {
               <p className="text-sm text-gray-400 mt-2">
                 {percent}% &mdash; help our library grow
               </p>
+              <a
+                href={DONATE_URL}
+                className="inline-block text-white font-bold text-base px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform mt-4"
+                style={{ backgroundColor: coral }}
+              >
+                Donate Now
+              </a>
             </div>
           </div>
         </div>
