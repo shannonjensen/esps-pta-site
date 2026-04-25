@@ -47,8 +47,7 @@ const committee = [
 
 /* ── Achievement stats ── */
 const achievements = [
-  { figure: "£26k+", label: "raised autumn term alone" },
-  { figure: "£18k", label: "from the Christmas Fair" },
+  { figure: "£33k+", label: "raised this school year" },
   { figure: "1,000+", label: "books donated by families" },
   { figure: "600", label: "children chose a free book on World Book Day" },
 ];
@@ -154,7 +153,7 @@ export default function Home() {
           over &pound;150,000 in the past three years. Here are some highlights
           from this year alone.
         </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-3 gap-6">
           {achievements.map((a) => (
             <div key={a.label} className="text-center">
               <p
