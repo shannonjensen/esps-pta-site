@@ -57,18 +57,12 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-800 font-[family-name:var(--font-dm-sans)]">
       {/* ════════════ HERO ════════════ */}
-      <section className="bg-white px-6 pt-12 pb-10 md:pt-16 md:pb-14 border-b border-gray-100">
+      <section className="px-6 pt-10 pb-8 md:pt-14 md:pb-12" style={{ backgroundColor: blue }}>
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xs md:text-sm uppercase tracking-[0.25em] mb-3 text-gray-400 font-medium">
-            East Sheen Primary School
-          </p>
-          <h1
-            className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-bold leading-tight mb-5 tracking-tight"
-            style={{ color: blue }}
-          >
-            PTA
+          <h1 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl font-bold text-white tracking-tight mb-3">
+            ESPS PTA
           </h1>
-          <p className="max-w-xl mx-auto text-lg text-gray-500 leading-relaxed">
+          <p className="max-w-xl mx-auto text-base text-sky-100/80 leading-relaxed">
             We raise funds and bring our community together to enrich the
             education and school experience of every child at East Sheen
             Primary.
