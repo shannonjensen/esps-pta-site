@@ -94,7 +94,7 @@ export default function Home() {
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-sky-100 leading-relaxed">
             We raise funds and bring our community together to enrich the
             education and school experience of every child at East Sheen
-            Primary. All parents and carers are automatic members.
+            Primary.
           </p>
         </div>
       </section>
