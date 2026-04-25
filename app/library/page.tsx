@@ -30,25 +30,99 @@ export default function LibraryPage() {
   return (
     <main className="min-h-screen bg-white text-gray-800">
       {/* ════════════ HERO ════════════ */}
-      <section
-        className="relative overflow-hidden text-white px-6 py-16 md:py-24"
-        style={{
-          background: `linear-gradient(135deg, ${blueDark} 0%, ${blue} 60%, #2a8bc2 100%)`,
-        }}
-      >
-        {/* Decorative leaves */}
-        <div className="absolute top-6 right-8 opacity-10">
-          <LeafCluster className="w-48 h-48" />
-        </div>
-        <div className="absolute bottom-8 left-6 opacity-[0.07] rotate-180">
-          <LeafCluster className="w-32 h-32" />
-        </div>
+      <section className="relative overflow-hidden text-white px-6 pt-16 pb-32 md:pt-24 md:pb-40">
+        {/* Sky gradient */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(180deg, #0c2233 0%, ${blueDark} 30%, ${blue} 70%, #5ba3cc 100%)`,
+          }}
+        />
 
-        <div className="relative max-w-4xl mx-auto flex flex-col items-center text-center">
+        {/* Stars / fireflies */}
+        <div className="absolute top-8 left-[15%] w-1.5 h-1.5 bg-white/30 rounded-full" />
+        <div className="absolute top-14 right-[25%] w-1 h-1 bg-white/20 rounded-full" />
+        <div className="absolute top-20 left-[40%] w-1 h-1 bg-white/15 rounded-full" />
+        <div className="absolute top-6 right-[12%] w-1.5 h-1.5 bg-white/25 rounded-full" />
+
+        {/* Background hill layer (furthest) */}
+        <svg
+          className="absolute bottom-0 left-0 w-full"
+          viewBox="0 0 1440 200"
+          preserveAspectRatio="none"
+          style={{ height: "160px" }}
+        >
+          <path
+            d="M0 200 L0 120 Q120 60 240 90 Q400 130 520 80 Q680 20 800 70 Q960 130 1100 60 Q1280 10 1440 80 L1440 200Z"
+            fill="#1a4a2e"
+            opacity="0.4"
+          />
+        </svg>
+
+        {/* Mid-ground trees layer */}
+        <svg
+          className="absolute bottom-0 left-0 w-full"
+          viewBox="0 0 1440 220"
+          preserveAspectRatio="none"
+          style={{ height: "180px" }}
+        >
+          {/* Rolling hills */}
+          <path
+            d="M0 220 L0 150 Q180 100 360 130 Q540 170 720 110 Q900 60 1080 120 Q1260 160 1440 100 L1440 220Z"
+            fill="#1e5435"
+            opacity="0.5"
+          />
+          {/* Trees on the hills */}
+          {/* Left cluster */}
+          <path d="M80 130 L90 70 L100 130Z" fill="#2d6e47" opacity="0.7" />
+          <path d="M110 135 L125 55 L140 135Z" fill="#245a3a" opacity="0.8" />
+          <path d="M60 138 L72 85 L84 138Z" fill="#2d6e47" opacity="0.6" />
+          {/* Mid-left */}
+          <path d="M320 125 L335 60 L350 125Z" fill="#245a3a" opacity="0.7" />
+          <path d="M350 130 L360 80 L370 130Z" fill="#2d6e47" opacity="0.6" />
+          {/* Center */}
+          <path d="M650 115 L665 45 L680 115Z" fill="#245a3a" opacity="0.8" />
+          <path d="M690 120 L700 70 L710 120Z" fill="#2d6e47" opacity="0.6" />
+          <path d="M720 112 L738 30 L756 112Z" fill="#1e5435" opacity="0.7" />
+          {/* Right */}
+          <path d="M1000 110 L1015 40 L1030 110Z" fill="#2d6e47" opacity="0.7" />
+          <path d="M1040 118 L1052 65 L1064 118Z" fill="#245a3a" opacity="0.6" />
+          {/* Far right */}
+          <path d="M1300 115 L1315 50 L1330 115Z" fill="#245a3a" opacity="0.8" />
+          <path d="M1340 120 L1350 75 L1360 120Z" fill="#2d6e47" opacity="0.6" />
+          <path d="M1370 118 L1385 55 L1400 118Z" fill="#1e5435" opacity="0.7" />
+        </svg>
+
+        {/* Foreground hill + trees (closest) */}
+        <svg
+          className="absolute bottom-0 left-0 w-full"
+          viewBox="0 0 1440 160"
+          preserveAspectRatio="none"
+          style={{ height: "120px" }}
+        >
+          <path
+            d="M0 160 L0 110 Q200 70 400 100 Q600 130 800 90 Q1000 50 1200 95 Q1350 120 1440 90 L1440 160Z"
+            fill="#2d6e47"
+            opacity="0.6"
+          />
+          {/* Foreground trees — larger, more detailed */}
+          <path d="M150 95 L170 20 L190 95Z" fill="#3a8f5c" opacity="0.7" />
+          <path d="M170 98 L185 40 L200 98Z" fill="#2d6e47" opacity="0.8" />
+          <path d="M460 105 L478 35 L496 105Z" fill="#3a8f5c" opacity="0.6" />
+          <path d="M870 80 L890 10 L910 80Z" fill="#2d6e47" opacity="0.8" />
+          <path d="M900 85 L912 40 L924 85Z" fill="#3a8f5c" opacity="0.6" />
+          <path d="M1220 90 L1240 25 L1260 90Z" fill="#3a8f5c" opacity="0.7" />
+        </svg>
+
+        {/* Ground strip */}
+        <div className="absolute bottom-0 left-0 w-full h-6 bg-[#2d6e47] opacity-70" />
+
+        {/* Content */}
+        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
           <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.25em] mb-3 text-sky-200/80">
             East Sheen Primary School PTA
           </p>
-          <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-bold leading-tight mb-6">
+          <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-bold leading-tight mb-6 drop-shadow-md">
             Love Our Libraries
           </h1>
           <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-lg md:text-xl text-sky-100 leading-relaxed mb-10">
