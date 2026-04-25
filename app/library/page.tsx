@@ -2,80 +2,128 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "The Library Project | ESPS PTA",
+  title: "Love Our Libraries | ESPS PTA",
   description:
-    "East Sheen Primary School PTA Library Project — transforming our libraries, refreshing our book stock, and opening access to families.",
+    "Help us raise £50,000 to transform the East Sheen Primary School libraries into inspiring spaces where children discover a lifelong love of reading.",
 };
 
-/* ── Colour palette (from logo) ── */
-const blue = "#1b6fa0"; // deep book-blue
+/* ── Config ── */
+const GOAL = 50_000;
+const RAISED = 0;
+const DONATE_URL = "#donate"; // placeholder
+const BIKE_RIDE_URL = "#bike-ride"; // placeholder
+
+/* ── Colour palette ── */
+const blue = "#1b6fa0";
+const blueDark = "#15587e";
 const blueLight = "#e8f2f8";
-const coral = "#e0713e"; // warm orange from the flames
+const coral = "#e0713e";
 const coralDark = "#c45e2f";
 
 export default function LibraryPage() {
+  const percent = Math.min(Math.round((RAISED / GOAL) * 100), 100);
+
   return (
     <main className="min-h-screen bg-white text-gray-800">
-      {/* Hero */}
-      <section className="text-white px-6 py-10 md:py-14" style={{ backgroundColor: blue }}>
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:gap-10 text-center md:text-left">
+      {/* ════════════ HERO ════════════ */}
+      <section
+        className="relative overflow-hidden text-white px-6 py-16 md:py-24"
+        style={{
+          background: `linear-gradient(135deg, ${blueDark} 0%, ${blue} 60%, #2a8bc2 100%)`,
+        }}
+      >
+        {/* Subtle decorative circles */}
+        <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-10 bg-white" />
+        <div className="absolute -bottom-32 -left-16 w-64 h-64 rounded-full opacity-5 bg-white" />
+
+        <div className="relative max-w-4xl mx-auto flex flex-col items-center text-center">
           <Image
             src="/library/logo.png"
             alt="ESPS Library Project logo"
             width={160}
             height={200}
-            className="w-20 md:w-32 h-auto mb-4 md:mb-0 drop-shadow-lg shrink-0"
+            className="w-24 md:w-36 h-auto mb-6 drop-shadow-lg"
             priority
           />
-          <div>
-            <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.2em] mb-1 text-sky-200/80">
-              National Year of Reading 2026
+          <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.25em] mb-3 text-sky-200/80">
+            East Sheen Primary School PTA
+          </p>
+          <h1 className="font-[family-name:var(--font-caveat)] text-5xl md:text-7xl font-bold leading-tight mb-6">
+            Love Our Libraries
+          </h1>
+          <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-lg md:text-xl text-sky-100 leading-relaxed mb-10">
+            At East Sheen Primary, reading isn&rsquo;t just part of the
+            curriculum &mdash; it&rsquo;s at the heart of how our children
+            learn, imagine and grow. Our libraries are where that love of
+            reading takes root: where children discover books, ideas and whole
+            new worlds.
+          </p>
+
+          {/* CTA */}
+          <a
+            href={DONATE_URL}
+            className="inline-block text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-transform"
+            style={{ backgroundColor: coral }}
+          >
+            Donate Now
+          </a>
+        </div>
+      </section>
+
+      {/* ════════════ FUNDRAISING THERMOMETER ════════════ */}
+      <section className="max-w-3xl mx-auto px-6 -mt-8 relative z-10">
+        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
+          <div className="flex justify-between items-baseline mb-3">
+            <p className="text-2xl md:text-3xl font-bold" style={{ color: blue }}>
+              &pound;{RAISED.toLocaleString()}
+              <span className="text-base font-normal text-gray-400">
+                {" "}raised
+              </span>
             </p>
-            <h1 className="font-[family-name:var(--font-caveat)] text-4xl md:text-6xl font-bold leading-tight mb-3">
-              The Library Project
-            </h1>
-            <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-base md:text-lg text-sky-100 leading-relaxed">
-              We are working with the school on ambitious plans to transform our
-              libraries and support reading for pleasure across every year group.
+            <p className="text-lg font-semibold text-gray-500">
+              &pound;{GOAL.toLocaleString()} goal
             </p>
           </div>
+          {/* Progress bar */}
+          <div className="w-full h-5 bg-gray-100 rounded-full overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-1000 ease-out"
+              style={{
+                width: `${Math.max(percent, 2)}%`,
+                background: `linear-gradient(90deg, ${coral}, ${coralDark})`,
+              }}
+            />
+          </div>
+          <p className="text-sm text-gray-400 mt-2 text-center">
+            {percent}% of our goal &mdash; every contribution counts
+          </p>
         </div>
       </section>
 
-      {/* Vision Cards */}
-      <section className="max-w-5xl mx-auto px-6 pt-10 pb-16">
+      {/* ════════════ THE MISSION ════════════ */}
+      <section className="max-w-3xl mx-auto px-6 py-16 md:py-20 text-center">
         <h2
-          className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-3"
+          className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold mb-6"
           style={{ color: blue }}
         >
-          What&rsquo;s the big idea?
+          &pound;50,000 to Transform Two Libraries
         </h2>
-        <div className="w-24 h-0.5 mx-auto mb-12" style={{ backgroundColor: coral }} />
-        <div className="grid md:grid-cols-2 gap-8">
-          <Card
-            emoji="📚"
-            title="A Transformation of Both Libraries"
-            text="We're already working with library designers to create inspiring spaces that encourage children to fall in love with reading. We'll share design proposals and launch dedicated fundraising initiatives in the spring."
-          />
-          <Card
-            emoji="📖"
-            title="New Books!"
-            text="Our book stock is ready for a refresh. We're aiming to put more than 1,000 new books on the shelves, sourced from families' used book donations and a new 'Book-Buy' campaign in the summer term. Input from pupils, staff, and families will help make sure the shelves are full of books that children will fall in love with."
-          />
-          <Card
-            emoji="👨‍👩‍👧"
-            title="Opening the Library to Families"
-            text="After the February half-term, our KS2 library will open after school on Tuesdays and Wednesdays (3:20–4:15pm, made possible by parent volunteers) — giving families time to choose books and read together."
-          />
-          <Card
-            emoji="🎉"
-            title="World Book Day Events (Thursday, March 5)"
-            text="Alongside the usual parade, every child will choose a free book to take home on World Book Day. Families can then stock up at our Secondhand Book Sale the next day, with all funds raised going towards this campaign."
-          />
-        </div>
+        <div className="w-20 h-1 mx-auto rounded-full mb-8" style={{ backgroundColor: coral }} />
+        <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+          We&rsquo;re raising &pound;50,000 to transform our KS1 and KS2
+          libraries into spaces worthy of that mission. Spaces children want to
+          be in. Shelves stocked with books they&rsquo;ll remember for life.
+          Reading nooks that turn a quiet moment into an adventure.
+        </p>
+        <p
+          className="font-[family-name:var(--font-caveat)] text-2xl md:text-3xl font-bold mt-8"
+          style={{ color: coral }}
+        >
+          Every contribution &mdash; big or small &mdash; helps write the next chapter.
+        </p>
       </section>
 
-      {/* Current vs. Inspiration Photos */}
+      {/* ════════════ PHOTO GALLERY ════════════ */}
       <section className="bg-gray-50 px-6 py-16">
         <div className="max-w-5xl mx-auto">
           <h2
@@ -84,207 +132,199 @@ export default function LibraryPage() {
           >
             Imagine the Possibilities
           </h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Our libraries are well-loved — now it&rsquo;s time for a refresh.
-            Here&rsquo;s where we are and where we&rsquo;re headed.
+          <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto">
+            Our libraries are well-loved &mdash; now it&rsquo;s time for a
+            transformation.
           </p>
+
           <div className="mb-12">
-            <h3 className="text-lg font-semibold text-gray-500 uppercase tracking-wide mb-4 text-center">
-              Our Current Libraries
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4 text-center">
+              Where We Are Now
             </h3>
             <div className="grid sm:grid-cols-2 gap-6">
-              <figure className="overflow-hidden rounded-xl shadow">
-                <Image
-                  src="/library/ks1-current.jpg"
-                  alt="Current KS1 library"
-                  width={800}
-                  height={600}
-                  className="w-full h-64 object-cover"
-                />
-                <figcaption className="text-center text-sm text-gray-500 py-2">
-                  KS1 Library
-                </figcaption>
-              </figure>
-              <figure className="overflow-hidden rounded-xl shadow">
-                <Image
-                  src="/library/ks2-current.jpg"
-                  alt="Current KS2 library"
-                  width={800}
-                  height={600}
-                  className="w-full h-64 object-cover"
-                />
-                <figcaption className="text-center text-sm text-gray-500 py-2">
-                  KS2 Library
-                </figcaption>
-              </figure>
+              <PhotoCard
+                src="/library/ks1-current.jpg"
+                alt="Current KS1 library"
+                caption="KS1 Library"
+              />
+              <PhotoCard
+                src="/library/ks2-current.jpg"
+                alt="Current KS2 library"
+                caption="KS2 Library"
+              />
             </div>
           </div>
+
           <div>
             <h3
-              className="text-lg font-semibold uppercase tracking-wide mb-4 text-center"
+              className="text-sm font-semibold uppercase tracking-widest mb-4 text-center"
               style={{ color: coral }}
             >
-              Inspiration for the Upgrade
+              Where We&rsquo;re Headed
             </h3>
             <div className="grid sm:grid-cols-2 gap-6">
-              <figure
-                className="overflow-hidden rounded-xl shadow ring-2"
-                style={{ "--tw-ring-color": `${coral}33` } as React.CSSProperties}
-              >
-                <Image
-                  src="/library/sample-library-1.jpg"
-                  alt="Sample upgraded school library with cosy reading nooks"
-                  width={800}
-                  height={600}
-                  className="w-full h-64 object-cover"
-                />
-                <figcaption className="text-center text-sm text-gray-500 py-2">
-                  Cosy nooks and colourful, well-organised shelving
-                </figcaption>
-              </figure>
-              <figure
-                className="overflow-hidden rounded-xl shadow ring-2"
-                style={{ "--tw-ring-color": `${coral}33` } as React.CSSProperties}
-              >
-                <Image
-                  src="/library/sample-library-2.jpg"
-                  alt="Sample upgraded school library with imaginative play structures"
-                  width={800}
-                  height={600}
-                  className="w-full h-64 object-cover"
-                />
-                <figcaption className="text-center text-sm text-gray-500 py-2">
-                  Imaginative spaces that inspire a love of reading
-                </figcaption>
-              </figure>
+              <PhotoCard
+                src="/library/sample-library-1.jpg"
+                alt="Inspiration: cosy reading nooks and colourful shelving"
+                caption="Cosy nooks and vibrant, well-organised shelving"
+                accent
+              />
+              <PhotoCard
+                src="/library/sample-library-2.jpg"
+                alt="Inspiration: imaginative play structures and reading spaces"
+                caption="Imaginative spaces that inspire a love of reading"
+                accent
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Timeline / Upcoming Events */}
-      <section className="max-w-3xl mx-auto px-6 py-16">
+      {/* ════════════ WHAT HAPPENS NEXT ════════════ */}
+      <section className="max-w-3xl mx-auto px-6 py-16 md:py-20">
         <h2
-          className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-12"
+          className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-8"
           style={{ color: blue }}
         >
-          Upcoming Events
+          What Happens Next?
         </h2>
-        <div className="space-y-0">
-          <h3 className="text-lg font-bold mb-4" style={{ color: coral }}>
-            Spring Term
-          </h3>
-          <TimelineItem
-            date="Mon, Feb 23"
-            text="Last day for WBD costume donations"
-          />
-          <TimelineItem
-            date="Tue, Feb 24"
-            text="STEM Book Wishlist opens for orders"
-          />
-          <TimelineItem
-            date="Tue & Wed from Feb 24"
-            text="KS2 library open after school, 3:20–4:15 pm"
-            highlight
-          />
-          <TimelineItem
-            date="Fri, Feb 27"
-            text="World Book Day Costume Sale"
-          />
-          <TimelineItem
-            date="Mon, Mar 2"
-            text="Last day for secondhand book donations"
-          />
-          <TimelineItem
-            date="Thu, Mar 5"
-            text="World Book Day — Parade & free book pick"
-            highlight
-          />
-          <TimelineItem
-            date="Fri, Mar 6"
-            text="Secondhand Book Sale"
-          />
-          <TimelineItem
-            date="March"
-            text="Library design proposals shared"
-          />
-          <div className="h-6" />
-          <h3 className="text-lg font-bold mb-4" style={{ color: coral }}>
-            Summer Term
-          </h3>
-          <TimelineItem date="After Easter" text="Book Wishlist launches" />
-          <TimelineItem
-            date="Summer"
-            text="Library designs finalised, active fundraising"
-          />
+        <div className="bg-gray-50 rounded-2xl p-8 md:p-10 shadow-sm">
+          <p className="text-lg text-gray-700 leading-relaxed mb-6">
+            The school and PTA are currently working with library suppliers on
+            the final designs, which will be shared and displayed later this
+            term. We aim to create welcoming, engaging environments where
+            children are eager to pick up a book.
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed font-semibold">
+            With your generous support, we will be able to install the libraries
+            over the summer holiday.
+          </p>
         </div>
       </section>
 
-      {/* How to Help */}
-      <section className="px-6 py-16" style={{ backgroundColor: blueLight }}>
+      {/* ════════════ HOW CAN I HELP ════════════ */}
+      <section className="px-6 py-16 md:py-20" style={{ backgroundColor: blueLight }}>
         <div className="max-w-5xl mx-auto">
           <h2
-            className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-12"
+            className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold text-center mb-4"
             style={{ color: blue }}
           >
-            How Can You Help?
+            How Can I Help?
           </h2>
+          <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto">
+            There are lots of ways to support the campaign.
+          </p>
+
           <div className="grid md:grid-cols-3 gap-8">
+            {/* Donate */}
             <HelpCard
-              emoji="📦"
-              title="Donate Books"
-              text="Donate good-quality, age-appropriate books (ages 4–11) to the main office throughout February. They'll refresh our shelves, supply the World Book Day free book pick, and stock the secondhand sale."
-            />
+              icon={
+                <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke={coral} strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+              }
+              title="Donate"
+              blue={blue}
+            >
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Please donate what you can. If your donation is eligible for
+                Gift Aid, we receive a 25% top-up at no cost to you. If your
+                employer offers charitable donation matching, it could mean
+                doubling your impact.
+              </p>
+              <a
+                href={DONATE_URL}
+                className="inline-block text-white font-semibold px-6 py-2.5 rounded-lg transition hover:opacity-90"
+                style={{ backgroundColor: coral }}
+              >
+                Make a Donation &rarr;
+              </a>
+            </HelpCard>
+
+            {/* Bike Ride */}
             <HelpCard
-              emoji="💛"
-              title="Donate Funds"
-              text="A dedicated library fundraiser will launch this spring. Interested in sponsoring a reading nook or bookshelf? Ongoing £10/month donations via our Coffee Club also help fund initiatives like this."
-              link={{
-                href: "https://tinyurl.com/Esps10",
-                label: "Join the Coffee Club",
-              }}
-            />
+              icon={
+                <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke={coral} strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              }
+              title="Sponsor a Rider"
+              blue={blue}
+            >
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Sponsor a rider in the ESPS charity bike ride. All proceeds
+                this year go to the library transformation. One parent&rsquo;s
+                employer is generously double-matching the first &pound;5,000
+                he raises.
+              </p>
+              <a
+                href={BIKE_RIDE_URL}
+                className="inline-block text-white font-semibold px-6 py-2.5 rounded-lg transition hover:opacity-90"
+                style={{ backgroundColor: coral }}
+              >
+                Sponsor Now &rarr;
+              </a>
+            </HelpCard>
+
+            {/* Suggest a Book */}
             <HelpCard
-              emoji="⏰"
-              title="Donate Time"
-              text="Volunteer to staff the library after school, sort book donations, help with events, or support the restocking effort — whether it's a one-time thing or an ongoing commitment."
-              link={{
-                href: "https://tinyurl.com/espslibraryvolunteer",
-                label: "Sign up to volunteer",
-              }}
-            />
+              icon={
+                <svg className="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke={coral} strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+              }
+              title="Suggest a Book"
+              blue={blue}
+            >
+              <p className="text-gray-600 leading-relaxed">
+                Suggest a book that you love! We are working with the school on
+                a book wishlist so our new shelves are filled with stories
+                children will treasure. More details coming soon.
+              </p>
+            </HelpCard>
           </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="max-w-3xl mx-auto px-6 py-16 text-center">
-        <h2 className="font-[family-name:var(--font-caveat)] text-3xl md:text-4xl font-bold mb-4" style={{ color: blue }}>
-          Get in Touch
+      {/* ════════════ CLOSING CTA ════════════ */}
+      <section
+        className="text-white px-6 py-16 md:py-20 text-center"
+        style={{
+          background: `linear-gradient(135deg, ${blueDark} 0%, ${blue} 100%)`,
+        }}
+      >
+        <h2 className="font-[family-name:var(--font-caveat)] text-4xl md:text-5xl font-bold mb-4">
+          Help Us Write the Next Chapter
         </h2>
-        <p className="text-gray-600 mb-6 leading-relaxed">
-          Have questions or want to get involved? We&rsquo;d love to hear from
-          you.
+        <p className="text-sky-100 text-lg max-w-xl mx-auto mb-8 leading-relaxed">
+          Together we can give every child at East Sheen Primary a library
+          they&rsquo;ll love &mdash; and remember.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="mailto:shannon@espspta.org"
-            className="inline-block text-white font-semibold px-8 py-3 rounded-lg bg-[#e0713e] hover:bg-[#c45e2f] transition"
-          >
-            Email Shannon
-          </a>
-          <a
-            href="mailto:pta@espspta.org"
-            className="inline-block font-semibold px-8 py-3 rounded-lg border-2 transition"
-            style={{ borderColor: blue, color: blue }}
-          >
-            Email the PTA
-          </a>
-        </div>
+        <a
+          href={DONATE_URL}
+          className="inline-block text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-transform"
+          style={{ backgroundColor: coral }}
+        >
+          Donate Now
+        </a>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-100 text-center text-sm text-gray-500 py-6 px-4">
+      {/* ════════════ CONTACT ════════════ */}
+      <section className="max-w-3xl mx-auto px-6 py-12 text-center">
+        <p className="text-gray-500">
+          Questions?{" "}
+          <a
+            href="mailto:pta@espspta.org"
+            className="font-semibold underline underline-offset-2 transition hover:opacity-80"
+            style={{ color: blue }}
+          >
+            Get in touch with the PTA
+          </a>
+        </p>
+      </section>
+
+      {/* ════════════ FOOTER ════════════ */}
+      <footer className="bg-gray-100 text-center text-sm text-gray-400 py-6 px-4">
         &copy; {new Date().getFullYear()} East Sheen Primary School PTA. All
         rights reserved.
       </footer>
@@ -292,83 +332,59 @@ export default function LibraryPage() {
   );
 }
 
-/* ── Subcomponents ── */
+/* ══════════════════════════════════════════
+   Subcomponents
+   ══════════════════════════════════════════ */
 
-function Card({
-  emoji,
-  title,
-  text,
+function PhotoCard({
+  src,
+  alt,
+  caption,
+  accent,
 }: {
-  emoji: string;
-  title: string;
-  text: string;
+  src: string;
+  alt: string;
+  caption: string;
+  accent?: boolean;
 }) {
   return (
-    <div className="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition">
-      <div className="flex flex-col items-center text-center md:flex-row md:text-left md:items-center gap-1 md:gap-3 mb-2">
-        <div className="text-3xl shrink-0">{emoji}</div>
-        <h3 className="text-xl font-bold text-gray-900">{title}</h3>
-      </div>
-      <p className="text-gray-600 leading-relaxed">{text}</p>
-    </div>
-  );
-}
-
-function TimelineItem({
-  date,
-  text,
-  highlight,
-}: {
-  date: string;
-  text: string;
-  highlight?: boolean;
-}) {
-  return (
-    <div className="flex gap-4 pb-6 relative">
-      <div className="flex flex-col items-center">
-        <div
-          className="w-3 h-3 rounded-full mt-1.5 shrink-0"
-          style={{ backgroundColor: highlight ? coral : blue }}
-        />
-        <div className="w-0.5 bg-gray-200 grow" />
-      </div>
-      <div>
-        <p className="text-sm font-semibold" style={{ color: blue }}>
-          {date}
-        </p>
-        <p className="text-gray-700">{text}</p>
-      </div>
-    </div>
+    <figure
+      className={`overflow-hidden rounded-xl shadow-md ${
+        accent ? "ring-2 ring-[#e0713e]/20" : ""
+      }`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        width={800}
+        height={600}
+        className="w-full h-64 object-cover"
+      />
+      <figcaption className="text-center text-sm text-gray-500 py-3 px-2">
+        {caption}
+      </figcaption>
+    </figure>
   );
 }
 
 function HelpCard({
-  emoji,
+  icon,
   title,
-  text,
-  link,
+  children,
+  blue,
 }: {
-  emoji: string;
+  icon: React.ReactNode;
   title: string;
-  text: string;
-  link?: { href: string; label: string };
+  children: React.ReactNode;
+  blue: string;
 }) {
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm text-center">
-      <div className="text-4xl mb-3">{emoji}</div>
-      <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
-      <p className="text-gray-600 leading-relaxed mb-4">{text}</p>
-      {link && (
-        <a
-          href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block font-semibold underline underline-offset-2 transition"
-          style={{ color: blue }}
-        >
-          {link.label} &rarr;
-        </a>
-      )}
+    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition text-center">
+      <div className="flex justify-center mb-4">{icon}</div>
+      <h3 className="text-xl font-bold mb-3" style={{ color: blue }}>
+        {title}
+      </h3>
+      {children}
     </div>
   );
 }
