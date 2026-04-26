@@ -273,7 +273,7 @@ function WhatsOn() {
   return (
     <section id="whats-on" className="pt-7 pb-6">
       <div className="max-w-6xl mx-auto">
-      <div className="px-4 lg:px-6 mb-3">
+      <div className="px-4 lg:px-6 mb-5">
         <h2 className={`${h} font-black text-[26px] tracking-tight text-stone-900 leading-none`}>
           What&rsquo;s{" "}
           <span className="relative inline-block">
