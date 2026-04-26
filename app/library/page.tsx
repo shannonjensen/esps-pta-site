@@ -44,7 +44,7 @@ export default function LibraryPage() {
               style={{ background: "#DEEBDA", color: "#3D6B3D" }}>
               <Star color="#3D6B3D" size={11} /> The Big Campaign <Star color="#3D6B3D" size={11} />
             </span>
-            <h1 className={`${heading} font-black tracking-tight leading-[0.95] text-[48px] sm:text-[80px] lg:text-[100px] text-stone-900`}>
+            <h1 className={`${heading} font-black tracking-tight leading-[1.05] text-[60px] sm:text-[80px] lg:text-[100px] text-stone-900`}>
               Love Our<br />
               <span className="relative inline-block">
                 <span style={{ color: accent, position: "relative", zIndex: 1 }}>Libraries.</span>
