@@ -1,570 +1,213 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
-
-export const metadata: Metadata = {
-  title: "Love Our Libraries | ESPS PTA",
-  description:
-    "Help us raise £50,000 to transform the East Sheen Primary School libraries into inspiring spaces where children discover a lifelong love of reading.",
-};
-
-/* ── Config ── */
-const GOAL = 50_000;
-const RAISED = 0;
-const DONATE_URL = "#donate"; // placeholder
-const BIKE_RIDE_URL = "#bike-ride"; // placeholder
-
-/* ── Colour palette ── */
-const blue = "#1b6fa0";
-const blueDark = "#15587e";
-const blueLight = "#e8f2f8";
-const coral = "#e0713e";
-const coralDark = "#c45e2f";
-const green = "#3a8f5c";
-const greenLight = "#e6f4ec";
-const greenDark = "#2d6e47";
-const bark = "#8B6914";
+import Link from "next/link";
 
 export default function LibraryPage() {
-  const percent = Math.min(Math.round((RAISED / GOAL) * 100), 100);
+  const raised = 18400;
+  const goal = 50000;
+  const donors = 142;
+  const pct = Math.min(100, Math.round((raised / goal) * 100));
+  const accent = "#5B8E5A";
+
+  const heading = "font-[family-name:var(--font-heading)]";
+
+  const plan = [
+    { phase: "Phase 1", title: "KS1 Reading Den", target: "£15,000", desc: "Soft seating, story corner, picture book curation, mural commission." },
+    { phase: "Phase 2", title: "KS2 Library Refresh", target: "£25,000", desc: "New shelving, study nooks, fiction & non-fiction restock, librarian-led launch." },
+    { phase: "Phase 3", title: "Always-Open Hours", target: "£10,000", desc: "Fund after-school librarian, weekend events, parent-volunteer training." },
+  ];
+
+  const renders = [
+    { src: "/library/library-render-1.jpg", alt: "Library design concept — mezzanine reading nook" },
+    { src: "/library/library-render-2.jpg", alt: "Library design concept — story canopy and arched shelves" },
+    { src: "/library/library-render-3.jpg", alt: "Library design concept — curved shelving and reading mezzanine" },
+    { src: "/library/library-render-4.jpg", alt: "Library design concept — children playing in a circular reading nook" },
+  ];
 
   return (
-    <main className="min-h-screen bg-white text-gray-800">
-      {/* ════════════ HERO ════════════ */}
-      <section className="relative overflow-hidden text-white px-6 pt-16 pb-32 md:pt-24 md:pb-40">
-        {/* Rich green base gradient */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `linear-gradient(160deg, ${blueDark} 0%, ${blue} 40%, #2e7d4f 100%)`,
-          }}
-        />
+    <div className="min-h-screen" style={{ background: "#FBF9F4" }}>
+      {/* Back link */}
+      <div className="px-4 sm:px-6 pt-6">
+        <Link href="/" className="inline-flex items-center gap-2 text-[14px] font-semibold text-stone-600 hover:text-stone-900">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M19 12H5M11 6l-6 6 6 6" /></svg>
+          Back to ESPS PTA
+        </Link>
+      </div>
 
-        {/* Decorative foliage — large abstract leaf shapes */}
-        <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 800 500">
-          {/* Large leaves — top right */}
-          <path d="M650 -20 Q700 80 620 160 Q580 100 650 -20Z" fill="white" opacity="0.04" />
-          <path d="M720 30 Q780 120 700 190 Q660 130 720 30Z" fill="white" opacity="0.03" />
-          <path d="M780 -10 Q820 60 760 120 Q730 70 780 -10Z" fill="white" opacity="0.05" />
-          {/* Large leaves — bottom left */}
-          <path d="M-20 350 Q60 280 140 360 Q60 400 -20 350Z" fill="white" opacity="0.04" />
-          <path d="M30 420 Q110 360 170 440 Q100 470 30 420Z" fill="white" opacity="0.03" />
-          {/* Scattered smaller leaves */}
-          <path d="M200 50 Q220 80 200 110 Q180 80 200 50Z" fill="white" opacity="0.04" />
-          <path d="M500 400 Q520 430 500 460 Q480 430 500 400Z" fill="white" opacity="0.03" />
-          {/* Branch lines */}
-          <path d="M600 0 Q640 60 610 140" stroke="white" strokeWidth="1" fill="none" opacity="0.05" />
-          <path d="M0 300 Q80 280 150 320" stroke="white" strokeWidth="1" fill="none" opacity="0.04" />
-        </svg>
+      {/* Hero */}
+      <section className="relative px-6 sm:px-8 pt-10 pb-6 sm:py-14 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-bold mb-5 whitespace-nowrap"
+              style={{ background: "#DEEBDA", color: "#3D6B3D" }}>
+              <Star color="#3D6B3D" size={11} /> The Big Campaign <Star color="#3D6B3D" size={11} />
+            </span>
+            <h1 className={`${heading} font-black tracking-tight leading-[0.95] text-[36px] sm:text-[64px] lg:text-[80px] text-stone-900`}>
+              Love Our<br />
+              <span className="relative inline-block">
+                <span style={{ color: accent, position: "relative", zIndex: 1 }}>Libraries.</span>
+                <Squiggle color="#E0713E" className="absolute left-0 right-0" style={{ bottom: -6, height: 10, width: "100%" }} />
+              </span>
+            </h1>
+            <p className={`${heading} mt-4 text-stone-700 text-[12.5px] sm:text-[18px] leading-[1.55] max-w-2xl mx-auto font-normal`}>
+              We&rsquo;re raising £{goal.toLocaleString()} to transform our KS1 and KS2 libraries into inspiring spaces where every
+              child at East Sheen Primary falls in love with reading.
+            </p>
+          </div>
 
-        {/* Bottom organic edge — rolling green canopy shape */}
-        <svg
-          className="absolute bottom-0 left-0 w-full"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          style={{ height: "80px" }}
-        >
-          <path
-            d="M0 120 L0 60 Q80 30 180 50 Q300 75 420 40 Q540 10 680 45 Q820 80 960 35 Q1100 0 1240 40 Q1360 65 1440 45 L1440 120Z"
-            fill="white"
-          />
-        </svg>
-
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center text-center">
-          <p className="font-[family-name:var(--font-dm-sans)] text-xs md:text-sm uppercase tracking-[0.25em] mb-3 text-sky-200/80">
-            East Sheen Primary School PTA
-          </p>
-          <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-bold leading-tight mb-6 drop-shadow-md">
-            Love Our Libraries
-          </h1>
-          <p className="font-[family-name:var(--font-dm-sans)] max-w-2xl text-lg md:text-xl text-sky-100 leading-relaxed">
-            At East Sheen Primary, reading isn&rsquo;t just part of the
-            curriculum &mdash; it&rsquo;s at the heart of how our children
-            learn, imagine and grow. Our libraries are where that love of
-            reading takes root: where children discover books, ideas and whole
-            new worlds.
-          </p>
-        </div>
-      </section>
-
-      {/* ════════════ GROWING TREE PROGRESS ════════════ */}
-      <section className="max-w-3xl mx-auto px-6 -mt-20 md:-mt-24 relative z-10">
-        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-8">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-            {/* Tree */}
-            <div className="shrink-0">
-              <GrowingTree percent={percent} />
+          {/* Progress card */}
+          <div className="mt-8 sm:mt-10 max-w-3xl mx-auto rounded-3xl bg-white p-5 sm:p-6"
+            style={{ border: "1px solid #1a1a1a10", boxShadow: "0 12px 32px rgba(20,30,40,0.08)" }}>
+            <p className="text-[10px] uppercase tracking-[0.16em] font-bold text-stone-500">Raised so far</p>
+            <div className="mt-1 flex items-baseline gap-2 flex-wrap">
+              <span className={`${heading} font-black text-[36px] sm:text-[52px] tracking-tight leading-none`}
+                style={{ color: "#235D69" }}>
+                £{raised.toLocaleString()}
+              </span>
+              <span className="text-stone-500 text-[13px] sm:text-[15px] font-medium">
+                of £{goal.toLocaleString()}
+              </span>
             </div>
-            {/* Stats */}
-            <div className="flex-1 text-center md:text-left">
-              <p className="text-2xl md:text-3xl font-bold" style={{ color: green }}>
-                &pound;{RAISED.toLocaleString()}
-                <span className="text-base font-normal text-gray-400">
-                  {" "}raised
-                </span>
-              </p>
-              <p className="text-lg font-semibold text-gray-500 mb-3">
-                &pound;{GOAL.toLocaleString()} goal
-              </p>
-              {/* Ground-level progress bar */}
-              <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-1000 ease-out"
-                  style={{
-                    width: `${Math.max(percent, 2)}%`,
-                    background: `linear-gradient(90deg, ${green}, ${greenDark})`,
-                  }}
-                />
+
+            {/* Thermometer */}
+            <div className="mt-4 flex items-center gap-2.5">
+              <div className="relative flex-1 min-w-0">
+                <div className="h-4 rounded-full overflow-hidden" style={{ background: "#EFEAE0" }}>
+                  <div className="h-full rounded-full transition-all duration-700"
+                    style={{ width: pct + "%", background: "linear-gradient(90deg, #5B8E5A 0%, #88B36F 50%, #F5C24B 100%)" }} />
+                </div>
+                {[25, 50, 75].map((m) => (
+                  <div key={m} className="absolute top-0 bottom-0 w-px bg-white/70" style={{ left: m + "%" }} />
+                ))}
               </div>
-              <p className="text-sm text-gray-400 mt-2">
-                {percent}% &mdash; help our library grow
-              </p>
-              <a
-                href={DONATE_URL}
-                className="inline-block text-white font-bold text-base px-8 py-3 rounded-full shadow-lg hover:scale-105 transition-transform mt-4"
-                style={{ backgroundColor: coral }}
-              >
-                Donate Now
-              </a>
+              <div className={`${heading} font-black text-[15px] leading-none shrink-0`} style={{ color: "#3D6B3D" }}>
+                {pct}%
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ════════════ THE MISSION ════════════ */}
-      <section className="max-w-3xl mx-auto px-6 py-16 md:py-20 text-center">
-        <div className="flex justify-center mb-4 opacity-20">
-          <SmallLeaf className="w-8 h-8" color={green} />
-        </div>
-        <h2
-          className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold mb-6"
-          style={{ color: blue }}
-        >
-          &pound;50,000 to Transform Two Libraries
-        </h2>
-        <div className="w-20 h-1 mx-auto rounded-full mb-8" style={{ backgroundColor: green }} />
-        <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
-          We&rsquo;re raising &pound;50,000 to transform our KS1 and KS2
-          libraries into spaces worthy of that mission. Spaces children want to
-          be in. Shelves stocked with books they&rsquo;ll remember for life.
-          Reading nooks that turn a quiet moment into an adventure.
-        </p>
-        <p
-          className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold mt-8"
-          style={{ color: coral }}
-        >
-          Every contribution &mdash; big or small &mdash; helps write the next chapter.
-        </p>
-      </section>
-
-      {/* ════════════ PHOTO GALLERY ════════════ */}
-      <section className="px-6 py-16" style={{ backgroundColor: greenLight }}>
-        <div className="max-w-5xl mx-auto">
-          <h2
-            className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold text-center mb-4"
-            style={{ color: blue }}
-          >
-            Imagine the Possibilities
-          </h2>
-          <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto">
-            Our libraries are well-loved &mdash; now it&rsquo;s time for a
-            transformation.
-          </p>
-
-          <div className="mb-12">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4 text-center">
-              Where We Are Now
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <PhotoCard
-                src="/library/ks1-current.jpg"
-                alt="Current KS1 library"
-                caption="KS1 Library"
-              />
-              <PhotoCard
-                src="/library/ks2-current.jpg"
-                alt="Current KS2 library"
-                caption="KS2 Library"
-              />
+            <div className="mt-3 flex items-center justify-between gap-2 text-[12px] whitespace-nowrap">
+              <span className="text-stone-600"><span className="font-bold text-stone-900">{donors}</span> donors</span>
+              <span className="font-bold" style={{ color: "#B8551F" }}>£{(goal - raised).toLocaleString()} to go</span>
             </div>
-          </div>
 
-          <div className="flex justify-center my-8">
-            <svg className="w-8 h-8 text-green-600/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-
-          <div>
-            <h3
-              className="text-sm font-semibold uppercase tracking-widest mb-4 text-center"
-              style={{ color: green }}
-            >
-              Where We&rsquo;re Headed
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <PhotoCard
-                src="/library/sample-library-1.jpg"
-                alt="Inspiration: cosy reading nooks and colourful shelving"
-                caption="Cosy nooks and vibrant, well-organised shelving"
-                accent
-              />
-              <PhotoCard
-                src="/library/sample-library-2.jpg"
-                alt="Inspiration: imaginative play structures and reading spaces"
-                caption="Imaginative spaces that inspire a love of reading"
-                accent
-              />
-            </div>
+            <button className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white text-[14px] sm:text-[15px]"
+              style={{ background: accent, boxShadow: "0 3px 0 #3D6B3D" }}>
+              Donate now →
+            </button>
           </div>
         </div>
       </section>
 
-      {/* ════════════ WHAT HAPPENS NEXT ════════════ */}
-      <section className="max-w-3xl mx-auto px-6 py-16 md:py-20">
-        <h2
-          className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold text-center mb-8"
-          style={{ color: blue }}
-        >
-          What Happens Next?
-        </h2>
-        <div className="bg-gray-50 rounded-2xl p-8 md:p-10 shadow-sm border-l-4" style={{ borderColor: green }}>
-          <p className="text-lg text-gray-700 leading-relaxed mb-6">
-            The school and PTA are currently working with library suppliers on
-            the final designs, which will be shared and displayed later this
-            term. We aim to create welcoming, engaging environments where
-            children are eager to pick up a book.
-          </p>
-          <p className="text-lg text-gray-700 leading-relaxed font-semibold">
-            With your generous support, we will be able to install the libraries
-            over the summer holiday.
-          </p>
-        </div>
-      </section>
-
-      {/* ════════════ HOW CAN I HELP ════════════ */}
-      <section className="px-6 py-16 md:py-20" style={{ backgroundColor: blueLight }}>
-        <div className="max-w-5xl mx-auto">
-          <h2
-            className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold text-center mb-4"
-            style={{ color: blue }}
-          >
-            How Can I Help?
+      {/* Why */}
+      <section className="px-6 sm:px-8 pt-2 pb-10 sm:pt-4 sm:pb-16">
+        <div className="max-w-2xl mx-auto text-center">
+          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Why this matters</span>
+          <h2 className={`${heading} font-black text-[26px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
+            Libraries at the heart of our school.
           </h2>
-          <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto">
-            There are lots of ways to support the campaign.
+          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+            Reading isn&rsquo;t just a part of the curriculum — it&rsquo;s at the heart of how our children
+            learn, imagine, and grow.
           </p>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Donate */}
-            <HelpCard
-              icon={<SmallLeaf className="w-10 h-10" color={green} />}
-              title="Donate"
-              blue={blue}
-            >
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Please donate what you can. If your donation is eligible for
-                Gift Aid, we receive a 25% top-up at no cost to you. If your
-                employer offers charitable donation matching, it could mean
-                doubling your impact.
-              </p>
-              <a
-                href={DONATE_URL}
-                className="inline-block text-white font-semibold px-6 py-2.5 rounded-lg transition hover:opacity-90"
-                style={{ backgroundColor: coral }}
-              >
-                Make a Donation &rarr;
-              </a>
-            </HelpCard>
-
-            {/* Bike Ride */}
-            <HelpCard
-              icon={<SmallLeaf className="w-10 h-10" color={green} rotate />}
-              title="Sponsor a Rider"
-              blue={blue}
-            >
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Sponsor a rider in the ESPS charity bike ride. All proceeds
-                this year go to the library transformation. One parent&rsquo;s
-                employer is generously double-matching the first &pound;5,000
-                he raises.
-              </p>
-              <a
-                href={BIKE_RIDE_URL}
-                className="inline-block text-white font-semibold px-6 py-2.5 rounded-lg transition hover:opacity-90"
-                style={{ backgroundColor: coral }}
-              >
-                Sponsor Now &rarr;
-              </a>
-            </HelpCard>
-
-            {/* Suggest a Book */}
-            <HelpCard
-              icon={<SmallLeaf className="w-10 h-10" color={green} rotate />}
-              title="Suggest a Book"
-              blue={blue}
-            >
-              <p className="text-gray-600 leading-relaxed">
-                Suggest a book that you love! We are working with the school on
-                a book wishlist so our new shelves are filled with stories
-                children will treasure. More details coming soon.
-              </p>
-            </HelpCard>
-          </div>
+          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+            Libraries are where the joy of reading takes root. We&rsquo;re lucky to have two at ESPS,
+            and we want them to be places every child remembers for the rest of their lives.
+          </p>
         </div>
       </section>
 
-      {/* ════════════ CLOSING CTA ════════════ */}
-      <section
-        className="relative text-white px-6 py-16 md:py-20 text-center overflow-hidden"
-        style={{
-          background: `linear-gradient(135deg, ${greenDark} 0%, ${green} 100%)`,
-        }}
-      >
-        <div className="absolute top-4 left-8 opacity-10">
-          <LeafCluster className="w-40 h-40" />
-        </div>
-        <div className="absolute bottom-4 right-8 opacity-10 rotate-90">
-          <LeafCluster className="w-36 h-36" />
-        </div>
-        <div className="relative">
-          <h2 className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-bold mb-4">
-            Help Us Write the Next Chapter
+      {/* Plan */}
+      <section className="px-6 sm:px-8 py-8 sm:py-12" style={{ background: "#FAF6EE" }}>
+        <div className="max-w-2xl mx-auto text-center">
+          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: accent }}>The plan</span>
+          <h2 className={`${heading} font-black text-[26px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
+            Imagine the possibilities.
           </h2>
-          <p className="text-green-100 text-lg max-w-xl mx-auto mb-8 leading-relaxed">
-            Together we can give every child at East Sheen Primary a library
-            they&rsquo;ll love &mdash; and remember.
+          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+            The school and PTA are currently working with library suppliers on the final designs, which
+            will be shared and displayed later this term.
           </p>
-          <a
-            href={DONATE_URL}
-            className="inline-block text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:scale-105 transition-transform"
-            style={{ backgroundColor: coral }}
-          >
-            Donate Now
-          </a>
+          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+            With your generous support, we will be able to install the libraries over the summer holiday.
+          </p>
         </div>
-      </section>
 
-      {/* ════════════ CONTACT ════════════ */}
-      <section className="max-w-3xl mx-auto px-6 py-12 text-center">
-        <p className="text-gray-500">
-          Questions?{" "}
-          <a
-            href="mailto:pta@espspta.org"
-            className="font-semibold underline underline-offset-2 transition hover:opacity-80"
-            style={{ color: blue }}
-          >
-            Get in touch with the PTA
-          </a>
+        {/* Render previews */}
+        <div className="max-w-3xl mx-auto mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          {renders.map((r, i) => (
+            <figure key={i} className="rounded-2xl overflow-hidden bg-stone-100"
+              style={{ border: "1px solid #1a1a1a10", boxShadow: "0 8px 24px rgba(20,30,40,0.08)" }}>
+              <Image src={r.src} alt={r.alt} width={800} height={600} className="w-full h-full block object-cover" style={{ aspectRatio: "4/3" }} />
+            </figure>
+          ))}
+        </div>
+        <p className="text-center text-[11px] uppercase tracking-[0.2em] font-bold text-stone-500 mt-4">
+          Concept renders — final designs to come
         </p>
       </section>
 
-      {/* ════════════ FOOTER ════════════ */}
-      <footer className="bg-gray-100 text-center text-sm text-gray-400 py-6 px-4">
-        &copy; {new Date().getFullYear()} East Sheen Primary School PTA. All
-        rights reserved.
-      </footer>
-    </main>
-  );
-}
+      {/* Make a difference */}
+      <section className="px-6 sm:px-8 py-12 sm:py-16">
+        <div className="max-w-2xl mx-auto text-center">
+          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Make a difference</span>
+          <h2 className={`${heading} font-black text-[26px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
+            Every contribution helps write the next chapter.
+          </h2>
+          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+            You can help make our libraries places that inspire children for many years to come.
+            Please consider making a donation.
+          </p>
+          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+            As a charitable organisation, donations are eligible for employer matching schemes and Gift Aid.
+          </p>
+          <button className="mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-white text-[15px] sm:text-[16px]"
+            style={{ background: accent, boxShadow: "0 3px 0 #3D6B3D" }}>
+            Donate now →
+          </button>
+        </div>
+      </section>
 
-/* ══════════════════════════════════════════
-   Subcomponents
-   ══════════════════════════════════════════ */
-
-/**
- * A tree that grows from a seedling (0%) to a full tree (100%).
- * The canopy scales and leaves appear based on percent.
- */
-function GrowingTree({ percent }: { percent: number }) {
-  // Tree grows in stages
-  const stage =
-    percent === 0 ? 0 : percent < 20 ? 1 : percent < 50 ? 2 : percent < 80 ? 3 : 4;
-
-  return (
-    <div className="relative w-32 h-40 flex items-end justify-center">
-      {/* Ground */}
-      <div className="absolute bottom-0 w-full h-3 bg-amber-800/20 rounded-full" />
-
-      {stage === 0 && (
-        /* Seed / tiny sprout */
-        <svg viewBox="0 0 100 120" className="w-20 h-28">
-          {/* Pot / soil mound */}
-          <ellipse cx="50" cy="108" rx="25" ry="6" fill="#8B6914" opacity={0.3} />
-          {/* Seed */}
-          <ellipse cx="50" cy="100" rx="6" ry="4" fill={bark} />
-          {/* Tiny sprout */}
-          <line x1="50" y1="100" x2="50" y2="88" stroke={green} strokeWidth="2" />
-          <path d="M50 88 Q45 82 50 78 Q55 82 50 88Z" fill={green} opacity={0.6} />
-        </svg>
-      )}
-
-      {stage === 1 && (
-        /* Small seedling */
-        <svg viewBox="0 0 100 120" className="w-24 h-32">
-          <ellipse cx="50" cy="112" rx="28" ry="6" fill="#8B6914" opacity={0.3} />
-          <line x1="50" y1="110" x2="50" y2="60" stroke={bark} strokeWidth="3" />
-          {/* Small leaves */}
-          <path d="M50 75 Q38 65 50 55 Q62 65 50 75Z" fill={green} opacity={0.7} />
-          <path d="M50 85 Q40 78 45 68" stroke={green} strokeWidth="1.5" fill="none" />
-          <path d="M45 70 Q38 62 46 58 Q50 65 45 70Z" fill={green} opacity={0.5} />
-          <path d="M50 82 Q60 75 55 65" stroke={green} strokeWidth="1.5" fill="none" />
-          <path d="M55 67 Q62 59 54 56 Q50 63 55 67Z" fill={green} opacity={0.5} />
-        </svg>
-      )}
-
-      {stage === 2 && (
-        /* Medium sapling */
-        <svg viewBox="0 0 100 120" className="w-28 h-36">
-          <ellipse cx="50" cy="114" rx="30" ry="6" fill="#8B6914" opacity={0.3} />
-          {/* Trunk */}
-          <path d="M50 112 Q49 80 50 45" stroke={bark} strokeWidth="4" fill="none" />
-          <path d="M50 70 Q38 60 32 50" stroke={bark} strokeWidth="2.5" fill="none" />
-          <path d="M50 60 Q62 50 68 42" stroke={bark} strokeWidth="2.5" fill="none" />
-          {/* Canopy clusters */}
-          <circle cx="50" cy="38" r="16" fill={green} opacity={0.7} />
-          <circle cx="35" cy="48" r="12" fill={green} opacity={0.6} />
-          <circle cx="65" cy="45" r="13" fill={green} opacity={0.6} />
-          <circle cx="45" cy="30" r="10" fill={greenDark} opacity={0.4} />
-        </svg>
-      )}
-
-      {stage === 3 && (
-        /* Large tree */
-        <svg viewBox="0 0 100 120" className="w-32 h-40">
-          <ellipse cx="50" cy="114" rx="32" ry="6" fill="#8B6914" opacity={0.3} />
-          {/* Trunk */}
-          <path d="M47 112 Q46 75 48 40" stroke={bark} strokeWidth="5" fill="none" />
-          <path d="M53 112 Q54 75 52 40" stroke={bark} strokeWidth="5" fill="none" />
-          <path d="M48 65 Q35 52 25 42" stroke={bark} strokeWidth="3" fill="none" />
-          <path d="M52 55 Q65 42 75 35" stroke={bark} strokeWidth="3" fill="none" />
-          <path d="M48 75 Q38 68 30 62" stroke={bark} strokeWidth="2" fill="none" />
-          {/* Full canopy */}
-          <circle cx="50" cy="30" r="20" fill={green} opacity={0.75} />
-          <circle cx="30" cy="42" r="16" fill={green} opacity={0.65} />
-          <circle cx="70" cy="38" r="17" fill={green} opacity={0.65} />
-          <circle cx="25" cy="30" r="12" fill={green} opacity={0.55} />
-          <circle cx="75" cy="28" r="13" fill={green} opacity={0.55} />
-          <circle cx="50" cy="18" r="14" fill={greenDark} opacity={0.4} />
-          <circle cx="38" cy="25" r="10" fill={greenDark} opacity={0.3} />
-        </svg>
-      )}
-
-      {stage === 4 && (
-        /* Full majestic tree */
-        <svg viewBox="0 0 100 120" className="w-32 h-40">
-          <ellipse cx="50" cy="114" rx="35" ry="6" fill="#8B6914" opacity={0.3} />
-          {/* Thick trunk */}
-          <path d="M45 112 Q43 70 46 35" stroke={bark} strokeWidth="6" fill="none" />
-          <path d="M55 112 Q57 70 54 35" stroke={bark} strokeWidth="6" fill="none" />
-          {/* Branches */}
-          <path d="M46 60 Q30 45 18 35" stroke={bark} strokeWidth="3" fill="none" />
-          <path d="M54 50 Q70 35 82 28" stroke={bark} strokeWidth="3" fill="none" />
-          <path d="M46 72 Q35 65 22 58" stroke={bark} strokeWidth="2.5" fill="none" />
-          <path d="M54 65 Q65 55 78 48" stroke={bark} strokeWidth="2.5" fill="none" />
-          {/* Lush canopy */}
-          <circle cx="50" cy="24" r="22" fill={green} opacity={0.8} />
-          <circle cx="25" cy="35" r="18" fill={green} opacity={0.7} />
-          <circle cx="75" cy="30" r="19" fill={green} opacity={0.7} />
-          <circle cx="18" cy="48" r="14" fill={green} opacity={0.6} />
-          <circle cx="82" cy="42" r="15" fill={green} opacity={0.6} />
-          <circle cx="50" cy="12" r="16" fill={greenDark} opacity={0.45} />
-          <circle cx="35" cy="20" r="12" fill={greenDark} opacity={0.35} />
-          <circle cx="65" cy="18" r="13" fill={greenDark} opacity={0.35} />
-          {/* Highlight leaves */}
-          <circle cx="40" cy="15" r="5" fill="#4CAF50" opacity={0.3} />
-          <circle cx="60" cy="22" r="4" fill="#4CAF50" opacity={0.3} />
-        </svg>
-      )}
+      {/* Get in touch */}
+      <section className="px-6 sm:px-8 py-12 sm:py-16" style={{ background: "#FAF6EE" }}>
+        <div className="max-w-2xl mx-auto text-center">
+          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Any questions</span>
+          <h2 className={`${heading} font-black text-[26px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
+            Get in touch.
+          </h2>
+          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+            Please reach out to{" "}
+            <a href="mailto:shannon@espspta.org"
+              className="font-bold underline decoration-2 underline-offset-4"
+              style={{ color: accent, textDecorationColor: "#E0713E" }}>
+              shannon@espspta.org
+            </a>{" "}
+            with any questions.
+          </p>
+          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+            If you are able and willing to make a significant donation, there are opportunities to sponsor
+            reading nooks and cosy corners. Please email for more information.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
 
-function LeafCluster({ className }: { className?: string }) {
+/* ── Primitives ── */
+function Squiggle({ color = "#E0713E", className = "", style }: { color?: string; className?: string; style?: React.CSSProperties }) {
   return (
-    <svg viewBox="0 0 120 120" fill="none" className={className}>
-      <path d="M60 80 Q40 60 60 30 Q80 60 60 80Z" fill="white" />
-      <path d="M40 90 Q25 70 45 50 Q55 75 40 90Z" fill="white" opacity={0.7} />
-      <path d="M80 85 Q95 65 75 45 Q65 70 80 85Z" fill="white" opacity={0.7} />
-      <path d="M55 95 Q50 85 60 75 Q70 85 65 95Z" fill="white" opacity={0.5} />
+    <svg viewBox="0 0 200 14" className={className} style={style} fill="none" preserveAspectRatio="none">
+      <path d="M2 8 Q 18 1, 34 7 T 66 7 T 98 7 T 130 7 T 162 7 T 198 7" stroke={color} strokeWidth="3.5" strokeLinecap="round" />
     </svg>
   );
 }
 
-function SmallLeaf({
-  className,
-  color,
-  rotate,
-}: {
-  className?: string;
-  color: string;
-  rotate?: boolean;
-}) {
+function Star({ color = "#F5C24B", size = 20 }: { color?: string; size?: number }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      className={`${className} ${rotate ? "rotate-45" : ""}`}
-    >
-      <path
-        d="M12 22 Q4 14 12 2 Q20 14 12 22Z"
-        fill={color}
-        opacity={0.6}
-      />
-      <line x1="12" y1="22" x2="12" y2="8" stroke={color} strokeWidth="1" opacity={0.4} />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M12 2 L13.5 9 L20 9.5 L15 13.5 L17 20 L12 16 L7 20 L9 13.5 L4 9.5 L10.5 9 Z" fill={color} stroke={color} strokeWidth="1.2" strokeLinejoin="round" />
     </svg>
-  );
-}
-
-function PhotoCard({
-  src,
-  alt,
-  caption,
-  accent,
-}: {
-  src: string;
-  alt: string;
-  caption: string;
-  accent?: boolean;
-}) {
-  return (
-    <figure
-      className={`overflow-hidden rounded-xl shadow-md ${
-        accent ? "ring-2 ring-[#3a8f5c]/20" : ""
-      }`}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={800}
-        height={600}
-        className="w-full h-64 object-cover"
-      />
-      <figcaption className="text-center text-sm text-gray-500 py-3 px-2 bg-white">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
-function HelpCard({
-  icon,
-  title,
-  children,
-  blue,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  children: React.ReactNode;
-  blue: string;
-}) {
-  return (
-    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md transition text-center">
-      <div className="flex justify-center mb-4">{icon}</div>
-      <h3 className="text-xl font-bold mb-3" style={{ color: blue }}>
-        {title}
-      </h3>
-      {children}
-    </div>
   );
 }

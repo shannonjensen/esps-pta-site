@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next"
-import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
+import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
+  axes: ["SOFT"],
 });
 
 const dmSans = DM_Sans({
@@ -16,9 +17,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'ESPS PTA - Coming Soon',
-  description: 'ESPS PTA website coming soon',
-}
+  title: "ESPS PTA",
+  description: "East Sheen Primary School PTA",
+};
 
 export default function RootLayout({
   children,
@@ -27,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${plusJakarta.variable} ${dmSans.variable}`}>
+      <body className={`${fraunces.variable} ${dmSans.variable}`}>
         {children}
       </body>
     </html>
