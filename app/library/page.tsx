@@ -51,7 +51,7 @@ export default function LibraryPage() {
                 <Squiggle color="#E0713E" className="absolute left-0 right-0" style={{ bottom: -6, height: 10, width: "100%" }} />
               </span>
             </h1>
-            <p className={`${heading} mt-4 text-stone-700 text-[12.5px] sm:text-[18px] leading-[1.55] max-w-2xl mx-auto font-normal`}>
+            <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[18px] leading-[1.55] max-w-2xl mx-auto font-normal`}>
               We&rsquo;re raising £{goal.toLocaleString()} to transform our KS1 and KS2 libraries into inspiring spaces where every
               child at East Sheen Primary falls in love with reading.
             </p>
@@ -92,7 +92,7 @@ export default function LibraryPage() {
               <span className="font-bold" style={{ color: "#B8551F" }}>£{(goal - raised).toLocaleString()} to go</span>
             </div>
 
-            <button className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white text-[14px] sm:text-[15px]"
+            <button className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white text-[15px] sm:text-[16px]"
               style={{ background: accent, boxShadow: "0 3px 0 #3D6B3D" }}>
               Donate now →
             </button>
@@ -104,14 +104,14 @@ export default function LibraryPage() {
       <section className="px-6 sm:px-8 pt-2 pb-10 sm:pt-4 sm:pb-16">
         <div className="max-w-2xl mx-auto text-center">
           <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Why this matters</span>
-          <h2 className={`${heading} font-black text-[26px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
+          <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
             Libraries at the heart of our school.
           </h2>
-          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             Reading isn&rsquo;t just a part of the curriculum — it&rsquo;s at the heart of how our children
             learn, imagine, and grow.
           </p>
-          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             Libraries are where the joy of reading takes root. We&rsquo;re lucky to have two at ESPS,
             and we want them to be places every child remembers for the rest of their lives.
           </p>
@@ -122,14 +122,14 @@ export default function LibraryPage() {
       <section className="px-6 sm:px-8 py-8 sm:py-12" style={{ background: "#FAF6EE" }}>
         <div className="max-w-2xl mx-auto text-center">
           <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: accent }}>The plan</span>
-          <h2 className={`${heading} font-black text-[26px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
+          <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
             Imagine the possibilities.
           </h2>
-          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             The school and PTA are currently working with library suppliers on the final designs, which
             will be shared and displayed later this term.
           </p>
-          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             With your generous support, we will be able to install the libraries over the summer holiday.
           </p>
         </div>
@@ -152,17 +152,17 @@ export default function LibraryPage() {
       <section className="px-6 sm:px-8 py-12 sm:py-16">
         <div className="max-w-2xl mx-auto text-center">
           <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Make a difference</span>
-          <h2 className={`${heading} font-black text-[26px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
+          <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
             Every contribution helps write the next chapter.
           </h2>
-          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             You can help make our libraries places that inspire children for many years to come.
             Please consider making a donation.
           </p>
-          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             As a charitable organisation, donations are eligible for employer matching schemes and Gift Aid.
           </p>
-          <button className="mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-white text-[15px] sm:text-[16px]"
+          <button className="mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-white text-[16px] sm:text-[17px]"
             style={{ background: accent, boxShadow: "0 3px 0 #3D6B3D" }}>
             Donate now →
           </button>
@@ -173,10 +173,10 @@ export default function LibraryPage() {
       <section className="px-6 sm:px-8 py-12 sm:py-16" style={{ background: "#FAF6EE" }}>
         <div className="max-w-2xl mx-auto text-center">
           <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Any questions</span>
-          <h2 className={`${heading} font-black text-[26px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
+          <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
             Get in touch.
           </h2>
-          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             Please reach out to{" "}
             <a href="mailto:shannon@espspta.org"
               className="font-bold underline decoration-2 underline-offset-4"
@@ -185,7 +185,7 @@ export default function LibraryPage() {
             </a>{" "}
             with any questions.
           </p>
-          <p className={`${heading} mt-4 text-stone-700 text-[14.5px] sm:text-[16px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             If you are able and willing to make a significant donation, there are opportunities to sponsor
             reading nooks and cosy corners. Please email for more information.
           </p>
