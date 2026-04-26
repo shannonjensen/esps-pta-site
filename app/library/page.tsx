@@ -125,7 +125,20 @@ export default function LibraryPage() {
           <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
             Imagine the possibilities.
           </h2>
-          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+        </div>
+
+        {/* First 2 renders — right after the heading */}
+        <div className="max-w-3xl mx-auto mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          {renders.slice(0, 2).map((r, i) => (
+            <figure key={i} className="rounded-2xl overflow-hidden bg-stone-100"
+              style={{ border: "1px solid #1a1a1a10", boxShadow: "0 8px 24px rgba(20,30,40,0.08)" }}>
+              <Image src={r.src} alt={r.alt} width={800} height={600} className="w-full h-full block object-cover" style={{ aspectRatio: "4/3" }} />
+            </figure>
+          ))}
+        </div>
+
+        <div className="max-w-2xl mx-auto text-center mt-8">
+          <p className={`${heading} text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             The school and PTA are currently working with library suppliers on the final designs, which
             will be shared and displayed later this term.
           </p>
@@ -134,9 +147,9 @@ export default function LibraryPage() {
           </p>
         </div>
 
-        {/* Render previews */}
+        {/* Second 2 renders — after the text */}
         <div className="max-w-3xl mx-auto mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {renders.map((r, i) => (
+          {renders.slice(2, 4).map((r, i) => (
             <figure key={i} className="rounded-2xl overflow-hidden bg-stone-100"
               style={{ border: "1px solid #1a1a1a10", boxShadow: "0 8px 24px rgba(20,30,40,0.08)" }}>
               <Image src={r.src} alt={r.alt} width={800} height={600} className="w-full h-full block object-cover" style={{ aspectRatio: "4/3" }} />
