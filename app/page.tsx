@@ -72,6 +72,36 @@ const Star = ({ color = "#F5C24B", size = 20 }: { color?: string; size?: number 
   </svg>
 );
 
+/* ── Desktop Header ── */
+function DesktopHeader({ onDonate }: { onDonate: () => void }) {
+  const go = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+  return (
+    <header
+      className="hidden lg:flex items-center justify-between px-8 py-3 sticky top-0 z-50"
+      style={{ background: "rgba(251,249,244,0.95)", backdropFilter: "blur(12px)", borderBottom: "1px solid #1a1a1a10" }}
+    >
+      <span className={`${h} font-black text-[20px] text-stone-900 tracking-tight`}>ESPS PTA</span>
+      <nav className="flex items-center gap-6">
+        <a href="#whats-on" onClick={(e) => go(e, "whats-on")} className="text-[14px] font-semibold text-stone-600 hover:text-stone-900 transition">What&rsquo;s On</a>
+        <Link href="/library" className="text-[14px] font-semibold text-stone-600 hover:text-stone-900 transition">Library</Link>
+        <a href="#achievements" onClick={(e) => go(e, "achievements")} className="text-[14px] font-semibold text-stone-600 hover:text-stone-900 transition">Achievements</a>
+        <a href="#involved" onClick={(e) => go(e, "involved")} className="text-[14px] font-semibold text-stone-600 hover:text-stone-900 transition">Get Involved</a>
+        <a href="#contact" onClick={(e) => go(e, "contact")} className="text-[14px] font-semibold text-stone-600 hover:text-stone-900 transition">Contact</a>
+      </nav>
+      <button onClick={onDonate} className="px-5 py-2 rounded-full font-bold text-white text-[13px] hover:opacity-90 transition" style={{ background: "#E0713E" }}>
+        Donate
+      </button>
+    </header>
+  );
+}
+
 /* ── Nav ── */
 const NAV = [
   { id: "top", label: "Home", icon: (a: boolean) => <svg width="22" height="22" viewBox="0 0 24 24" fill={a ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z" /></svg> },
@@ -106,8 +136,8 @@ function BottomNav({ onDonate }: { onDonate: () => void }) {
   };
   return (
     <>
-      <div aria-hidden style={{ height: "calc(74px + env(safe-area-inset-bottom))" }} />
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white"
+      <div aria-hidden className="lg:hidden" style={{ height: "calc(74px + env(safe-area-inset-bottom))" }} />
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white lg:hidden"
         style={{ borderTop: "1px solid #1a1a1a14", paddingBottom: "env(safe-area-inset-bottom)", boxShadow: "0 -4px 16px rgba(20,30,40,0.06)" }}>
         <div className="grid grid-cols-5 items-end px-2 pt-2 pb-2 max-w-md mx-auto">
           {NAV.slice(0, 2).map((n) => (
@@ -147,21 +177,36 @@ function TabBtn({ item, active, onClick }: { item: typeof NAV[0]; active: boolea
 /* ── Hero ── */
 function Hero() {
   return (
-    <section id="top" className="px-4 pt-2 pb-6">
-      <p className="text-[11px] uppercase tracking-[0.18em] font-bold text-stone-500">
-        East Sheen Primary PTA
-      </p>
-      <h1 className={`${h} font-black tracking-tight leading-[1.0] text-[40px] mt-1.5 text-stone-900`}>
-        <span className="block">Strengthening</span>
-        <span className="block">our school</span>
-        <span className="block relative inline-block">
-          <span style={{ color: "#E0713E" }}>and community.</span>
-          <Underline color="#F5C24B" className="absolute -bottom-1 left-0 w-full h-2.5" />
-        </span>
-      </h1>
-      <p className="mt-3 text-stone-600 text-[15px] leading-relaxed">
-        We raise funds and run events that help create extraordinary opportunities for every child at ESPS.
-      </p>
+    <section id="top" className="px-4 lg:px-6 pt-2 pb-6 lg:pt-12 lg:pb-14">
+      <div className="max-w-6xl mx-auto">
+        <p className="text-[11px] uppercase tracking-[0.18em] font-bold text-stone-500">
+          East Sheen Primary PTA
+        </p>
+        <h1 className={`${h} font-black tracking-tight leading-[1.0] text-[40px] lg:text-[60px] mt-1.5 text-stone-900`}>
+          <span className="block">Strengthening</span>
+          <span className="block">our school</span>
+          <span className="block relative inline-block">
+            <span style={{ color: "#E0713E" }}>and community.</span>
+            <Underline color="#F5C24B" className="absolute -bottom-1 left-0 w-full h-2.5" />
+          </span>
+        </h1>
+        <p className="mt-3 text-stone-600 text-[15px] lg:text-[17px] leading-relaxed">
+          We raise funds and run events that help create extraordinary opportunities for every child at ESPS.
+        </p>
+        <div className="hidden lg:flex gap-3 mt-6">
+          <Link href="/library"
+            className="inline-flex items-center justify-center gap-1.5 px-6 py-3.5 rounded-full font-bold text-white text-[15px] hover:opacity-90 transition"
+            style={{ background: "#1a1a1a" }}>
+            Big campaign &rarr;
+          </Link>
+          <a href="#involved"
+            onClick={(e) => { e.preventDefault(); const el = document.getElementById("involved"); if (el) { const y = el.getBoundingClientRect().top + window.scrollY - 72; window.scrollTo({ top: y, behavior: "smooth" }); } }}
+            className="inline-flex items-center justify-center gap-1.5 px-6 py-3.5 rounded-full font-bold text-stone-900 text-[15px] hover:bg-stone-50 transition bg-white"
+            style={{ border: "1.5px solid #1a1a1a20" }}>
+            Help out
+          </a>
+        </div>
+      </div>
     </section>
   );
 }
@@ -171,9 +216,10 @@ function LibraryPulse() {
   const { raised, goal, donors } = DATA.library;
   const pct = Math.round((raised / goal) * 100);
   return (
-    <section id="library" className="px-4 pb-2">
+    <section id="library" className="px-4 lg:px-6 pb-2">
+      <div className="max-w-6xl mx-auto">
       <div className="rounded-3xl overflow-hidden relative" style={{ background: "#2d6e47" }}>
-        <div className="relative p-5 text-white">
+        <div className="relative p-5 lg:p-12 text-white">
           <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-green-200 mb-1.5">Our Big Campaign</p>
           <h2 className={`${h} font-black text-[32px] leading-[0.95] tracking-tight`}>
             Love Our<br />
@@ -213,6 +259,7 @@ function LibraryPulse() {
           </div>
         </div>
       </div>
+      </div>
     </section>
   );
 }
@@ -225,7 +272,8 @@ function WhatsOn() {
   ];
   return (
     <section id="whats-on" className="pt-7 pb-6">
-      <div className="px-4 mb-3">
+      <div className="max-w-6xl mx-auto">
+      <div className="px-4 lg:px-6 mb-3">
         <h2 className={`${h} font-black text-[26px] tracking-tight text-stone-900 leading-none`}>
           What&rsquo;s{" "}
           <span className="relative inline-block">
@@ -234,7 +282,7 @@ function WhatsOn() {
           </span>
         </h2>
       </div>
-      <div className="px-4 space-y-3">
+      <div className="px-4 lg:px-6 grid md:grid-cols-2 gap-3">
         {DATA.events.map((e, i) => {
           const t = tones[i];
           return (
@@ -272,6 +320,7 @@ function WhatsOn() {
           );
         })}
       </div>
+      </div>
     </section>
   );
 }
@@ -281,7 +330,8 @@ function Achievements() {
   const [open, setOpen] = useState<string | null>("thisYear");
   const palettes = [{ bg: "#FFE6D7", fg: "#B8551F" }, { bg: "#D6ECEF", fg: "#235D69" }, { bg: "#FFF1C9", fg: "#8B6B14" }];
   return (
-    <section id="achievements" className="px-4 py-8" style={{ background: "#FAF6EE" }}>
+    <section id="achievements" className="px-4 lg:px-6 py-8" style={{ background: "#FAF6EE" }}>
+      <div className="max-w-6xl mx-auto">
       <h2 className={`${h} font-black text-[28px] tracking-tight text-stone-900 leading-tight`}>
         What we&rsquo;ve{" "}
         <span className="relative inline-block">
@@ -293,7 +343,7 @@ function Achievements() {
       <div className="mt-5 grid grid-cols-3 gap-2">
         {DATA.achievements.map((a, i) => (
           <div key={a.label} className="rounded-2xl p-3" style={{ background: palettes[i].bg }}>
-            <div className={`${h} font-black text-[24px] leading-none tracking-tight`} style={{ color: palettes[i].fg }}>{a.figure}</div>
+            <div className={`${h} font-black text-[24px] lg:text-[44px] leading-none tracking-tight`} style={{ color: palettes[i].fg }}>{a.figure}</div>
             <div className="text-[10px] mt-1.5 font-medium leading-tight" style={{ color: palettes[i].fg }}>{a.label}</div>
           </div>
         ))}
@@ -301,7 +351,8 @@ function Achievements() {
       <p className="mt-6 text-stone-700 text-[14px] leading-relaxed">
         These are some of the items recently funded by our community&rsquo;s generosity.
       </p>
-      <div className="mt-3 space-y-2">
+      {/* Mobile: accordion */}
+      <div className="mt-3 space-y-2 lg:hidden">
         {[
           { id: "thisYear", title: "This year", items: DATA.thisYear, color: "#5B8E5A" },
           { id: "threeYears", title: "Past three years", items: DATA.threeYears, color: "#E0713E" },
@@ -333,6 +384,30 @@ function Achievements() {
           );
         })}
       </div>
+      {/* Desktop: side-by-side, always expanded */}
+      <div className="mt-3 hidden lg:grid md:grid-cols-2 gap-3">
+        {[
+          { id: "thisYear", title: "This year", items: DATA.thisYear, color: "#5B8E5A" },
+          { id: "threeYears", title: "Past three years", items: DATA.threeYears, color: "#E0713E" },
+        ].map((col) => (
+          <div key={col.id} className="bg-white rounded-2xl overflow-hidden" style={{ border: "1px solid #1a1a1a10" }}>
+            <div className="p-4">
+              <h3 className={`${h} font-black text-[15px] text-stone-900`}>{col.title}</h3>
+            </div>
+            <ul className="px-4 pb-4 space-y-2">
+              {col.items.map((item) => (
+                <li key={item} className="flex gap-2.5 text-[13px] text-stone-700 leading-relaxed">
+                  <span className="shrink-0 w-4 h-4 rounded-full flex items-center justify-center mt-0.5" style={{ background: col.color }}>
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round"><path d="M5 12l5 5L20 7" /></svg>
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      </div>
     </section>
   );
 }
@@ -348,7 +423,8 @@ function GetInvolved() {
     { bg: "#D6ECEF", fg: "#235D69", accent: "#3B8C9C" },
   ];
   return (
-    <section id="involved" className="px-4 py-8">
+    <section id="involved" className="px-4 lg:px-6 py-8">
+      <div className="max-w-6xl mx-auto">
       <h2 className={`${h} font-black text-[28px] tracking-tight text-stone-900 leading-tight`}>
         Get{" "}
         <span className="relative inline-block">
@@ -357,7 +433,7 @@ function GetInvolved() {
         </span>
       </h2>
       <p className="text-stone-500 mt-2 text-[14px]">Six ways to make a difference.</p>
-      <div className="mt-4 space-y-2.5">
+      <div className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
         {DATA.involved.map((card, i) => {
           const p = palettes[i];
           return (
@@ -382,6 +458,7 @@ function GetInvolved() {
           );
         })}
       </div>
+      </div>
     </section>
   );
 }
@@ -392,14 +469,14 @@ function Committee() {
   const fgColors = ["#B8551F", "#235D69", "#8B6B14", "#3D6B3D"];
   return (
     <section className="py-8" style={{ background: "#FAF6EE" }}>
-      <div className="px-4 mb-4">
+      <div className="px-4 lg:px-6 mb-4 max-w-6xl lg:mx-auto">
         <h2 className={`${h} font-black text-[24px] tracking-tight text-stone-900 leading-tight`}>Your PTA committee</h2>
         <p className="text-stone-600 mt-1 text-[13px]">Elected at the AGM each October.</p>
       </div>
-      <div className="flex gap-2.5 overflow-x-auto px-4 pb-2"
+      <div className="flex gap-2.5 overflow-x-auto px-4 lg:px-6 pb-2 lg:grid lg:grid-cols-6 lg:overflow-visible lg:max-w-6xl lg:mx-auto"
         style={{ scrollSnapType: "x mandatory", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
         {DATA.committee.map((m, i) => (
-          <div key={m.name} className="bg-white rounded-2xl p-3 text-center shrink-0"
+          <div key={m.name} className="bg-white rounded-2xl p-3 text-center shrink-0 lg:shrink lg:w-auto"
             style={{ border: "1px solid #1a1a1a10", width: "108px", scrollSnapAlign: "start" }}>
             <div className="w-12 h-12 mx-auto rounded-full mb-2 flex items-center justify-center"
               style={{ background: colors[i % 4] }}>
@@ -419,7 +496,8 @@ function Committee() {
 /* ── Newsletters ── */
 function Newsletters() {
   return (
-    <section className="px-4 py-8" style={{ background: "#FAF6EE" }}>
+    <section className="px-4 lg:px-6 py-8" style={{ background: "#FAF6EE" }}>
+      <div className="max-w-6xl mx-auto">
       <h2 className={`${h} font-black text-[26px] tracking-tight text-stone-900 leading-tight`}>
         Read our{" "}
         <span className="relative inline-block">
@@ -462,6 +540,7 @@ function Newsletters() {
           </a>
         ))}
       </div>
+      </div>
     </section>
   );
 }
@@ -469,11 +548,11 @@ function Newsletters() {
 /* ── Contact ── */
 function Contact() {
   return (
-    <section id="contact" className="px-4 py-10" style={{ background: "#1F3D4A" }}>
-      <div className="text-center">
+    <section id="contact" className="px-4 lg:px-6 py-10" style={{ background: "#1F3D4A" }}>
+      <div className="text-center max-w-2xl mx-auto">
         <h2 className={`${h} font-black text-[28px] tracking-tight text-white leading-tight`}>Say hello.</h2>
         <p className="text-white/70 mt-2 text-[14px] mx-auto">Questions, ideas, or want to get involved? We&rsquo;d love to hear.</p>
-        <div className="mt-5 flex flex-col gap-2.5">
+        <div className="mt-5 flex flex-col sm:flex-row sm:justify-center gap-2.5">
           <a href="mailto:pta@espspta.org"
             className="inline-flex items-center justify-center gap-1.5 px-5 py-3 rounded-full font-bold text-white text-[14px]"
             style={{ background: "#E0713E", boxShadow: "0 2px 0 #B8551F" }}>
@@ -494,8 +573,8 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   const [custom, setCustom] = useState("");
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center" style={{ background: "rgba(15,25,30,0.55)" }} onClick={onClose}>
-      <div className="bg-white rounded-t-3xl w-full max-w-md p-5 relative"
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center" style={{ background: "rgba(15,25,30,0.55)" }} onClick={onClose}>
+      <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-md p-5 relative"
         style={{ boxShadow: "0 -12px 32px rgba(0,0,0,0.18)", paddingBottom: "calc(20px + env(safe-area-inset-bottom))" }}
         onClick={(e) => e.stopPropagation()}>
         <div className="w-10 h-1 rounded-full bg-stone-300 mx-auto mb-3" />
@@ -543,7 +622,8 @@ function PageFooter() {
 export default function Home() {
   const [donateOpen, setDonateOpen] = useState(false);
   return (
-    <div className="min-h-screen mx-auto" style={{ background: "#FBF9F4", color: "#1a1a1a", maxWidth: "480px" }}>
+    <div className="min-h-screen" style={{ background: "#FBF9F4", color: "#1a1a1a" }}>
+      <DesktopHeader onDonate={() => setDonateOpen(true)} />
       <BottomNav onDonate={() => setDonateOpen(true)} />
       <Hero />
       <LibraryPulse />
