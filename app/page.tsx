@@ -254,13 +254,12 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
       <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1F6B47" }}>
         <div className="relative p-5 lg:p-12 text-white">
           <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-green-200 mb-1.5">The Library Campaign</p>
-          <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[1.0] tracking-tight`}>
-            Let&rsquo;s{" "}
+          <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[0.95] tracking-tight`}>
+            Love Our<br className="lg:hidden" />{" "}
             <span className="relative inline-block">
-              Transform
+              Libraries.
               <Squiggle color="#F5C24B" className="absolute -bottom-1.5 left-0 w-full h-2.5" />
-            </span>{" "}
-            Our Libraries
+            </span>
           </h2>
           <p className="mt-3 text-white/90 text-[15px] lg:text-[16px] leading-relaxed">
             We&rsquo;re raising <strong className="font-black" style={{ color: "#F5C24B" }}>£50,000</strong> to transform our KS1 and KS2 libraries into inspiring spaces where every child falls in love with reading.
