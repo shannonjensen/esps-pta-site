@@ -635,7 +635,7 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
           <>
             <Star color="#F5C24B" size={22} />
             <h3 className={`${h} font-black text-[22px] mt-2 text-stone-900`}>Make a donation</h3>
-            <p className="text-stone-500 text-[13px] mt-1">Every pound goes directly to ESPS children. Gift Aid adds 25%.</p>
+            <p className="text-stone-500 text-[13px] mt-1">Thank you for your support. Please consider stretching your pound further by opting into Gift Aid.</p>
             <div className="grid grid-cols-4 gap-2 mt-4">
               {[10, 20, 50, 100].map((p) => (
                 <button key={p} onClick={() => { setAmount(p); setCustom(""); }}

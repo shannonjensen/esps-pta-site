@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Minimum donation is £1" }, { status: 400 });
     }
 
-    const intent = await stripe.paymentIntents.create({
+    const intent = await getStripe().paymentIntents.create({
       amount,
       currency: "gbp",
       automatic_payment_methods: { enabled: true },

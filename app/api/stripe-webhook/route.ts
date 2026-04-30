@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export const runtime = "nodejs";
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(body, sig, secret);
+    event = getStripe().webhooks.constructEvent(body, sig, secret);
   } catch (e) {
     const msg = e instanceof Error ? e.message : "Unknown error";
     return NextResponse.json({ error: `Invalid signature: ${msg}` }, { status: 400 });
