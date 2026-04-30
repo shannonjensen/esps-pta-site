@@ -21,6 +21,8 @@ export async function POST(req: NextRequest) {
         gift_aid: body.giftAid ? "true" : "false",
         donor_address: body.address || "",
         donor_postcode: body.postcode || "",
+        employer_match: body.employerMatch ? "true" : "false",
+        source: body.source || "",
       },
     });
 

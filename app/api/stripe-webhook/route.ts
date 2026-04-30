@@ -42,6 +42,8 @@ export async function POST(req: NextRequest) {
           gift_aid: pi.metadata.gift_aid === "true",
           donor_address: pi.metadata.donor_address || null,
           donor_postcode: pi.metadata.donor_postcode || null,
+          employer_match: pi.metadata.employer_match === "true",
+          source: pi.metadata.source || null,
         },
         { onConflict: "stripe_payment_intent_id" }
       );

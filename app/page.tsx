@@ -32,8 +32,8 @@ const DATA = {
     "Playground improvements",
   ],
   involved: [
-    { title: "Coffee Club", description: "A small monthly donation of £5, £10 or £20 makes a big difference, raising over £3,700 this year. These donations can qualify for gift aid, boosting your donation by 25% at no cost to you.", cta: "Sign up", href: "https://tinyurl.com/Esps10" },
-    { title: "EasyFundraising", description: "Shop online as usual and earn free donations for the school. Over £400 raised last term alone with zero effort.", cta: "Start raising", href: "https://www.easyfundraising.org.uk" },
+    { title: "Coffee Club", description: "A small monthly donation of £5, £10 or £20 makes a big difference, raising over £3,700 this year. These donations can qualify for gift aid, boosting your donation by 25% at no cost to you.", cta: "Sign up", href: "https://docs.google.com/forms/d/e/1FAIpQLScIncFFAhnKj8KHagLgLhKSntQO2aUzipyykp1OIpvmluZ7_w/viewform?usp=header" },
+    { title: "EasyFundraising", description: "Shop online as usual and earn free donations for the school. Over £400 raised last term alone with zero effort.", cta: "Start raising", href: "https://www.easyfundraising.org.uk/causes/eastsheenps/" },
     { title: "Volunteer your time", description: "Help out at events, staff the after-school library or share your skills. One-off or regular opportunities available.", cta: "Get in touch", href: "mailto:geneva@espspta.org" },
     { title: "Attend our events", description: "From the Summer Fair to coffee mornings, every ticket sold and cake bought helps fund the things that make our school special. Showing up is what builds community — and it's what makes these events fun." },
     { title: "Donate", description: "Donations are always welcome. You may be able to boost a donation's impact with corporate matching or by opting into gift aid.", cta: "Make a donation", href: "#donate" },
@@ -230,25 +230,30 @@ function Hero() {
 
 /* ── Library campaign pulse ── */
 function LibraryPulse({ onDonate }: { onDonate: () => void }) {
-  const [stats, setStats] = useState(DATA.library);
+  const goal = DATA.library.goal;
+  const [stats, setStats] = useState<{ raised: number; donors: number } | null>(null);
   useEffect(() => {
     fetch("/api/totals")
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
         if (d && typeof d.raised === "number") {
-          setStats((prev) => ({ ...prev, raised: d.raised, donors: d.donors }));
+          setStats({ raised: d.raised, donors: d.donors });
+        } else {
+          setStats({ raised: 0, donors: 0 });
         }
       })
-      .catch(() => {});
+      .catch(() => setStats({ raised: 0, donors: 0 }));
   }, []);
-  const { raised, goal, donors } = stats;
-  const pct = Math.round((raised / goal) * 100);
+  const loaded = stats !== null;
+  const raised = stats?.raised ?? 0;
+  const donors = stats?.donors ?? 0;
+  const pct = loaded ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
   return (
     <section id="library" className="px-4 lg:px-6 pb-2">
       <div className="max-w-3xl mx-auto">
-      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1E548E" }}>
+      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#5B8E5A" }}>
         <div className="relative p-5 lg:p-12 text-white">
-          <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-sky-200 mb-1.5">Our Big Campaign</p>
+          <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-green-200 mb-1.5">Our Big Campaign</p>
           <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[0.95] tracking-tight`}>
             Love Our<br className="lg:hidden" />{" "}
             <span className="relative inline-block">
@@ -256,22 +261,24 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
               <Squiggle color="#F5C24B" className="absolute -bottom-1.5 left-0 w-full h-2.5" />
             </span>
           </h2>
-          <p className="mt-3 text-sky-50/90 text-[14px] leading-relaxed">
+          <p className="mt-3 text-green-50/90 text-[14px] leading-relaxed">
             We&rsquo;re raising £50,000 to transform our KS1 and KS2 libraries into inspiring spaces where every child falls in love with reading.
           </p>
           <div className="mt-4 rounded-2xl p-3.5" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(6px)" }}>
             <div className="flex items-baseline justify-between mb-2">
-              <span className={`${h} font-black text-[26px] leading-none`}>£{raised.toLocaleString()}</span>
-              <span className="text-sky-50 text-[12px] font-medium">of £{goal.toLocaleString()}</span>
+              <span className={`${h} font-black text-[26px] leading-none`} style={{ minHeight: "1em" }}>
+                {loaded ? `£${raised.toLocaleString()}` : " "}
+              </span>
+              <span className="text-green-50 text-[12px] font-medium">of £{goal.toLocaleString()}</span>
             </div>
             <div className="h-3 rounded-full overflow-hidden relative" style={{ background: "rgba(0,0,0,0.18)" }}>
-              <div className="h-full rounded-full relative" style={{ width: `${pct}%`, background: "linear-gradient(90deg, #F5C24B, #FFE6A8)" }}>
+              <div className="h-full rounded-full relative transition-[width] duration-500" style={{ width: `${pct}%`, background: "linear-gradient(90deg, #F5C24B, #FFE6A8)" }}>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 -mr-1 w-3 h-3 rounded-full bg-white" style={{ boxShadow: "0 0 0 2px #F5C24B" }} />
               </div>
             </div>
-            <div className="flex justify-between mt-2 text-[11px] text-sky-50">
-              <span className="font-bold">{pct}% there</span>
-              <span>{donors} donors so far</span>
+            <div className="flex justify-between mt-2 text-[11px] text-green-50">
+              <span className="font-bold">{loaded ? `${pct}% there` : " "}</span>
+              <span>{loaded ? `${donors} donors so far` : " "}</span>
             </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-2">
@@ -602,7 +609,7 @@ function Contact() {
 }
 
 /* ── Donate modal ── */
-function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+function DonateModal({ open, onClose, source }: { open: boolean; onClose: () => void; source: string | null }) {
   const [step, setStep] = useState<"amount" | "payment" | "success">("amount");
   const [amount, setAmount] = useState(5);
   const [custom, setCustom] = useState("");
@@ -611,6 +618,7 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   const [giftAid, setGiftAid] = useState(false);
   const [address, setAddress] = useState("");
   const [postcode, setPostcode] = useState("");
+  const [employerMatch, setEmployerMatch] = useState(false);
 
   useEffect(() => {
     if (!open) setStep("amount");
@@ -619,7 +627,8 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   if (!open) return null;
   const finalAmount = custom ? parseInt(custom) || 0 : amount;
   const giftAidValid = !giftAid || (name.trim() && address.trim() && postcode.trim());
-  const canContinue = finalAmount >= 1 && giftAidValid;
+  const employerMatchValid = !employerMatch || email.trim();
+  const canContinue = finalAmount >= 1 && giftAidValid && employerMatchValid;
 
   const inputClass =
     "w-full px-3.5 py-3 rounded-xl bg-stone-50 font-semibold text-[16px] focus:outline-none focus:bg-white";
@@ -672,10 +681,16 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                 <input type="text" value={postcode} onChange={(e) => setPostcode(e.target.value.toUpperCase())} placeholder="Postcode"
                   className={inputClass} style={{ ...inputStyle, background: "white" }} />
                 <p className="text-[11px] text-stone-700 leading-relaxed">
-                  By ticking Gift Aid I confirm I am a UK taxpayer and want East Sheen Primary School PTA to claim Gift Aid on this donation and any donations I make in the future or have made in the past four years. I understand that if I pay less Income Tax and/or Capital Gains Tax in the current tax year than the amount of Gift Aid claimed on all my donations, it is my responsibility to pay any difference.
+                  By ticking Gift Aid I confirm I am a UK taxpayer and want East Sheen Primary School PTA to claim Gift Aid on this donation. I understand that if I pay less Income Tax and/or Capital Gains Tax in the current tax year than the amount of Gift Aid claimed, it is my responsibility to pay any difference.
                 </p>
               </div>
             )}
+            <label className="mt-2.5 flex items-start gap-2.5 cursor-pointer">
+              <input type="checkbox" checked={employerMatch} onChange={(e) => setEmployerMatch(e.target.checked)} className="mt-1 w-4 h-4 accent-orange-500" />
+              <span className="text-[12px] text-stone-600 leading-relaxed">
+                <span className="font-bold text-stone-900">My employer matches charitable donations.</span> Stretch your donation further. We&rsquo;ll follow up via email.
+              </span>
+            </label>
             <button onClick={() => canContinue && setStep("payment")}
               disabled={!canContinue}
               className="w-full mt-4 py-3.5 rounded-full font-bold text-white text-[15px] disabled:opacity-60"
@@ -700,6 +715,8 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               giftAid={giftAid}
               address={address}
               postcode={postcode}
+              employerMatch={employerMatch}
+              source={source}
               onSuccess={() => setStep("success")}
               onBack={() => setStep("amount")}
             />
@@ -735,13 +752,15 @@ function PageFooter() {
 
 /* ── Main ── */
 export default function Home() {
-  const [donateOpen, setDonateOpen] = useState(false);
+  const [donateSource, setDonateSource] = useState<string | null>(null);
+  const donateOpen = donateSource !== null;
+  const closeDonate = () => setDonateSource(null);
   return (
     <div className="min-h-screen" style={{ background: "#FBF9F4", color: "#1a1a1a" }}>
-      <DesktopHeader onDonate={() => setDonateOpen(true)} />
-      <MobileHeader onDonate={() => setDonateOpen(true)} />
+      <DesktopHeader onDonate={() => setDonateSource("header")} />
+      <MobileHeader onDonate={() => setDonateSource("header")} />
       <Hero />
-      <LibraryPulse onDonate={() => setDonateOpen(true)} />
+      <LibraryPulse onDonate={() => setDonateSource("campaign_card")} />
       <WhatsOn />
       <Achievements />
       <GetInvolved />
@@ -749,7 +768,7 @@ export default function Home() {
       <Newsletters />
       <Contact />
       <PageFooter />
-      <DonateModal open={donateOpen} onClose={() => setDonateOpen(false)} />
+      <DonateModal open={donateOpen} onClose={closeDonate} source={donateSource} />
     </div>
   );
 }

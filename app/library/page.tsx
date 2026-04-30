@@ -6,20 +6,23 @@ import Link from "next/link";
 
 export default function LibraryPage() {
   const goal = 50000;
-  const [raised, setRaised] = useState(18400);
-  const [donors, setDonors] = useState(142);
+  const [stats, setStats] = useState<{ raised: number; donors: number } | null>(null);
   useEffect(() => {
     fetch("/api/totals")
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {
         if (d && typeof d.raised === "number") {
-          setRaised(d.raised);
-          setDonors(d.donors);
+          setStats({ raised: d.raised, donors: d.donors });
+        } else {
+          setStats({ raised: 0, donors: 0 });
         }
       })
-      .catch(() => {});
+      .catch(() => setStats({ raised: 0, donors: 0 }));
   }, []);
-  const pct = Math.min(100, Math.round((raised / goal) * 100));
+  const loaded = stats !== null;
+  const raised = stats?.raised ?? 0;
+  const donors = stats?.donors ?? 0;
+  const pct = loaded ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
   const accent = "#5B8E5A";
 
   const heading = "font-[family-name:var(--font-heading)]";
@@ -74,8 +77,8 @@ export default function LibraryPage() {
             <p className="text-[10px] uppercase tracking-[0.16em] font-bold text-stone-500">Raised so far</p>
             <div className="mt-1 flex items-baseline gap-2 flex-wrap">
               <span className={`${heading} font-black text-[36px] sm:text-[52px] tracking-tight leading-none`}
-                style={{ color: "#235D69" }}>
-                £{raised.toLocaleString()}
+                style={{ color: "#235D69", minHeight: "1em" }}>
+                {loaded ? `£${raised.toLocaleString()}` : " "}
               </span>
               <span className="text-stone-500 text-[13px] sm:text-[15px] font-medium">
                 of £{goal.toLocaleString()}
@@ -94,13 +97,13 @@ export default function LibraryPage() {
                 ))}
               </div>
               <div className={`${heading} font-black text-[15px] leading-none shrink-0`} style={{ color: "#3D6B3D" }}>
-                {pct}%
+                {loaded ? `${pct}%` : ""}
               </div>
             </div>
 
             <div className="mt-3 flex items-center justify-between gap-2 text-[12px] whitespace-nowrap">
-              <span className="text-stone-600"><span className="font-bold text-stone-900">{donors}</span> donors</span>
-              <span className="font-bold" style={{ color: "#B8551F" }}>£{(goal - raised).toLocaleString()} to go</span>
+              <span className="text-stone-600">{loaded && (<><span className="font-bold text-stone-900">{donors}</span> donors</>)}</span>
+              <span className="font-bold" style={{ color: "#B8551F" }}>{loaded && `£${(goal - raised).toLocaleString()} to go`}</span>
             </div>
 
             <button className="mt-4 w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white text-[15px] sm:text-[16px]"

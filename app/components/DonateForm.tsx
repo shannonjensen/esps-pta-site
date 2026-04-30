@@ -14,6 +14,8 @@ type Props = {
   giftAid: boolean;
   address: string;
   postcode: string;
+  employerMatch: boolean;
+  source: string | null;
   onSuccess: () => void;
   onBack: () => void;
 };
@@ -34,6 +36,8 @@ export function DonateForm(props: Props) {
         giftAid: props.giftAid,
         address: props.address,
         postcode: props.postcode,
+        employerMatch: props.employerMatch,
+        source: props.source,
       }),
     })
       .then((r) => r.json())
@@ -44,7 +48,7 @@ export function DonateForm(props: Props) {
       })
       .catch((e) => !cancelled && setError(e.message));
     return () => { cancelled = true; };
-  }, [props.amount, props.name, props.email, props.giftAid, props.address, props.postcode]);
+  }, [props.amount, props.name, props.email, props.giftAid, props.address, props.postcode, props.employerMatch, props.source]);
 
   if (!pubKey) {
     return (
