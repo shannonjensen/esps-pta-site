@@ -622,7 +622,7 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   const canContinue = finalAmount >= 1 && giftAidValid;
 
   const inputClass =
-    "w-full px-3.5 py-3 rounded-xl bg-stone-50 font-semibold text-[14px] focus:outline-none focus:bg-white";
+    "w-full px-3.5 py-3 rounded-xl bg-stone-50 font-semibold text-[16px] focus:outline-none focus:bg-white";
   const inputStyle = { border: "1px solid #1a1a1a14" };
 
   return (
