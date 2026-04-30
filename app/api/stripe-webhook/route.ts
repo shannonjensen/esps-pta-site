@@ -40,6 +40,8 @@ export async function POST(req: NextRequest) {
           donor_name: pi.metadata.donor_name || null,
           donor_email: pi.metadata.donor_email || pi.receipt_email || null,
           gift_aid: pi.metadata.gift_aid === "true",
+          donor_address: pi.metadata.donor_address || null,
+          donor_postcode: pi.metadata.donor_postcode || null,
         },
         { onConflict: "stripe_payment_intent_id" }
       );

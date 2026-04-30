@@ -12,12 +12,15 @@ export async function POST(req: NextRequest) {
     const intent = await getStripe().paymentIntents.create({
       amount,
       currency: "gbp",
+      description: "Donation to East Sheen Primary School PTA",
       automatic_payment_methods: { enabled: true },
       receipt_email: body.email || undefined,
       metadata: {
         donor_name: body.name || "",
         donor_email: body.email || "",
         gift_aid: body.giftAid ? "true" : "false",
+        donor_address: body.address || "",
+        donor_postcode: body.postcode || "",
       },
     });
 

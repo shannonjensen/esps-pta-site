@@ -609,6 +609,8 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [giftAid, setGiftAid] = useState(false);
+  const [address, setAddress] = useState("");
+  const [postcode, setPostcode] = useState("");
 
   useEffect(() => {
     if (!open) setStep("amount");
@@ -616,6 +618,8 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
 
   if (!open) return null;
   const finalAmount = custom ? parseInt(custom) || 0 : amount;
+  const giftAidValid = !giftAid || (name.trim() && address.trim() && postcode.trim());
+  const canContinue = finalAmount >= 1 && giftAidValid;
 
   const inputClass =
     "w-full px-3.5 py-3 rounded-xl bg-stone-50 font-semibold text-[14px] focus:outline-none focus:bg-white";
@@ -651,18 +655,29 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
                 placeholder="Other amount"
                 className={`${inputClass} pl-8`} style={inputStyle} />
             </div>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name (optional)"
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={giftAid ? "Full name (required for Gift Aid)" : "Your name (optional)"}
               className={`${inputClass} mt-2.5`} style={inputStyle} />
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email for receipt"
               className={`${inputClass} mt-2.5`} style={inputStyle} />
             <label className="mt-3 flex items-start gap-2.5 cursor-pointer">
               <input type="checkbox" checked={giftAid} onChange={(e) => setGiftAid(e.target.checked)} className="mt-1 w-4 h-4 accent-orange-500" />
               <span className="text-[12px] text-stone-600 leading-relaxed">
-                <span className="font-bold text-stone-900">Add Gift Aid (+25%)</span> — I&rsquo;m a UK taxpayer and want the PTA to claim Gift Aid on this donation.
+                <span className="font-bold text-stone-900">Add Gift Aid (+25%)</span> — boost your donation by 25% at no extra cost (UK taxpayers only).
               </span>
             </label>
-            <button onClick={() => finalAmount >= 1 && setStep("payment")}
-              disabled={finalAmount < 1}
+            {giftAid && (
+              <div className="mt-3 p-3.5 rounded-xl space-y-2.5" style={{ background: "#FFF8E6", border: "1px solid #F5C24B40" }}>
+                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Home address line 1"
+                  className={inputClass} style={{ ...inputStyle, background: "white" }} />
+                <input type="text" value={postcode} onChange={(e) => setPostcode(e.target.value.toUpperCase())} placeholder="Postcode"
+                  className={inputClass} style={{ ...inputStyle, background: "white" }} />
+                <p className="text-[11px] text-stone-700 leading-relaxed">
+                  By ticking Gift Aid I confirm I am a UK taxpayer and want East Sheen Primary School PTA to claim Gift Aid on this donation and any donations I make in the future or have made in the past four years. I understand that if I pay less Income Tax and/or Capital Gains Tax in the current tax year than the amount of Gift Aid claimed on all my donations, it is my responsibility to pay any difference.
+                </p>
+              </div>
+            )}
+            <button onClick={() => canContinue && setStep("payment")}
+              disabled={!canContinue}
               className="w-full mt-4 py-3.5 rounded-full font-bold text-white text-[15px] disabled:opacity-60"
               style={{ background: "#E0713E", boxShadow: "0 2px 0 #B8551F" }}>
               Continue · £{finalAmount || 0} →
@@ -683,6 +698,8 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
               name={name}
               email={email}
               giftAid={giftAid}
+              address={address}
+              postcode={postcode}
               onSuccess={() => setStep("success")}
               onBack={() => setStep("amount")}
             />
