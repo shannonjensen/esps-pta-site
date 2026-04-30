@@ -147,9 +147,6 @@ export default function LibraryPage() {
             </figure>
           ))}
         </div>
-        <p className="text-center text-[11px] uppercase tracking-[0.2em] font-bold text-white/60 mt-4">
-          Our libraries today
-        </p>
       </section>
 
       {/* Vision */}
@@ -166,19 +163,17 @@ export default function LibraryPage() {
             The Vision
           </h2>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            The aim of the project is to create library spaces where children step into a magical world
-            that nurtures their imagination — and always want to return. We are currently working with
-            library suppliers on the final designs, which will be shared later this term. Below are
-            conceptual renders informing the design process.
+            Inspired by nature, our vision is to create immersive environments that nurture imagination
+            and growth. We are currently working with library suppliers on the final designs, which will
+            be shared later this term. Below are visuals shaping the design.
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div className="max-w-3xl mx-auto mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           {[
-            { src: "/library/library-render-1.jpg", alt: "Library design concept — mezzanine reading nook" },
             { src: "/library/library-render-2.jpg", alt: "Library design concept — story canopy and arched shelves" },
             { src: "/library/library-render-3.jpg", alt: "Library design concept — curved shelving and reading mezzanine" },
-            { src: "/library/library-render-4.jpg", alt: "Library design concept — children playing in a circular reading nook" },
+            { src: "/library/library-render-1.jpg", alt: "Library design concept — mezzanine reading nook" },
           ].map((r) => (
             <figure key={r.src} className="rounded-2xl overflow-hidden bg-stone-100"
               style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.25)" }}>
@@ -189,7 +184,7 @@ export default function LibraryPage() {
         </div>
 
         <p className="text-center text-[11px] uppercase tracking-[0.2em] font-bold text-white/60 mt-4">
-          Conceptual renders — final designs to come
+          Design inspiration — final designs to come
         </p>
       </section>
 
