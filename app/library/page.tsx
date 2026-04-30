@@ -24,20 +24,20 @@ export default function LibraryPage() {
   const donors = stats?.donors ?? 0;
   const pct = loaded ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
   const accent = "#5B8E5A";
+  const orange = "#E0713E";
+  const gold = "#C28E1C";
 
   const heading = "font-[family-name:var(--font-heading)]";
 
-  const plan = [
-    { phase: "Phase 1", title: "KS1 Reading Den", target: "£15,000", desc: "Soft seating, story corner, picture book curation, mural commission." },
-    { phase: "Phase 2", title: "KS2 Library Refresh", target: "£25,000", desc: "New shelving, study nooks, fiction & non-fiction restock, librarian-led launch." },
-    { phase: "Phase 3", title: "Always-Open Hours", target: "£10,000", desc: "Fund after-school librarian, weekend events, parent-volunteer training." },
-  ];
-
-  const renders = [
-    { src: "/library/library-render-1.jpg", alt: "Library design concept — mezzanine reading nook" },
-    { src: "/library/library-render-2.jpg", alt: "Library design concept — story canopy and arched shelves" },
-    { src: "/library/library-render-3.jpg", alt: "Library design concept — curved shelving and reading mezzanine" },
-    { src: "/library/library-render-4.jpg", alt: "Library design concept — children playing in a circular reading nook" },
+  const pairs = [
+    {
+      today: { src: "/library/ks1-current.jpg", alt: "Current KS1 library at East Sheen Primary" },
+      after: { src: "/library/library-render-1.jpg", alt: "KS1 reading den concept render" },
+    },
+    {
+      today: { src: "/library/ks2-current.jpg", alt: "Current KS2 library at East Sheen Primary" },
+      after: { src: "/library/library-render-3.jpg", alt: "KS2 mezzanine reading concept render" },
+    },
   ];
 
   return (
@@ -52,33 +52,38 @@ export default function LibraryPage() {
 
       {/* Hero */}
       <section className="relative px-6 sm:px-8 pt-10 pb-6 sm:py-14 overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-bold mb-5 whitespace-nowrap"
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center">
+            <span className="inline-block px-3 py-1.5 rounded-full text-[10px] sm:text-[11px] uppercase tracking-[0.18em] font-bold mb-5"
               style={{ background: "#DEEBDA", color: "#3D6B3D" }}>
-              <Star color="#3D6B3D" size={11} /> The Big Campaign <Star color="#3D6B3D" size={11} />
+              ESPS PTA Library Campaign
             </span>
-            <h1 className={`${heading} font-black tracking-tight leading-[1.05] text-[60px] sm:text-[80px] lg:text-[100px] text-stone-900`}>
-              Love Our<br />
+            <h1 className={`${heading} font-black tracking-tight leading-[1.02] text-[52px] sm:text-[76px] lg:text-[88px] text-stone-900`}>
+              Let&rsquo;s{" "}
               <span className="relative inline-block">
-                <span style={{ color: accent, position: "relative", zIndex: 1 }}>Libraries.</span>
-                <Squiggle color="#E0713E" className="absolute left-0 right-0" style={{ bottom: -6, height: 10, width: "100%" }} />
-              </span>
+                <span style={{ color: orange, position: "relative", zIndex: 1 }}>Transform</span>
+                <Squiggle color={orange} className="absolute left-0 right-0" style={{ bottom: -6, height: 10, width: "100%" }} />
+              </span>{" "}
+              Our Libraries
             </h1>
-            <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[18px] leading-[1.55] max-w-2xl mx-auto font-normal`}>
-              We&rsquo;re raising £{goal.toLocaleString()} to transform our KS1 and KS2 libraries into inspiring spaces where every
-              child at East Sheen Primary falls in love with reading.
+            <p className={`${heading} mt-6 text-stone-700 text-[18px] sm:text-[22px] leading-[1.5] max-w-2xl mx-auto font-normal`}>
+              into{" "}
+              <span className="relative inline-block">
+                inspiring spaces
+                <Squiggle color={orange} className="absolute left-0 right-0" style={{ bottom: -3, height: 8, width: "100%" }} />
+              </span>{" "}
+              where every child can fall in love with reading.
             </p>
           </div>
 
           {/* Progress card */}
-          <div className="mt-8 sm:mt-10 max-w-3xl mx-auto rounded-3xl bg-white p-5 sm:p-6"
+          <div className="mt-8 sm:mt-10 rounded-3xl bg-white p-5 sm:p-6"
             style={{ border: "1px solid #1a1a1a10", boxShadow: "0 12px 32px rgba(20,30,40,0.08)" }}>
             <p className="text-[10px] uppercase tracking-[0.16em] font-bold text-stone-500">Raised so far</p>
             <div className="mt-1 flex items-baseline gap-2 flex-wrap">
               <span className={`${heading} font-black text-[36px] sm:text-[52px] tracking-tight leading-none`}
                 style={{ color: "#235D69", minHeight: "1em" }}>
-                {loaded ? `£${raised.toLocaleString()}` : " "}
+                {loaded ? `£${raised.toLocaleString()}` : " "}
               </span>
               <span className="text-stone-500 text-[13px] sm:text-[15px] font-medium">
                 of £{goal.toLocaleString()}
@@ -117,7 +122,7 @@ export default function LibraryPage() {
       {/* Why */}
       <section className="px-6 sm:px-8 pt-2 pb-10 sm:pt-4 sm:pb-16">
         <div className="max-w-2xl mx-auto text-center">
-          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Why this matters</span>
+          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: orange }}>Why this matters</span>
           <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
             Libraries at the heart of our school.
           </h2>
@@ -132,61 +137,67 @@ export default function LibraryPage() {
         </div>
       </section>
 
-      {/* Plan */}
-      <section className="px-6 sm:px-8 py-8 sm:py-12" style={{ background: "#FAF6EE" }}>
+      {/* Before & after */}
+      <section className="px-6 sm:px-8 py-10 sm:py-16" style={{ background: "#FAF6EE" }}>
         <div className="max-w-2xl mx-auto text-center">
-          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: accent }}>The plan</span>
+          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: accent }}>Before &amp; after</span>
           <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
             Imagine the possibilities.
           </h2>
         </div>
 
-        {/* First 2 renders — right after the heading */}
-        <div className="max-w-3xl mx-auto mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {renders.slice(0, 2).map((r, i) => (
-            <figure key={i} className="rounded-2xl overflow-hidden bg-stone-100"
-              style={{ border: "1px solid #1a1a1a10", boxShadow: "0 8px 24px rgba(20,30,40,0.08)" }}>
-              <Image src={r.src} alt={r.alt} width={800} height={600} className="w-full h-full block object-cover" style={{ aspectRatio: "4/3" }} />
-            </figure>
+        <div className="max-w-4xl mx-auto mt-8 sm:mt-12 space-y-8 sm:space-y-10">
+          {pairs.map((pair, i) => (
+            <div key={i} className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] items-center gap-4 sm:gap-5">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-stone-500 mb-2">Today</p>
+                <figure className="rounded-2xl overflow-hidden bg-stone-100"
+                  style={{ border: "1px solid #1a1a1a10", boxShadow: "0 8px 24px rgba(20,30,40,0.08)" }}>
+                  <Image src={pair.today.src} alt={pair.today.alt} width={800} height={600}
+                    className="w-full h-full block object-cover" style={{ aspectRatio: "4/3" }} />
+                </figure>
+              </div>
+              <div className="flex justify-center">
+                <svg className="hidden sm:block" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke={orange} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                </svg>
+                <svg className="sm:hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={orange} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19" /><polyline points="19 12 12 19 5 12" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.2em] font-bold mb-2" style={{ color: orange }}>An appealing, modern space</p>
+                <figure className="rounded-2xl overflow-hidden bg-stone-100"
+                  style={{ border: `1.5px solid ${orange}55`, boxShadow: "0 8px 24px rgba(20,30,40,0.08)" }}>
+                  <Image src={pair.after.src} alt={pair.after.alt} width={800} height={600}
+                    className="w-full h-full block object-cover" style={{ aspectRatio: "4/3" }} />
+                </figure>
+              </div>
+            </div>
           ))}
         </div>
 
-        <div className="max-w-2xl mx-auto text-center mt-8">
-          <p className={`${heading} text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            The school and PTA are currently working with library suppliers on the final designs, which
-            will be shared and displayed later this term.
-          </p>
-          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            With your generous support, we will be able to install the libraries over the summer holiday.
-          </p>
-        </div>
-
-        {/* Second 2 renders — after the text */}
-        <div className="max-w-3xl mx-auto mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {renders.slice(2, 4).map((r, i) => (
-            <figure key={i} className="rounded-2xl overflow-hidden bg-stone-100"
-              style={{ border: "1px solid #1a1a1a10", boxShadow: "0 8px 24px rgba(20,30,40,0.08)" }}>
-              <Image src={r.src} alt={r.alt} width={800} height={600} className="w-full h-full block object-cover" style={{ aspectRatio: "4/3" }} />
-            </figure>
-          ))}
-        </div>
-        <p className="text-center text-[11px] uppercase tracking-[0.2em] font-bold text-stone-500 mt-4">
-          Concept renders — final designs to come
+        <p className="text-center text-[11px] uppercase tracking-[0.2em] font-bold text-stone-500 mt-6 sm:mt-8">
+          Conceptual renders — final designs to come
         </p>
       </section>
 
-      {/* Make a difference */}
+      {/* Money paragraph + CTA */}
       <section className="px-6 sm:px-8 py-12 sm:py-16">
-        <div className="max-w-2xl mx-auto text-center">
-          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Make a difference</span>
-          <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
-            Every contribution helps write the next chapter.
-          </h2>
-          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            You can help make our libraries places that inspire children for many years to come.
-            Please consider making a donation.
+        <div className="max-w-3xl mx-auto text-center">
+          <p className={`${heading} font-bold text-[22px] sm:text-[30px] leading-[1.4] text-stone-900`}>
+            We need your help to raise{" "}
+            <strong className="font-black" style={{ color: gold }}>£50,000</strong>{" "}
+            to renovate our libraries, creating spaces that spark{" "}
+            <strong className="font-black" style={{ color: gold }}>curiosity</strong>,{" "}
+            <strong className="font-black" style={{ color: gold }}>wonder</strong>, and a{" "}
+            <span className="relative inline-block">
+              <strong className="font-black" style={{ color: gold }}>lifelong passion for books</strong>
+              <Squiggle color={orange} className="absolute left-0 right-0" style={{ bottom: -3, height: 8, width: "100%" }} />
+            </span>
+            .
           </p>
-          <p className={`${heading} mt-4 text-stone-700 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+          <p className={`${heading} mt-5 text-stone-600 text-[15px] sm:text-[16px] leading-[1.6] font-normal`}>
             As a charitable organisation, donations are eligible for employer matching schemes and Gift Aid.
           </p>
           <button className="mt-7 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-white text-[16px] sm:text-[17px]"
@@ -199,7 +210,7 @@ export default function LibraryPage() {
       {/* Get in touch */}
       <section className="px-6 sm:px-8 py-12 sm:py-16" style={{ background: "#FAF6EE" }}>
         <div className="max-w-2xl mx-auto text-center">
-          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: "#E0713E" }}>Any questions</span>
+          <span className="text-[11px] uppercase tracking-[0.22em] font-bold" style={{ color: orange }}>Any questions</span>
           <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-stone-900`}>
             Get in touch.
           </h2>
@@ -207,7 +218,7 @@ export default function LibraryPage() {
             Please reach out to{" "}
             <a href="mailto:shannon@espspta.org"
               className="font-bold underline decoration-2 underline-offset-4"
-              style={{ color: accent, textDecorationColor: "#E0713E" }}>
+              style={{ color: accent, textDecorationColor: orange }}>
               shannon@espspta.org
             </a>{" "}
             with any questions.
@@ -227,14 +238,6 @@ function Squiggle({ color = "#E0713E", className = "", style }: { color?: string
   return (
     <svg viewBox="0 0 200 14" className={className} style={style} fill="none" preserveAspectRatio="none">
       <path d="M2 8 Q 18 1, 34 7 T 66 7 T 98 7 T 130 7 T 162 7 T 198 7" stroke={color} strokeWidth="3.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function Star({ color = "#F5C24B", size = 20 }: { color?: string; size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path d="M12 2 L13.5 9 L20 9.5 L15 13.5 L17 20 L12 16 L7 20 L9 13.5 L4 9.5 L10.5 9 Z" fill={color} stroke={color} strokeWidth="1.2" strokeLinejoin="round" />
     </svg>
   );
 }

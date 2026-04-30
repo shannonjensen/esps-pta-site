@@ -762,6 +762,14 @@ export default function Home() {
   const [donateSource, setDonateSource] = useState<string | null>(null);
   const donateOpen = donateSource !== null;
   const closeDonate = () => setDonateSource(null);
+
+  // Auto-open donate modal if URL has ?source=... (used for printed QR codes)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const src = params.get("source");
+    if (src) setDonateSource(src);
+  }, []);
+
   return (
     <div className="min-h-screen" style={{ background: "#FBF9F4", color: "#1a1a1a" }}>
       <DesktopHeader onDonate={() => setDonateSource("header")} />
