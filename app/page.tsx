@@ -251,25 +251,26 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
   return (
     <section id="library" className="px-4 lg:px-6 pb-2">
       <div className="max-w-3xl mx-auto">
-      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#5B8E5A" }}>
+      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1F6B47" }}>
         <div className="relative p-5 lg:p-12 text-white">
-          <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-green-200 mb-1.5">Our Big Campaign</p>
-          <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[0.95] tracking-tight`}>
-            Love Our<br className="lg:hidden" />{" "}
+          <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-green-200 mb-1.5">The Library Campaign</p>
+          <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[1.0] tracking-tight`}>
+            Let&rsquo;s{" "}
             <span className="relative inline-block">
-              Libraries.
+              Transform
               <Squiggle color="#F5C24B" className="absolute -bottom-1.5 left-0 w-full h-2.5" />
-            </span>
+            </span>{" "}
+            Our Libraries
           </h2>
-          <p className="mt-3 text-green-50/90 text-[14px] leading-relaxed">
-            We&rsquo;re raising £50,000 to transform our KS1 and KS2 libraries into inspiring spaces where every child falls in love with reading.
+          <p className="mt-3 text-white/90 text-[15px] lg:text-[16px] leading-relaxed">
+            We&rsquo;re raising <strong className="font-black" style={{ color: "#F5C24B" }}>£50,000</strong> to transform our KS1 and KS2 libraries into inspiring spaces where every child falls in love with reading.
           </p>
           <div className="mt-4 rounded-2xl p-3.5" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(6px)" }}>
             <div className="flex items-baseline justify-between mb-2">
               <span className={`${h} font-black text-[26px] leading-none`} style={{ minHeight: "1em" }}>
                 {loaded ? `£${raised.toLocaleString()}` : " "}
               </span>
-              <span className="text-green-50 text-[12px] font-medium">of £{goal.toLocaleString()}</span>
+              <span className="text-green-50 text-[15px] font-semibold">of £{goal.toLocaleString()}</span>
             </div>
             <div className="h-3 rounded-full overflow-hidden relative" style={{ background: "rgba(0,0,0,0.18)" }}>
               <div className="h-full rounded-full relative transition-[width] duration-500" style={{ width: `${pct}%`, background: "linear-gradient(90deg, #F5C24B, #FFE6A8)" }}>
@@ -452,7 +453,7 @@ function Achievements() {
 }
 
 /* ── Get involved ── */
-function GetInvolved() {
+function GetInvolved({ onDonate }: { onDonate: () => void }) {
   const palettes = [
     { bg: "#FFE6D7", fg: "#B8551F", accent: "#E0713E" },
     { bg: "#D6ECEF", fg: "#235D69", accent: "#3B8C9C" },
@@ -487,11 +488,19 @@ function GetInvolved() {
                 <p className="text-[13px] leading-relaxed mt-1" style={{ color: p.fg + "cc" }}>{card.description}</p>
                 {card.cta && card.href && (
                   <div className="mt-auto pt-3">
-                    <a href={card.href} target={card.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold bg-white"
-                      style={{ color: p.fg, border: `1px solid ${p.accent}40` }}>
-                      {card.cta} →
-                    </a>
+                    {card.href === "#donate" ? (
+                      <button onClick={onDonate}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold bg-white active:scale-[0.98]"
+                        style={{ color: p.fg, border: `1px solid ${p.accent}40` }}>
+                        {card.cta} →
+                      </button>
+                    ) : (
+                      <a href={card.href} target={card.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold bg-white"
+                        style={{ color: p.fg, border: `1px solid ${p.accent}40` }}>
+                        {card.cta} →
+                      </a>
+                    )}
                   </div>
                 )}
               </div>
@@ -763,7 +772,7 @@ export default function Home() {
       <LibraryPulse onDonate={() => setDonateSource("campaign_card")} />
       <WhatsOn />
       <Achievements />
-      <GetInvolved />
+      <GetInvolved onDonate={() => setDonateSource("get_involved_button")} />
       <Committee />
       <Newsletters />
       <Contact />
