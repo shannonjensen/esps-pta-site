@@ -78,8 +78,8 @@ export default function LibraryPage() {
             style={{ boxShadow: "0 12px 32px rgba(0,0,0,0.18)" }}>
             <p className="text-[10px] uppercase tracking-[0.16em] font-bold text-stone-500">Raised so far</p>
             <div className="mt-1 flex items-baseline justify-between flex-wrap gap-2">
-              <span className={`${heading} font-black text-[18px] sm:text-[22px] tracking-tight leading-none`}
-                style={{ color: yellow, minHeight: "1em" }}>
+              <span className={`${heading} font-semibold text-[18px] sm:text-[22px] tracking-tight leading-none`}
+                style={{ color: navy, minHeight: "1em" }}>
                 {loaded ? `£${raised.toLocaleString()}` : " "}
               </span>
               <span className={`${heading} text-[18px] sm:text-[22px] tracking-tight leading-none font-semibold`}
@@ -168,8 +168,8 @@ export default function LibraryPage() {
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             The aim of the project is to create library spaces where children step into a magical world
             that nurtures their imagination — and always want to return. We are currently working with
-            library suppliers on the final designs, which will be shared later this term. The below are
-            conceptual renders.
+            library suppliers on the final designs, which will be shared later this term. Below are
+            conceptual renders informing the design process.
           </p>
         </div>
 
