@@ -7,6 +7,8 @@ import { DonateForm } from "./components/DonateForm";
 /* ── Data ── */
 const DATA = {
   events: [
+    { date: "9 May", shortDate: { day: "9", month: "May" }, title: "Y5 Cake Sale", description: "Year 5 are baking up a storm — pop by after pickup for a treat.", cta: "Save the date", tag: "Fundraiser" },
+    { date: "12 June", shortDate: { day: "12", month: "Jun" }, title: "Reception Cake Sale", description: "Reception families share homemade bakes — drop in after pickup to support our youngest year group.", cta: "Save the date", tag: "Fundraiser" },
     { date: "12–13 June", shortDate: { day: "12", month: "Jun" }, title: "ESPS Bike Ride to Amsterdam", description: "Our parents are cycling to Amsterdam to raise money for the library transformation. Novices welcome!", cta: "Sponsorship coming soon", tag: "Fundraiser" },
     { date: "27 June", shortDate: { day: "27", month: "Jun" }, title: "Summer Fair", time: "2–6pm", description: "Our biggest event of the year — stalls, games, food, live music and fun for the whole family.", cta: "Save the date", tag: "Community" },
   ],
@@ -254,12 +256,13 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
       <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1F6B47" }}>
         <div className="relative p-5 lg:p-12 text-white">
           <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-green-200 mb-1.5">The Library Campaign</p>
-          <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[0.95] tracking-tight`}>
-            Love Our<br className="lg:hidden" />{" "}
+          <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[1.0] tracking-tight`}>
+            Let&rsquo;s{" "}
             <span className="relative inline-block">
-              Libraries.
+              Transform
               <Squiggle color="#F5C24B" className="absolute -bottom-1.5 left-0 w-full h-2.5" />
-            </span>
+            </span>{" "}
+            Our Libraries
           </h2>
           <p className="mt-3 text-white/90 text-[15px] lg:text-[16px] leading-relaxed">
             We&rsquo;re raising <strong className="font-black" style={{ color: "#F5C24B" }}>£50,000</strong> to transform our KS1 and KS2 libraries into inspiring spaces where every child falls in love with reading.
@@ -304,6 +307,8 @@ function WhatsOn() {
   const tones = [
     { bg: "#FFE6D7", fg: "#B8551F", btn: "#E0713E", btnShadow: "#B8551F" },
     { bg: "#D6ECEF", fg: "#235D69", btn: "#3B8C9C", btnShadow: "#235D69" },
+    { bg: "#FFF1C9", fg: "#8B6B14", btn: "#D9A227", btnShadow: "#8B6B14" },
+    { bg: "#DEEBDA", fg: "#3D6B3D", btn: "#5B8E5A", btnShadow: "#3D6B3D" },
   ];
   return (
     <section id="whats-on" className="pt-7 pb-6">
@@ -319,7 +324,7 @@ function WhatsOn() {
       </div>
       <div className="px-4 lg:px-6 grid md:grid-cols-2 gap-3">
         {DATA.events.map((e, i) => {
-          const t = tones[i];
+          const t = tones[i % tones.length];
           return (
             <article key={e.title} className="relative bg-white rounded-3xl overflow-hidden flex flex-col"
               style={{ border: "1.5px solid #1a1a1a14", boxShadow: "0 4px 0 #1a1a1a08" }}>
@@ -624,6 +629,7 @@ function DonateModal({ open, onClose, source }: { open: boolean; onClose: () => 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [giftAid, setGiftAid] = useState(false);
+  const [giftAidName, setGiftAidName] = useState("");
   const [address, setAddress] = useState("");
   const [postcode, setPostcode] = useState("");
   const [employerMatch, setEmployerMatch] = useState(false);
@@ -634,9 +640,10 @@ function DonateModal({ open, onClose, source }: { open: boolean; onClose: () => 
 
   if (!open) return null;
   const finalAmount = custom ? parseInt(custom) || 0 : amount;
-  const giftAidValid = !giftAid || (name.trim() && address.trim() && postcode.trim());
+  const giftAidValid = !giftAid || (giftAidName.trim() && address.trim() && postcode.trim());
   const employerMatchValid = !employerMatch || email.trim();
   const canContinue = finalAmount >= 1 && giftAidValid && employerMatchValid;
+  const donorName = giftAid && giftAidName.trim() ? giftAidName.trim() : name.trim();
 
   const inputClass =
     "w-full px-3.5 py-3 rounded-xl bg-stone-50 font-semibold text-[16px] focus:outline-none focus:bg-white";
@@ -672,7 +679,7 @@ function DonateModal({ open, onClose, source }: { open: boolean; onClose: () => 
                 placeholder="Other amount"
                 className={`${inputClass} pl-8`} style={inputStyle} />
             </div>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={giftAid ? "Full name (required for Gift Aid)" : "Your name (optional)"}
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name (optional)"
               className={`${inputClass} mt-2.5`} style={inputStyle} />
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email for receipt"
               className={`${inputClass} mt-2.5`} style={inputStyle} />
@@ -684,6 +691,8 @@ function DonateModal({ open, onClose, source }: { open: boolean; onClose: () => 
             </label>
             {giftAid && (
               <div className="mt-3 p-3.5 rounded-xl space-y-2.5" style={{ background: "#FFF8E6", border: "1px solid #F5C24B40" }}>
+                <input type="text" value={giftAidName} onChange={(e) => setGiftAidName(e.target.value)} placeholder="Full name (required)"
+                  className={inputClass} style={{ ...inputStyle, background: "white" }} />
                 <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Home address line 1"
                   className={inputClass} style={{ ...inputStyle, background: "white" }} />
                 <input type="text" value={postcode} onChange={(e) => setPostcode(e.target.value.toUpperCase())} placeholder="Postcode"
@@ -718,7 +727,7 @@ function DonateModal({ open, onClose, source }: { open: boolean; onClose: () => 
             </p>
             <DonateForm
               amount={finalAmount}
-              name={name}
+              name={donorName}
               email={email}
               giftAid={giftAid}
               address={address}
