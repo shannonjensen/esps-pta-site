@@ -103,87 +103,98 @@ function DesktopHeader({ onDonate }: { onDonate: () => void }) {
   );
 }
 
-/* ── Nav ── */
-const NAV = [
-  { id: "top", label: "Home", icon: (a: boolean) => <svg width="22" height="22" viewBox="0 0 24 24" fill={a ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 11.5L12 4l9 7.5V20a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1z" /></svg> },
-  { id: "whats-on", label: "Events", icon: (a: boolean) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5" fill={a ? "currentColor" : "none"} /><path d="M3 10h18" stroke={a ? "white" : "currentColor"} /><path d="M8 3v4M16 3v4" /></svg> },
-  { id: "library", label: "Library", icon: (a: boolean) => <svg width="22" height="22" viewBox="0 0 24 24" fill={a ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h6a2 2 0 012 2v14a2 2 0 00-2-2H4z" /><path d="M20 4h-6a2 2 0 00-2 2v14a2 2 0 012-2h6z" /></svg> },
-  { id: "involved", label: "Help out", icon: (a: boolean) => <svg width="22" height="22" viewBox="0 0 24 24" fill={a ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z" /></svg> },
-];
+/* ── Mobile Header (burger) ── */
+function MobileHeader({ onDonate }: { onDonate: () => void }) {
+  const [open, setOpen] = useState(false);
 
-function BottomNav({ onDonate }: { onDonate: () => void }) {
-  const [active, setActive] = useState("top");
   useEffect(() => {
-    const ids = NAV.map((n) => n.id);
-    const onScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight * 0.35;
-      let current = "top";
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollPos) current = id;
-      }
-      setActive(current);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   const go = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
-    setActive(id);
-    if (id === "top") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
-    const el = document.getElementById(id);
-    if (el) { const y = el.getBoundingClientRect().top + window.scrollY - 8; window.scrollTo({ top: y, behavior: "smooth" }); }
+    setOpen(false);
+    requestAnimationFrame(() => {
+      if (id === "top") { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+      const el = document.getElementById(id);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 60;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    });
   };
+
+  const items: Array<{ id: string; label: string; href?: string }> = [
+    { id: "whats-on", label: "What’s On" },
+    { id: "library", label: "Library", href: "/library" },
+    { id: "achievements", label: "Achievements" },
+    { id: "involved", label: "Get Involved" },
+    { id: "contact", label: "Contact" },
+  ];
+
   return (
     <>
-      <div aria-hidden className="lg:hidden" style={{ height: "calc(74px + env(safe-area-inset-bottom))" }} />
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white lg:hidden"
-        style={{ borderTop: "1px solid #1a1a1a14", paddingBottom: "env(safe-area-inset-bottom)", boxShadow: "0 -4px 16px rgba(20,30,40,0.06)" }}>
-        <div className="grid grid-cols-5 items-end px-2 pt-2 pb-2 max-w-md mx-auto">
-          {NAV.slice(0, 2).map((n) => (
-            <TabBtn key={n.id} item={n} active={active === n.id} onClick={(e) => go(e, n.id)} />
-          ))}
-          <div className="flex justify-center">
-            <button onClick={onDonate} aria-label="Donate"
-              className="relative -mt-7 w-[58px] h-[58px] rounded-full flex flex-col items-center justify-center text-white active:scale-[0.95] transition"
-              style={{ background: "#E0713E", boxShadow: "0 4px 0 #B8551F, 0 6px 14px rgba(224,113,62,0.45)", border: "3px solid #FBF9F4" }}>
-              <Star color="#FFE6A8" size={20} />
-              <span className="text-[9px] font-black uppercase tracking-wider mt-0.5" style={{ letterSpacing: "0.08em" }}>Donate</span>
-            </button>
-          </div>
-          {NAV.slice(2, 4).map((n) => (
-            <TabBtn key={n.id} item={n} active={active === n.id} onClick={(e) => go(e, n.id)} />
-          ))}
+      <header className="lg:hidden sticky top-0 z-50 flex items-center justify-between px-4 py-3"
+        style={{ background: "rgba(251,249,244,0.95)", backdropFilter: "blur(12px)", borderBottom: "1px solid #1a1a1a10" }}>
+        <span className={`${h} font-black text-[18px] text-stone-900 tracking-tight`}>ESPS PTA</span>
+        <div className="flex items-center gap-2">
+          <button onClick={onDonate} className="px-3.5 py-1.5 rounded-full font-bold text-white text-[12px] active:scale-[0.98]"
+            style={{ background: "#E0713E", boxShadow: "0 2px 0 #B8551F" }}>
+            Donate
+          </button>
+          <button onClick={() => setOpen((o) => !o)} aria-label="Menu" aria-expanded={open}
+            className="w-9 h-9 rounded-full flex items-center justify-center text-stone-800 active:scale-[0.95]">
+            {open ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
+              </svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="4" y1="7" x2="20" y2="7" /><line x1="4" y1="13" x2="20" y2="13" /><line x1="4" y1="19" x2="20" y2="19" />
+              </svg>
+            )}
+          </button>
         </div>
-      </nav>
-    </>
-  );
-}
+      </header>
 
-function TabBtn({ item, active, onClick }: { item: typeof NAV[0]; active: boolean; onClick: (e: React.MouseEvent) => void }) {
-  return (
-    <a href={`#${item.id}`} onClick={onClick}
-      className="flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl active:scale-[0.95] transition"
-      style={{ color: active ? "#E0713E" : "#736B61" }}>
-      <div className="relative">
-        {item.icon(active)}
-        {active && <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{ background: "#E0713E" }} />}
-      </div>
-      <span className={`text-[10px] tracking-wide ${active ? "font-black" : "font-semibold"}`}>{item.label}</span>
-    </a>
+      {open && (
+        <>
+          <div className="lg:hidden fixed inset-0 z-30" onClick={() => setOpen(false)}
+            style={{ background: "rgba(15,25,30,0.35)" }} />
+          <nav className="lg:hidden fixed left-3 right-3 z-40 bg-white rounded-2xl p-2"
+            style={{ top: "64px", boxShadow: "0 12px 32px rgba(0,0,0,0.18)", border: "1px solid #1a1a1a10" }}>
+            {items.map((item) =>
+              item.href ? (
+                <Link key={item.id} href={item.href} onClick={() => setOpen(false)}
+                  className="block px-4 py-3 rounded-xl text-[15px] font-semibold text-stone-800 active:bg-stone-100">
+                  {item.label}
+                </Link>
+              ) : (
+                <a key={item.id} href={`#${item.id}`} onClick={(e) => go(e, item.id)}
+                  className="block px-4 py-3 rounded-xl text-[15px] font-semibold text-stone-800 active:bg-stone-100">
+                  {item.label}
+                </a>
+              )
+            )}
+          </nav>
+        </>
+      )}
+    </>
   );
 }
 
 /* ── Hero ── */
 function Hero() {
   return (
-    <section id="top" className="px-4 lg:px-6 pt-2 pb-6 lg:pt-12 lg:pb-14">
+    <section id="top" className="px-4 lg:px-6 pt-8 pb-6 lg:pt-14 lg:pb-14">
       <div className="max-w-3xl mx-auto lg:text-center">
-        <h2 className={`${h} font-bold text-stone-700 text-[16px] lg:text-[20px] tracking-tight`}>
-          The PTA of East Sheen Primary School
+        <h2 className={`${h} font-bold text-stone-700 text-[22px] lg:text-[28px] tracking-tight leading-tight`}>
+          East Sheen Primary&rsquo;s PTA
         </h2>
-        <h1 className={`${h} font-black tracking-tight leading-[1.0] text-[40px] lg:text-[64px] mt-2 lg:mt-3`} style={{ color: "#1E548E" }}>
+        <h1 className={`${h} font-black tracking-tight leading-[1.0] text-[34px] lg:text-[52px] mt-3 lg:mt-4`} style={{ color: "#1E548E" }}>
           {/* Mobile: three stacked lines, two separate underlines */}
           <span className="lg:hidden">
             <span className="block">Strengthening</span>
@@ -711,7 +722,7 @@ export default function Home() {
   return (
     <div className="min-h-screen" style={{ background: "#FBF9F4", color: "#1a1a1a" }}>
       <DesktopHeader onDonate={() => setDonateOpen(true)} />
-      <BottomNav onDonate={() => setDonateOpen(true)} />
+      <MobileHeader onDonate={() => setDonateOpen(true)} />
       <Hero />
       <LibraryPulse onDonate={() => setDonateOpen(true)} />
       <WhatsOn />
