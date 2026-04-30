@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { DonateForm } from "./components/DonateForm";
 
 /* ── Data ── */
 const DATA = {
   events: [
-    { date: "12–13 June", shortDate: { day: "12", month: "Jun" }, title: "ESPS Bike Ride to Amsterdam", description: "Our parents are cycling to Amsterdam to raise money for the library transformation. Novices welcome!", cta: "Sponsor a rider", tag: "Fundraiser" },
+    { date: "12–13 June", shortDate: { day: "12", month: "Jun" }, title: "ESPS Bike Ride to Amsterdam", description: "Our parents are cycling to Amsterdam to raise money for the library transformation. Novices welcome!", cta: "Sponsorship coming soon", tag: "Fundraiser" },
     { date: "27 June", shortDate: { day: "27", month: "Jun" }, title: "Summer Fair", time: "2–6pm", description: "Our biggest event of the year — stalls, games, food, live music and fun for the whole family.", cta: "Save the date", tag: "Community" },
   ],
   achievements: [
@@ -178,70 +179,86 @@ function TabBtn({ item, active, onClick }: { item: typeof NAV[0]; active: boolea
 function Hero() {
   return (
     <section id="top" className="px-4 lg:px-6 pt-2 pb-6 lg:pt-12 lg:pb-14">
-      <div className="max-w-6xl mx-auto">
-        <p className="text-[11px] uppercase tracking-[0.18em] font-bold text-stone-500">
-          East Sheen Primary PTA
-        </p>
-        <h1 className={`${h} font-black tracking-tight leading-[1.0] text-[40px] lg:text-[60px] mt-1.5 text-stone-900`}>
-          <span className="block">Strengthening</span>
-          <span className="block">our school</span>
-          <span className="block relative inline-block">
-            <span style={{ color: "#E0713E" }}>and community.</span>
-            <Underline color="#F5C24B" className="absolute -bottom-1 left-0 w-full h-2.5" />
+      <div className="max-w-3xl mx-auto lg:text-center">
+        <h2 className={`${h} font-bold text-stone-700 text-[16px] lg:text-[20px] tracking-tight`}>
+          The PTA of East Sheen Primary School
+        </h2>
+        <h1 className={`${h} font-black tracking-tight leading-[1.0] text-[40px] lg:text-[64px] mt-2 lg:mt-3`} style={{ color: "#1E548E" }}>
+          {/* Mobile: three stacked lines, two separate underlines */}
+          <span className="lg:hidden">
+            <span className="block">Strengthening</span>
+            <span className="block">
+              our{" "}
+              <span className="relative inline-block">
+                school
+                <Underline color="#F5C24B" className="absolute -bottom-1 left-0 w-full h-2.5" />
+              </span>
+            </span>
+            <span className="block relative inline-block">
+              <span style={{ color: "#E0713E" }}>and community.</span>
+              <Underline color="#F5C24B" className="absolute -bottom-1 left-0 w-full h-2.5" />
+            </span>
+          </span>
+
+          {/* Desktop: one line, one long squiggle under "school and community." */}
+          <span className="hidden lg:inline">
+            Strengthening our{" "}
+            <span className="relative inline-block" style={{ color: "#E0713E" }}>
+              school and community.
+              <Underline color="#F5C24B" className="absolute -bottom-1 left-0 w-full h-2.5" />
+            </span>
           </span>
         </h1>
-        <p className="mt-3 text-stone-600 text-[15px] lg:text-[17px] leading-relaxed">
+        <p className="mt-3 text-stone-600 text-[15px] lg:text-[17px] leading-relaxed lg:max-w-xl lg:mx-auto">
           We raise funds and run events that help create extraordinary opportunities for every child at ESPS.
         </p>
-        <div className="hidden lg:flex gap-3 mt-6">
-          <Link href="/library"
-            className="inline-flex items-center justify-center gap-1.5 px-6 py-3.5 rounded-full font-bold text-white text-[15px] hover:opacity-90 transition"
-            style={{ background: "#1a1a1a" }}>
-            Big campaign &rarr;
-          </Link>
-          <a href="#involved"
-            onClick={(e) => { e.preventDefault(); const el = document.getElementById("involved"); if (el) { const y = el.getBoundingClientRect().top + window.scrollY - 72; window.scrollTo({ top: y, behavior: "smooth" }); } }}
-            className="inline-flex items-center justify-center gap-1.5 px-6 py-3.5 rounded-full font-bold text-stone-900 text-[15px] hover:bg-stone-50 transition bg-white"
-            style={{ border: "1.5px solid #1a1a1a20" }}>
-            Help out
-          </a>
-        </div>
       </div>
     </section>
   );
 }
 
 /* ── Library campaign pulse ── */
-function LibraryPulse() {
-  const { raised, goal, donors } = DATA.library;
+function LibraryPulse({ onDonate }: { onDonate: () => void }) {
+  const [stats, setStats] = useState(DATA.library);
+  useEffect(() => {
+    fetch("/api/totals")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d && typeof d.raised === "number") {
+          setStats((prev) => ({ ...prev, raised: d.raised, donors: d.donors }));
+        }
+      })
+      .catch(() => {});
+  }, []);
+  const { raised, goal, donors } = stats;
   const pct = Math.round((raised / goal) * 100);
   return (
     <section id="library" className="px-4 lg:px-6 pb-2">
-      <div className="max-w-6xl mx-auto">
-      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#2d6e47" }}>
+      <div className="max-w-3xl mx-auto">
+      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1E548E" }}>
         <div className="relative p-5 lg:p-12 text-white">
-          <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-green-200 mb-1.5">Our Big Campaign</p>
-          <h2 className={`${h} font-black text-[32px] leading-[0.95] tracking-tight`}>
-            Love Our<br />
+          <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-sky-200 mb-1.5">Our Big Campaign</p>
+          <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[0.95] tracking-tight`}>
+            Love Our<br className="lg:hidden" />{" "}
             <span className="relative inline-block">
               Libraries.
               <Squiggle color="#F5C24B" className="absolute -bottom-1.5 left-0 w-full h-2.5" />
             </span>
           </h2>
-          <p className="mt-3 text-green-50/90 text-[14px] leading-relaxed">
+          <p className="mt-3 text-sky-50/90 text-[14px] leading-relaxed">
             We&rsquo;re raising £50,000 to transform our KS1 and KS2 libraries into inspiring spaces where every child falls in love with reading.
           </p>
           <div className="mt-4 rounded-2xl p-3.5" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(6px)" }}>
             <div className="flex items-baseline justify-between mb-2">
               <span className={`${h} font-black text-[26px] leading-none`}>£{raised.toLocaleString()}</span>
-              <span className="text-green-50 text-[12px] font-medium">of £{goal.toLocaleString()}</span>
+              <span className="text-sky-50 text-[12px] font-medium">of £{goal.toLocaleString()}</span>
             </div>
             <div className="h-3 rounded-full overflow-hidden relative" style={{ background: "rgba(0,0,0,0.18)" }}>
               <div className="h-full rounded-full relative" style={{ width: `${pct}%`, background: "linear-gradient(90deg, #F5C24B, #FFE6A8)" }}>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 -mr-1 w-3 h-3 rounded-full bg-white" style={{ boxShadow: "0 0 0 2px #F5C24B" }} />
               </div>
             </div>
-            <div className="flex justify-between mt-2 text-[11px] text-green-50">
+            <div className="flex justify-between mt-2 text-[11px] text-sky-50">
               <span className="font-bold">{pct}% there</span>
               <span>{donors} donors so far</span>
             </div>
@@ -252,7 +269,7 @@ function LibraryPulse() {
               style={{ background: "#F5C24B", boxShadow: "0 2px 0 #B8851A" }}>
               Learn more →
             </Link>
-            <button className="inline-flex items-center justify-center gap-1.5 px-3 py-3 rounded-full font-bold text-white text-[13px] active:scale-[0.98] transition"
+            <button onClick={onDonate} className="inline-flex items-center justify-center gap-1.5 px-3 py-3 rounded-full font-bold text-white text-[13px] active:scale-[0.98] transition"
               style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)" }}>
               Donate
             </button>
@@ -272,7 +289,7 @@ function WhatsOn() {
   ];
   return (
     <section id="whats-on" className="pt-7 pb-6">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-3xl mx-auto">
       <div className="px-4 lg:px-6 mb-5">
         <h2 className={`${h} font-black text-[26px] tracking-tight text-stone-900 leading-none`}>
           What&rsquo;s{" "}
@@ -286,7 +303,7 @@ function WhatsOn() {
         {DATA.events.map((e, i) => {
           const t = tones[i];
           return (
-            <article key={e.title} className="relative bg-white rounded-3xl overflow-hidden"
+            <article key={e.title} className="relative bg-white rounded-3xl overflow-hidden flex flex-col"
               style={{ border: "1.5px solid #1a1a1a14", boxShadow: "0 4px 0 #1a1a1a08" }}>
               <div className="flex items-stretch">
                 <div className="shrink-0 flex flex-col items-center justify-center px-4 py-4"
@@ -303,17 +320,21 @@ function WhatsOn() {
                   <div className="text-[12px] font-semibold text-stone-500 mt-0.5">{e.date}</div>
                 </div>
               </div>
-              <div className="px-4 pb-4">
+              <div className="px-4 pt-3 pb-4 flex-1 flex flex-col">
                 <p className="text-stone-600 text-[13.5px] leading-relaxed">{e.description}</p>
                 {e.cta && (
-                  /save the date/i.test(e.cta) ? (
-                    <p className="mt-3 font-bold text-[13px]" style={{ color: t.fg }}>{e.cta}!</p>
-                  ) : (
-                    <button className="mt-3 inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full font-bold text-white text-[13px] active:scale-[0.98]"
-                      style={{ background: t.btn, boxShadow: `0 2px 0 ${t.btnShadow}` }}>
-                      {e.cta} →
-                    </button>
-                  )
+                  <div className="mt-auto pt-3">
+                    {/save the date|coming soon/i.test(e.cta) ? (
+                      <p className="font-bold text-[13px]" style={{ color: t.fg }}>
+                        {e.cta}{/save the date/i.test(e.cta) ? "!" : ""}
+                      </p>
+                    ) : (
+                      <button className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full font-bold text-white text-[13px] active:scale-[0.98]"
+                        style={{ background: t.btn, boxShadow: `0 2px 0 ${t.btnShadow}` }}>
+                        {e.cta} →
+                      </button>
+                    )}
+                  </div>
                 )}
               </div>
             </article>
@@ -331,7 +352,7 @@ function Achievements() {
   const palettes = [{ bg: "#FFE6D7", fg: "#B8551F" }, { bg: "#D6ECEF", fg: "#235D69" }, { bg: "#FFF1C9", fg: "#8B6B14" }];
   return (
     <section id="achievements" className="px-4 lg:px-6 py-8" style={{ background: "#FAF6EE" }}>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-3xl mx-auto">
       <h2 className={`${h} font-black text-[28px] tracking-tight text-stone-900 leading-tight`}>
         What we&rsquo;ve{" "}
         <span className="relative inline-block">
@@ -424,7 +445,7 @@ function GetInvolved() {
   ];
   return (
     <section id="involved" className="px-4 lg:px-6 py-8">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-3xl mx-auto">
       <h2 className={`${h} font-black text-[28px] tracking-tight text-stone-900 leading-tight`}>
         Get{" "}
         <span className="relative inline-block">
@@ -443,15 +464,17 @@ function GetInvolved() {
                 style={{ border: `1.5px solid ${p.accent}` }}>
                 <span className={`${h} font-black text-[16px]`} style={{ color: p.fg }}>{i + 1}</span>
               </div>
-              <div className="min-w-0 flex-1">
+              <div className="min-w-0 flex-1 flex flex-col">
                 <h3 className={`${h} font-black text-[17px] leading-tight`} style={{ color: p.fg }}>{card.title}</h3>
                 <p className="text-[13px] leading-relaxed mt-1" style={{ color: p.fg + "cc" }}>{card.description}</p>
                 {card.cta && card.href && (
-                  <a href={card.href} target={card.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
-                    className="mt-2.5 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold bg-white"
-                    style={{ color: p.fg, border: `1px solid ${p.accent}40` }}>
-                    {card.cta} →
-                  </a>
+                  <div className="mt-auto pt-3">
+                    <a href={card.href} target={card.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-bold bg-white"
+                      style={{ color: p.fg, border: `1px solid ${p.accent}40` }}>
+                      {card.cta} →
+                    </a>
+                  </div>
                 )}
               </div>
             </article>
@@ -469,11 +492,11 @@ function Committee() {
   const fgColors = ["#B8551F", "#235D69", "#8B6B14", "#3D6B3D"];
   return (
     <section className="py-8" style={{ background: "#FAF6EE" }}>
-      <div className="px-4 lg:px-6 mb-4 max-w-6xl lg:mx-auto">
+      <div className="px-4 lg:px-6 mb-4 max-w-3xl lg:mx-auto">
         <h2 className={`${h} font-black text-[24px] tracking-tight text-stone-900 leading-tight`}>Your PTA committee</h2>
         <p className="text-stone-600 mt-1 text-[13px]">Elected at the AGM each October.</p>
       </div>
-      <div className="flex gap-2.5 overflow-x-auto px-4 lg:px-6 pb-2 lg:grid lg:grid-cols-6 lg:overflow-visible lg:max-w-6xl lg:mx-auto"
+      <div className="flex gap-2.5 overflow-x-auto px-4 lg:px-6 pb-2 lg:grid lg:grid-cols-6 lg:overflow-visible lg:max-w-3xl lg:mx-auto"
         style={{ scrollSnapType: "x mandatory", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
         {DATA.committee.map((m, i) => (
           <div key={m.name} className="bg-white rounded-2xl p-3 text-center shrink-0 lg:shrink lg:w-auto"
@@ -497,7 +520,7 @@ function Committee() {
 function Newsletters() {
   return (
     <section className="px-4 lg:px-6 py-8" style={{ background: "#FAF6EE" }}>
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-3xl mx-auto">
       <h2 className={`${h} font-black text-[26px] tracking-tight text-stone-900 leading-tight`}>
         Read our{" "}
         <span className="relative inline-block">
@@ -549,7 +572,7 @@ function Newsletters() {
 function Contact() {
   return (
     <section id="contact" className="px-4 lg:px-6 py-10" style={{ background: "#1F3D4A" }}>
-      <div className="text-center max-w-2xl mx-auto">
+      <div className="text-center max-w-3xl mx-auto">
         <h2 className={`${h} font-black text-[28px] tracking-tight text-white leading-tight`}>Say hello.</h2>
         <p className="text-white/70 mt-2 text-[14px] mx-auto">Questions, ideas, or want to get involved? We&rsquo;d love to hear.</p>
         <div className="mt-5 flex flex-col sm:flex-row sm:justify-center gap-2.5">
@@ -569,42 +592,106 @@ function Contact() {
 
 /* ── Donate modal ── */
 function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [step, setStep] = useState<"amount" | "payment" | "success">("amount");
   const [amount, setAmount] = useState(20);
   const [custom, setCustom] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [giftAid, setGiftAid] = useState(false);
+
+  useEffect(() => {
+    if (!open) setStep("amount");
+  }, [open]);
+
   if (!open) return null;
+  const finalAmount = custom ? parseInt(custom) || 0 : amount;
+
+  const inputClass =
+    "w-full px-3.5 py-3 rounded-xl bg-stone-50 font-semibold text-[14px] focus:outline-none focus:bg-white";
+  const inputStyle = { border: "1px solid #1a1a1a14" };
+
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center" style={{ background: "rgba(15,25,30,0.55)" }} onClick={onClose}>
-      <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-md p-5 relative"
+      <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-md p-5 relative max-h-[90vh] overflow-y-auto"
         style={{ boxShadow: "0 -12px 32px rgba(0,0,0,0.18)", paddingBottom: "calc(20px + env(safe-area-inset-bottom))" }}
         onClick={(e) => e.stopPropagation()}>
         <div className="w-10 h-1 rounded-full bg-stone-300 mx-auto mb-3" />
         <button onClick={onClose} className="absolute top-4 right-4 w-8 h-8 rounded-full hover:bg-stone-100 flex items-center justify-center">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" /></svg>
         </button>
-        <Star color="#F5C24B" size={22} />
-        <h3 className={`${h} font-black text-[22px] mt-2 text-stone-900`}>Make a donation</h3>
-        <p className="text-stone-500 text-[13px] mt-1">Every pound goes directly to ESPS children. Gift Aid adds 25%.</p>
-        <div className="grid grid-cols-4 gap-2 mt-4">
-          {[10, 20, 50, 100].map((p) => (
-            <button key={p} onClick={() => { setAmount(p); setCustom(""); }}
-              className={`py-3 rounded-xl font-bold text-[14px] transition ${amount === p && !custom ? "text-white" : "bg-stone-100 text-stone-800"}`}
-              style={amount === p && !custom ? { background: "#E0713E" } : {}}>
-              £{p}
+
+        {step === "amount" && (
+          <>
+            <Star color="#F5C24B" size={22} />
+            <h3 className={`${h} font-black text-[22px] mt-2 text-stone-900`}>Make a donation</h3>
+            <p className="text-stone-500 text-[13px] mt-1">Every pound goes directly to ESPS children. Gift Aid adds 25%.</p>
+            <div className="grid grid-cols-4 gap-2 mt-4">
+              {[10, 20, 50, 100].map((p) => (
+                <button key={p} onClick={() => { setAmount(p); setCustom(""); }}
+                  className={`py-3 rounded-xl font-bold text-[14px] transition ${amount === p && !custom ? "text-white" : "bg-stone-100 text-stone-800"}`}
+                  style={amount === p && !custom ? { background: "#E0713E" } : {}}>
+                  £{p}
+                </button>
+              ))}
+            </div>
+            <div className="mt-2.5 relative">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-stone-500 text-[14px]">£</span>
+              <input type="number" value={custom} onChange={(e) => { setCustom(e.target.value); setAmount(parseInt(e.target.value) || 0); }}
+                placeholder="Other amount"
+                className={`${inputClass} pl-8`} style={inputStyle} />
+            </div>
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name (optional)"
+              className={`${inputClass} mt-2.5`} style={inputStyle} />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email for receipt"
+              className={`${inputClass} mt-2.5`} style={inputStyle} />
+            <label className="mt-3 flex items-start gap-2.5 cursor-pointer">
+              <input type="checkbox" checked={giftAid} onChange={(e) => setGiftAid(e.target.checked)} className="mt-1 w-4 h-4 accent-orange-500" />
+              <span className="text-[12px] text-stone-600 leading-relaxed">
+                <span className="font-bold text-stone-900">Add Gift Aid (+25%)</span> — I&rsquo;m a UK taxpayer and want the PTA to claim Gift Aid on this donation.
+              </span>
+            </label>
+            <button onClick={() => finalAmount >= 1 && setStep("payment")}
+              disabled={finalAmount < 1}
+              className="w-full mt-4 py-3.5 rounded-full font-bold text-white text-[15px] disabled:opacity-60"
+              style={{ background: "#E0713E", boxShadow: "0 2px 0 #B8551F" }}>
+              Continue · £{finalAmount || 0} →
             </button>
-          ))}
-        </div>
-        <div className="mt-2.5 relative">
-          <span className="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-stone-500 text-[14px]">£</span>
-          <input type="number" value={custom} onChange={(e) => { setCustom(e.target.value); setAmount(parseInt(e.target.value) || 0); }}
-            placeholder="Other amount"
-            className="w-full pl-8 pr-3 py-3 rounded-xl bg-stone-50 font-semibold text-[14px] focus:outline-none focus:bg-white"
-            style={{ border: "1px solid #1a1a1a14" }} />
-        </div>
-        <button className="w-full mt-4 py-3.5 rounded-full font-bold text-white text-[15px]"
-          style={{ background: "#E0713E", boxShadow: "0 2px 0 #B8551F" }}>
-          Donate £{amount || 0} →
-        </button>
-        <p className="text-center text-[11px] text-stone-400 mt-3">Secure · Gift Aid eligible · Tax receipt by email</p>
+            <p className="text-center text-[11px] text-stone-400 mt-3">Secure · Gift Aid eligible · Tax receipt by email</p>
+          </>
+        )}
+
+        {step === "payment" && (
+          <>
+            <h3 className={`${h} font-black text-[22px] mt-2 text-stone-900`}>Payment</h3>
+            <p className="text-stone-500 text-[13px] mt-1 mb-4">
+              Donating <span className="font-bold text-stone-900">£{finalAmount}</span>
+              {giftAid && <span className="text-stone-600"> + Gift Aid</span>}
+            </p>
+            <DonateForm
+              amount={finalAmount}
+              name={name}
+              email={email}
+              giftAid={giftAid}
+              onSuccess={() => setStep("success")}
+              onBack={() => setStep("amount")}
+            />
+          </>
+        )}
+
+        {step === "success" && (
+          <div className="py-2 text-center">
+            <div className="flex justify-center"><Star color="#F5C24B" size={32} /></div>
+            <h3 className={`${h} font-black text-[22px] mt-2 text-stone-900`}>Thank you!</h3>
+            <p className="text-stone-600 text-[14px] mt-2 leading-relaxed">
+              Your £{finalAmount} donation helps every child at ESPS. A receipt is on its way to {email || "your inbox"}.
+            </p>
+            <button onClick={onClose}
+              className="w-full mt-5 py-3 rounded-full font-bold text-white text-[15px]"
+              style={{ background: "#E0713E", boxShadow: "0 2px 0 #B8551F" }}>
+              Done
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -626,7 +713,7 @@ export default function Home() {
       <DesktopHeader onDonate={() => setDonateOpen(true)} />
       <BottomNav onDonate={() => setDonateOpen(true)} />
       <Hero />
-      <LibraryPulse />
+      <LibraryPulse onDonate={() => setDonateOpen(true)} />
       <WhatsOn />
       <Achievements />
       <GetInvolved />

@@ -1,13 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function LibraryPage() {
-  const raised = 18400;
   const goal = 50000;
-  const donors = 142;
+  const [raised, setRaised] = useState(18400);
+  const [donors, setDonors] = useState(142);
+  useEffect(() => {
+    fetch("/api/totals")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d && typeof d.raised === "number") {
+          setRaised(d.raised);
+          setDonors(d.donors);
+        }
+      })
+      .catch(() => {});
+  }, []);
   const pct = Math.min(100, Math.round((raised / goal) * 100));
   const accent = "#5B8E5A";
 
