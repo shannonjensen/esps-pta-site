@@ -604,7 +604,7 @@ function Contact() {
 /* ── Donate modal ── */
 function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [step, setStep] = useState<"amount" | "payment" | "success">("amount");
-  const [amount, setAmount] = useState(20);
+  const [amount, setAmount] = useState(5);
   const [custom, setCustom] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -637,7 +637,7 @@ function DonateModal({ open, onClose }: { open: boolean; onClose: () => void }) 
             <h3 className={`${h} font-black text-[22px] mt-2 text-stone-900`}>Make a donation</h3>
             <p className="text-stone-500 text-[13px] mt-1">Thank you for your support. Please consider stretching your pound further by opting into Gift Aid.</p>
             <div className="grid grid-cols-4 gap-2 mt-4">
-              {[10, 20, 50, 100].map((p) => (
+              {[2, 5, 10, 20].map((p) => (
                 <button key={p} onClick={() => { setAmount(p); setCustom(""); }}
                   className={`py-3 rounded-xl font-bold text-[14px] transition ${amount === p && !custom ? "text-white" : "bg-stone-100 text-stone-800"}`}
                   style={amount === p && !custom ? { background: "#E0713E" } : {}}>
