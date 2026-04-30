@@ -48,6 +48,8 @@ const DATA = {
     { role: "Member", name: "Karen Langley" },
     { role: "Member", name: "Geneva Kearns" },
     { role: "Member", name: "Susana Garcia" },
+    { role: "Member", name: "Elisa Peccerillo-Pallister" },
+    { role: "Member", name: "Kelsey Elliott" },
   ],
   library: { raised: 18400, goal: 50000, donors: 142 },
   newsletters: [
@@ -527,7 +529,7 @@ function Committee() {
         <h2 className={`${h} font-black text-[24px] tracking-tight text-stone-900 leading-tight`}>Your PTA committee</h2>
         <p className="text-stone-600 mt-1 text-[13px]">Elected at the AGM each October.</p>
       </div>
-      <div className="flex gap-2.5 overflow-x-auto px-4 lg:px-6 pb-2 lg:grid lg:grid-cols-6 lg:overflow-visible lg:max-w-3xl lg:mx-auto"
+      <div className="flex gap-2.5 overflow-x-auto px-4 lg:px-6 pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible lg:max-w-3xl lg:mx-auto"
         style={{ scrollSnapType: "x mandatory", scrollbarWidth: "none", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
         {DATA.committee.map((m, i) => (
           <div key={m.name} className="bg-white rounded-2xl p-3 text-center shrink-0 lg:shrink lg:w-auto"
@@ -565,21 +567,9 @@ function Newsletters() {
       <div className="mt-5 grid grid-cols-2 gap-3">
         {DATA.newsletters.map((n) => (
           <a key={n.season} href={n.href} target="_blank" rel="noopener noreferrer"
-            className="group relative rounded-2xl overflow-hidden bg-white active:scale-[0.99] transition"
-            style={{ border: "1px solid #1a1a1a10" }}>
-            <div className="aspect-[3/4] p-3 relative" style={{ background: n.bg }}>
-              <div className="absolute inset-3 bg-white rounded-lg p-2 flex flex-col gap-1.5" style={{ boxShadow: "0 2px 6px rgba(0,0,0,0.06)" }}>
-                <div className="h-1.5 rounded-full w-3/4" style={{ background: n.accent }} />
-                <div className="h-1 rounded-full w-full bg-stone-200" />
-                <div className="h-1 rounded-full w-5/6 bg-stone-200" />
-                <div className="h-1 rounded-full w-2/3 bg-stone-200" />
-                <div className="mt-1 h-8 rounded" style={{ background: n.bg }} />
-                <div className="h-1 rounded-full w-full bg-stone-200" />
-                <div className="h-1 rounded-full w-4/5 bg-stone-200" />
-                <div className="h-1 rounded-full w-3/5 bg-stone-200" />
-              </div>
-            </div>
-            <div className="p-3">
+            className="group relative rounded-2xl overflow-hidden active:scale-[0.99] transition"
+            style={{ background: n.bg, border: `1px solid ${n.accent}30` }}>
+            <div className="p-4">
               <p className="text-[10px] uppercase tracking-[0.16em] font-bold" style={{ color: n.fg }}>{n.season} {n.year}</p>
               <div className="mt-1 flex items-center justify-between">
                 <p className={`${h} font-black text-[15px] text-stone-900`}>Newsletter</p>
