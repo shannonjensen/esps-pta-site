@@ -25,9 +25,16 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
   const [postcode, setPostcode] = useState("");
   const [employerMatch, setEmployerMatch] = useState(false);
   const [anonymous, setAnonymous] = useState(false);
+  const [bankSubmitting, setBankSubmitting] = useState(false);
+  const [bankReference, setBankReference] = useState<string | null>(null);
+  const [bankError, setBankError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!open) setStep("amount");
+    if (!open) {
+      setStep("amount");
+      setBankReference(null);
+      setBankError(null);
+    }
   }, [open]);
 
   if (!open) return null;
@@ -36,6 +43,8 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
   const employerMatchValid = !employerMatch || email.trim();
   const canContinue = finalAmount >= 1 && giftAidValid && employerMatchValid;
   const donorName = giftAid && giftAidName.trim() ? giftAidName.trim() : name.trim();
+
+  const bankPledgesEnabled = process.env.NEXT_PUBLIC_BANK_PLEDGES_ENABLED === "true";
 
   const inputClass =
     "w-full px-3.5 py-3 rounded-xl bg-stone-50 font-semibold text-[16px] focus:outline-none focus:bg-white";
@@ -138,6 +147,63 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
               onSuccess={() => setStep("success")}
               onBack={() => setStep("amount")}
             />
+
+            {bankPledgesEnabled && finalAmount >= 100 && (
+              <div className="mt-5 pt-5 border-t border-stone-200">
+                {bankReference ? (
+                  <div className="text-center">
+                    <p className="text-[14px] font-bold text-stone-900">Bank details on the way ✉️</p>
+                    <p className="text-[13px] text-stone-600 mt-1.5 leading-relaxed">
+                      Check <span className="font-semibold">{email}</span> for our sort code, account number, and your reference{" "}
+                      <span className="font-mono font-bold text-stone-900">{bankReference}</span>.
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-[13px] text-stone-700 leading-relaxed">
+                      <span className="font-bold text-stone-900">Prefer bank transfer?</span> No card fees on amounts over £100. We&rsquo;ll email our bank details and a reference number.
+                    </p>
+                    {!email.trim() ? (
+                      <p className="mt-2 text-[12px] text-stone-500">Go back and add an email to use this option.</p>
+                    ) : null}
+                    {bankError && <p className="mt-2 text-[12px] text-red-600">{bankError}</p>}
+                    <button
+                      onClick={async () => {
+                        setBankSubmitting(true);
+                        setBankError(null);
+                        try {
+                          const res = await fetch("/api/create-bank-pledge", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              amount: finalAmount,
+                              name: donorName,
+                              email,
+                              giftAid,
+                              address,
+                              postcode,
+                              employerMatch,
+                              anonymous,
+                              source,
+                            }),
+                          });
+                          const d = await res.json();
+                          if (!res.ok) throw new Error(d.error || "Something went wrong");
+                          setBankReference(d.reference);
+                        } catch (e) {
+                          setBankError(e instanceof Error ? e.message : "Unknown error");
+                        } finally {
+                          setBankSubmitting(false);
+                        }
+                      }}
+                      disabled={!email.trim() || bankSubmitting}
+                      className="mt-3 w-full py-2.5 rounded-full font-bold text-stone-700 bg-stone-100 hover:bg-stone-200 text-[13px] disabled:opacity-50">
+                      {bankSubmitting ? "Sending…" : "Email me bank details →"}
+                    </button>
+                  </>
+                )}
+              </div>
+            )}
           </>
         )}
 
