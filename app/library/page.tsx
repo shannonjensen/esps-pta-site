@@ -8,6 +8,7 @@ import { DonateModal } from "../components/DonateModal";
 export default function LibraryPage() {
   const goal = 50000;
   const [stats, setStats] = useState<{ raised: number; donors: number } | null>(null);
+  const [recent, setRecent] = useState<{ name: string; amount: number }[]>([]);
   const [donateSource, setDonateSource] = useState<string | null>(null);
   const donateOpen = donateSource !== null;
   const closeDonate = () => setDonateSource(null);
@@ -22,6 +23,12 @@ export default function LibraryPage() {
         }
       })
       .catch(() => setStats({ raised: 0, donors: 0 }));
+    fetch("/api/recent-donations")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d && Array.isArray(d.donations)) setRecent(d.donations);
+      })
+      .catch(() => {});
   }, []);
   const loaded = stats !== null;
   const raised = stats?.raised ?? 0;
@@ -107,6 +114,25 @@ export default function LibraryPage() {
               Donate now →
             </button>
           </div>
+
+          {recent.length > 0 && (() => {
+            const repeats = Math.max(2, Math.ceil(12 / recent.length));
+            const items = Array.from({ length: repeats }).flatMap(() => recent);
+            return (
+              <div className="mt-5 overflow-hidden border-t border-b border-white/15 py-2.5">
+                <div className="ticker-track inline-block whitespace-nowrap text-[13px] text-white/85">
+                  {[...items, ...items].map((d, i) => (
+                    <span key={i} className="px-4">
+                      <span className="font-bold text-white">{d.name}</span>
+                      <span className="text-white/60"> donated </span>
+                      <span className="font-bold" style={{ color: yellow }}>£{d.amount.toLocaleString()}</span>
+                      <span className="text-white/30 mx-1">·</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 

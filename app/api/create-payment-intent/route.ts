@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
         donor_address: body.address || "",
         donor_postcode: body.postcode || "",
         employer_match: body.employerMatch ? "true" : "false",
+        anonymous: body.anonymous ? "true" : "false",
         source: body.source || "",
       },
     });

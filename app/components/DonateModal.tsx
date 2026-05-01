@@ -24,6 +24,7 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
   const [address, setAddress] = useState("");
   const [postcode, setPostcode] = useState("");
   const [employerMatch, setEmployerMatch] = useState(false);
+  const [anonymous, setAnonymous] = useState(false);
 
   useEffect(() => {
     if (!open) setStep("amount");
@@ -42,7 +43,7 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
 
   return (
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center" style={{ background: "rgba(15,25,30,0.55)" }} onClick={onClose}>
-      <div className="bg-white rounded-t-3xl sm:rounded-3xl w-full max-w-md p-5 relative max-h-[90vh] overflow-y-auto"
+      <div className="bg-white text-stone-900 rounded-t-3xl sm:rounded-3xl w-full max-w-md p-5 relative max-h-[90vh] overflow-y-auto"
         style={{ boxShadow: "0 -12px 32px rgba(0,0,0,0.18)", paddingBottom: "calc(20px + env(safe-area-inset-bottom))" }}
         onClick={(e) => e.stopPropagation()}>
         <div className="w-10 h-1 rounded-full bg-stone-300 mx-auto mb-3" />
@@ -54,9 +55,9 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
           <>
             <Star color="#F5C24B" size={22} />
             <h3 className={`${h} font-black text-[22px] mt-2 text-stone-900`}>Make a donation</h3>
-            <p className="text-stone-500 text-[13px] mt-1">Thank you for your support. Please consider stretching your pound further by opting into Gift Aid.</p>
+            <p className="text-stone-500 text-[13px] mt-1">Thank you for your support. Please consider stretching your donation further by opting into Gift Aid.</p>
             <div className="grid grid-cols-4 gap-2 mt-4">
-              {[2, 5, 10, 20].map((p) => (
+              {[5, 10, 20, 50].map((p) => (
                 <button key={p} onClick={() => { setAmount(p); setCustom(""); }}
                   className={`py-3 rounded-xl font-bold text-[14px] transition ${amount === p && !custom ? "text-white" : "bg-stone-100 text-stone-800"}`}
                   style={amount === p && !custom ? { background: "#E0713E" } : {}}>
@@ -70,8 +71,14 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
                 placeholder="Other amount"
                 className={`${inputClass} pl-8`} style={inputStyle} />
             </div>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name (optional)"
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name"
               className={`${inputClass} mt-2.5`} style={inputStyle} />
+            <label className="mt-2 flex items-start gap-2.5 cursor-pointer">
+              <input type="checkbox" checked={anonymous} onChange={(e) => setAnonymous(e.target.checked)} className="mt-1 w-4 h-4 accent-orange-500" />
+              <span className="text-[12px] text-stone-600 leading-relaxed">
+                Keep my donation anonymous
+              </span>
+            </label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email for receipt"
               className={`${inputClass} mt-2.5`} style={inputStyle} />
             <label className="mt-3 flex items-start gap-2.5 cursor-pointer">
@@ -103,7 +110,9 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
               disabled={!canContinue}
               className="w-full mt-4 py-3.5 rounded-full font-bold text-white text-[15px] disabled:opacity-60"
               style={{ background: "#E0713E", boxShadow: "0 2px 0 #B8551F" }}>
-              Continue · £{finalAmount || 0} →
+              {employerMatch && !email.trim()
+                ? "Email required"
+                : `Continue · £${finalAmount || 0} →`}
             </button>
             <p className="text-center text-[11px] text-stone-400 mt-3">Secure · Gift Aid eligible · Tax receipt by email</p>
           </>
@@ -124,6 +133,7 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
               address={address}
               postcode={postcode}
               employerMatch={employerMatch}
+              anonymous={anonymous}
               source={source}
               onSuccess={() => setStep("success")}
               onBack={() => setStep("amount")}
