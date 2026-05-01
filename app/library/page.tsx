@@ -256,6 +256,21 @@ export default function LibraryPage() {
             If you are able and willing to make a particularly generous donation, there are opportunities
             to sponsor certain elements of the library. Please get in touch to discuss the possibilities.
           </p>
+
+          <h2 className={`${heading} font-bold text-[30px] sm:text-[40px] tracking-tight leading-tight text-white mt-12 sm:mt-16`}>
+            Other Ways to Contribute
+          </h2>
+          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+            There are volunteer opportunities to support our libraries involving ongoing efforts to
+            upgrade the book stock, as well as our after-school library hours. Please email{" "}
+            <a href="mailto:shannon@espspta.org"
+              className="font-bold underline decoration-2 underline-offset-4"
+              style={{ color: yellow, textDecorationColor: red }}>
+              shannon@espspta.org
+            </a>{" "}
+            with interest. There will also be an opportunity for parents and pupils to contribute to
+            our library book wishlist later this term.
+          </p>
         </div>
       </section>
 
@@ -267,7 +282,7 @@ export default function LibraryPage() {
 
             Any Questions
           </span>
-          <h2 className={`${heading} font-black text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-white`}>
+          <h2 className={`${heading} font-bold text-[30px] sm:text-[40px] tracking-tight mt-3 leading-tight text-white`}>
             Get in touch
           </h2>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
