@@ -35,7 +35,7 @@ export default function LibraryPage() {
   const donors = stats?.donors ?? 0;
   const pct = loaded ? Math.min(100, Math.round((raised / goal) * 100)) : 0;
 
-  const navy = "#1E548E";
+  const green = "#234A3A";
   const orange = "#E0713E";
   const yellow = "#F5C24B";
   const red = "#DC5A45";
@@ -45,7 +45,7 @@ export default function LibraryPage() {
   const eyebrow = "text-[12px] sm:text-[14px] uppercase tracking-[0.18em] font-bold";
 
   return (
-    <div className="min-h-screen text-white" style={{ background: navy }}>
+    <div className="min-h-screen text-white" style={{ background: green }}>
       {/* Back link */}
       <div className="px-4 sm:px-6 pt-6">
         <Link href="/" className="inline-flex items-center gap-2 text-[14px] font-semibold text-white/70 hover:text-white">
@@ -65,7 +65,7 @@ export default function LibraryPage() {
             </span>
             <h1 className={`${heading} font-bold tracking-tight leading-[1.02] text-[42px] sm:text-[60px] lg:text-[72px] text-white`}>
               Let&rsquo;s{" "}
-              <span style={{ color: "#EE8E5C" }}>Transform</span>{" "}
+              <span style={{ color: orange }}>Transform</span>{" "}
               Our Libraries
             </h1>
           </div>
@@ -86,11 +86,11 @@ export default function LibraryPage() {
             <p className="text-[10px] uppercase tracking-[0.16em] font-bold text-stone-500">Raised so far</p>
             <div className="mt-1 flex items-baseline justify-between flex-wrap gap-2">
               <span className={`${heading} font-semibold text-[18px] sm:text-[22px] tracking-tight leading-none`}
-                style={{ color: navy, minHeight: "1em" }}>
+                style={{ color: green, minHeight: "1em" }}>
                 {loaded ? `£${raised.toLocaleString()}` : " "}
               </span>
               <span className={`${heading} text-[18px] sm:text-[22px] tracking-tight leading-none font-semibold`}
-                style={{ color: navy }}>
+                style={{ color: green }}>
                 of £{goal.toLocaleString()}
               </span>
             </div>
@@ -104,7 +104,7 @@ export default function LibraryPage() {
             </div>
 
             <div className="flex justify-between mt-2 text-[12px]">
-              <span className="font-bold" style={{ color: navy }}>{loaded && `${pct}% there`}</span>
+              <span className="font-bold" style={{ color: green }}>{loaded && `${pct}% there`}</span>
               <span className="text-stone-600">{loaded && `${donors} donors so far`}</span>
             </div>
 
@@ -167,7 +167,7 @@ export default function LibraryPage() {
               <Image src={p.src} alt={`${p.label} library at East Sheen Primary today`} width={1600} height={1200}
                 className="w-full h-full block object-cover" style={{ aspectRatio: "4/3" }} />
               <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] bg-white"
-                style={{ color: navy }}>
+                style={{ color: green }}>
                 {p.label}
               </span>
             </figure>
