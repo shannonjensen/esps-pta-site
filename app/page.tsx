@@ -7,7 +7,7 @@ import { DonateModal } from "./components/DonateModal";
 /* ── Data ── */
 const DATA = {
   events: [
-    { date: "9 May", shortDate: { day: "9", month: "May" }, title: "Y5 Cake Sale", description: "Year 5 are baking up a storm — pop by after pickup for a treat.", cta: "Save the date", tag: "Fundraiser" },
+    { date: "8 May", shortDate: { day: "8", month: "May" }, title: "Y5 Cake Sale", description: "Year 5 are baking up a storm — pop by after pickup for a treat.", cta: "Save the date", tag: "Fundraiser" },
     { date: "12 June", shortDate: { day: "12", month: "Jun" }, title: "Reception Cake Sale", description: "Reception families share homemade bakes — drop in after pickup to support our youngest year group.", cta: "Save the date", tag: "Fundraiser" },
     { date: "12–13 June", shortDate: { day: "12", month: "Jun" }, title: "ESPS Bike Ride to Amsterdam", description: "Our parents are cycling to Amsterdam to raise money for the library transformation. Novices welcome!", cta: "Sponsorship coming soon", tag: "Fundraiser" },
     { date: "27 June", shortDate: { day: "27", month: "Jun" }, title: "Summer Fair", time: "2–6pm", description: "Our biggest event of the year — stalls, games, food, live music and fun for the whole family.", cta: "Save the date", tag: "Community" },
@@ -255,15 +255,15 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
   return (
     <section id="library" className="px-4 lg:px-6 pb-2">
       <div className="max-w-3xl mx-auto">
-      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1F6B47" }}>
+      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1E548E" }}>
         <div className="relative p-5 lg:p-12 text-white">
-          <p className="text-[10px] uppercase tracking-[0.18em] font-bold text-green-200 mb-1.5">The Library Campaign</p>
-          <h2 className={`${h} font-black text-[32px] lg:text-[44px] leading-[1.0] tracking-tight`}>
+          <span className="inline-block px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.18em] font-bold mb-2"
+            style={{ background: "rgba(255, 230, 215, 0.18)", color: "#FFE6D7" }}>
+            The Library Campaign
+          </span>
+          <h2 className={`${h} font-bold text-[32px] lg:text-[44px] leading-[1.0] tracking-tight mt-2`}>
             Let&rsquo;s{" "}
-            <span className="relative inline-block">
-              Transform
-              <Squiggle color="#F5C24B" className="absolute -bottom-1.5 left-0 w-full h-2.5" />
-            </span>{" "}
+            <span style={{ color: "#EE8E5C" }}>Transform</span>{" "}
             Our Libraries
           </h2>
           <p className="mt-3 text-white/90 text-[15px] lg:text-[16px] leading-relaxed">
@@ -271,29 +271,30 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
           </p>
           <div className="mt-4 rounded-2xl p-3.5" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(6px)" }}>
             <div className="flex items-baseline justify-between mb-2">
-              <span className={`${h} font-black text-[26px] leading-none`} style={{ minHeight: "1em" }}>
+              <span className={`${h} font-semibold text-[18px] sm:text-[22px] tracking-tight leading-none`} style={{ minHeight: "1em" }}>
                 {loaded ? `£${raised.toLocaleString()}` : " "}
               </span>
-              <span className="text-green-50 text-[15px] font-semibold">of £{goal.toLocaleString()}</span>
+              <span className={`${h} text-[18px] sm:text-[22px] tracking-tight leading-none font-semibold text-white/85`}>of £{goal.toLocaleString()}</span>
             </div>
             <div className="h-3 rounded-full overflow-hidden relative" style={{ background: "rgba(0,0,0,0.18)" }}>
               <div className="h-full rounded-full relative transition-[width] duration-500" style={{ width: `${pct}%`, background: "linear-gradient(90deg, #F5C24B, #FFE6A8)" }}>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 -mr-1 w-3 h-3 rounded-full bg-white" style={{ boxShadow: "0 0 0 2px #F5C24B" }} />
               </div>
             </div>
-            <div className="flex justify-between mt-2 text-[11px] text-green-50">
+            <div className="flex justify-between mt-2 text-[11px] text-white/80">
               <span className="font-bold">{loaded ? `${pct}% there` : " "}</span>
               <span>{loaded ? `${donors} donors so far` : " "}</span>
             </div>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-2">
             <Link href="/library"
-              className="inline-flex items-center justify-center gap-1.5 px-3 py-3 rounded-full font-bold text-stone-900 text-[13px] active:scale-[0.98] transition"
-              style={{ background: "#F5C24B", boxShadow: "0 2px 0 #B8851A" }}>
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-3 rounded-full font-bold text-[13px] active:scale-[0.98] transition"
+              style={{ background: "transparent", border: "1.5px solid #F5C24B", color: "#F5C24B" }}>
               Learn more →
             </Link>
-            <button onClick={onDonate} className="inline-flex items-center justify-center gap-1.5 px-3 py-3 rounded-full font-bold text-white text-[13px] active:scale-[0.98] transition"
-              style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)" }}>
+            <button onClick={onDonate}
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-3 rounded-full font-bold text-white text-[13px] active:scale-[0.98] transition"
+              style={{ background: "#E0713E", boxShadow: "0 2px 0 #B8551F" }}>
               Donate
             </button>
           </div>
@@ -313,9 +314,9 @@ function WhatsOn() {
     { bg: "#DEEBDA", fg: "#3D6B3D", btn: "#5B8E5A", btnShadow: "#3D6B3D" },
   ];
   return (
-    <section id="whats-on" className="pt-7 pb-6">
+    <section id="whats-on" className="px-4 lg:px-6 pt-7 pb-6">
       <div className="max-w-3xl mx-auto">
-      <div className="px-4 lg:px-6 mb-5">
+      <div className="mb-5">
         <h2 className={`${h} font-black text-[26px] tracking-tight text-stone-900 leading-none`}>
           What&rsquo;s{" "}
           <span className="relative inline-block">
@@ -324,7 +325,7 @@ function WhatsOn() {
           </span>
         </h2>
       </div>
-      <div className="px-4 lg:px-6 grid md:grid-cols-2 gap-3">
+      <div className="grid md:grid-cols-2 gap-3">
         {DATA.events.map((e, i) => {
           const t = tones[i % tones.length];
           return (
@@ -366,6 +367,46 @@ function WhatsOn() {
           );
         })}
       </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── About the PTA ── */
+function AboutPta() {
+  const linkClass = "underline underline-offset-4 decoration-stone-300 hover:decoration-stone-500";
+  const linkColor = {} as React.CSSProperties;
+  return (
+    <section id="about" className="px-4 lg:px-6 py-8">
+      <div className="max-w-3xl mx-auto">
+        <h2 className={`${h} font-black text-[28px] tracking-tight text-stone-900 leading-tight`}>
+          About the{" "}
+          <span className="relative inline-block">
+            PTA
+            <Underline color="#E0713E" className="absolute -bottom-1 left-0 w-full h-2.5" />
+          </span>
+        </h2>
+        <p className="mt-4 text-stone-700 text-[15px] leading-relaxed">
+          Our PTA&rsquo;s purpose is to help every child at East Sheen Primary School to thrive. We
+          support the school in its ambition to be a fun, exciting and aspirational school where
+          children love learning, feel happy and safe at school, and have the support and
+          opportunities they need to succeed.
+        </p>
+        <p className="mt-4 text-stone-700 text-[15px] leading-relaxed">We do this by:</p>
+        <ol className="mt-2 space-y-2 text-stone-700 text-[15px] leading-relaxed list-decimal pl-5 marker:font-bold marker:text-stone-500">
+          <li>raising money to pay for equipment and facilities that aren&rsquo;t covered by the school&rsquo;s regular funding;</li>
+          <li>working with the school&rsquo;s leadership to understand what funds are needed for;</li>
+          <li>playing our part to connect a wider school community of parents, carers and teachers, which helps make East Sheen Primary School such a warm and welcoming place.</li>
+        </ol>
+        <p className="mt-4 text-stone-700 text-[15px] leading-relaxed">
+          Every parent and carer with a child at the school is a member of the PTA. Fundraising is
+          the ultimate team sport — we&rsquo;d encourage everyone to get involved. Click on the links
+          to find out more about our{" "}
+          <a href="#whats-on" className={linkClass} style={linkColor}>events</a>,{" "}
+          <a href="#achievements" className={linkClass} style={linkColor}>where we spend the money raised</a>,{" "}
+          <a href="#involved" className={linkClass} style={linkColor}>how to get involved</a>, and{" "}
+          <a href="#committee" className={linkClass} style={linkColor}>who&rsquo;s on the current PTA Committee</a>.
+        </p>
       </div>
     </section>
   );
@@ -524,7 +565,7 @@ function Committee() {
   const colors = ["#FFE6D7", "#D6ECEF", "#FFF1C9", "#DEEBDA"];
   const fgColors = ["#B8551F", "#235D69", "#8B6B14", "#3D6B3D"];
   return (
-    <section className="py-8" style={{ background: "#FAF6EE" }}>
+    <section id="committee" className="py-8" style={{ background: "#FAF6EE" }}>
       <div className="px-4 lg:px-6 mb-4 max-w-3xl lg:mx-auto">
         <h2 className={`${h} font-black text-[24px] tracking-tight text-stone-900 leading-tight`}>Your PTA committee</h2>
         <p className="text-stone-600 mt-1 text-[13px]">Elected at the AGM each October.</p>
@@ -639,6 +680,7 @@ export default function Home() {
       <Hero />
       <LibraryPulse onDonate={() => setDonateSource("campaign_card")} />
       <WhatsOn />
+      <AboutPta />
       <Achievements />
       <GetInvolved onDonate={() => setDonateSource("get_involved_button")} />
       <Committee />
