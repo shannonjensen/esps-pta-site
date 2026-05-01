@@ -274,6 +274,18 @@ export default function LibraryPage() {
         </div>
       </section>
 
+      {/* Photo break */}
+      <section className="px-6 sm:px-8 pt-2 pb-6 sm:pt-4 sm:pb-10">
+        <div className="max-w-xl mx-auto">
+          <figure className="rounded-2xl overflow-hidden bg-stone-100"
+            style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.25)" }}>
+            <Image src="/library/child-browsing.jpg" alt="A pupil browsing books in the ESPS library"
+              width={1600} height={1067}
+              className="w-full h-auto block" />
+          </figure>
+        </div>
+      </section>
+
       {/* Get in touch */}
       <section className="px-6 sm:px-8 py-12 sm:py-16">
         <div className="max-w-3xl mx-auto text-center">
