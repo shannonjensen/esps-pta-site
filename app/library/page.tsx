@@ -190,12 +190,9 @@ export default function LibraryPage() {
           </h2>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             Inspired by nature, our vision is to create immersive environments that nurture imagination
-            and growth. We are currently working with library suppliers on the final designs, which will
-            be shared later this term.
-          </p>
-          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            We are hoping to be able to install the new libraries over the summer holiday. Below are
-            visuals shaping the design.
+            and growth. We&rsquo;re working with library suppliers on the final designs, and
+            we&rsquo;ll share them later this term. We aim to install the new libraries over the summer holiday.
+            Below are visuals shaping the design.
           </p>
         </div>
 
@@ -231,18 +228,17 @@ export default function LibraryPage() {
             The Budget
           </h2>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            The budget is informed by a tender and design process with several library suppliers
-            throughout the spring term. We estimate the KS1 will cost about{" "}
-            <strong className="font-black" style={{ color: yellow }}>£20,000</strong>{" "}
+            Our budget is informed by a tender and design process with several library suppliers
+            throughout the spring term. We estimate the KS1 library will cost{" "}
+            <strong className="font-black" style={{ color: yellow }}>~£20,000</strong>{" "}
             and the KS2 library{" "}
-            <strong className="font-black" style={{ color: yellow }}>£30,000</strong>. The KS1 library
-            is a much smaller space but it needs new flooring, minor structural improvements, and
-            effective heating and cooling, which add to the cost.
+            <strong className="font-black" style={{ color: yellow }}>~£30,000</strong>. The KS1
+            library needs new flooring, minor structural improvements, and effective heating and
+            cooling, which add to the cost.
           </p>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            We are working with the school to ensure value for money. We will be focusing on upgrading
-            our book stock in the autumn, but if the total cost is less than we raise, excess funds
-            will be directed to books.
+            We&rsquo;re working with the school to ensure every pound has an impact. Any surplus will
+            go to our book stock — a focus for the autumn.
           </p>
         </div>
       </section>
@@ -260,8 +256,8 @@ export default function LibraryPage() {
             Stretching Your Donation Further
           </h2>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            We will be fundraising throughout this term for the library campaign. Direct donations are
-            hugely appreciated and can be made here.
+            We&rsquo;ll be fundraising throughout this term for the library campaign. Direct donations
+            are hugely appreciated and can be made here.
           </p>
           <button onClick={() => setDonateSource("library_page")}
             className="mt-5 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-white text-[15px] sm:text-[16px] active:scale-[0.99] transition"
@@ -270,32 +266,33 @@ export default function LibraryPage() {
           </button>
           <p className={`${heading} mt-6 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             Opting into Gift Aid adds a 25% boost. If your employer matches charitable giving, please
-            let us know — even modest amounts make a big difference. We are registered with Benevity
-            and CAF.
+            let us know — even modest amounts make a big difference. We&rsquo;re registered with
+            Benevity and CAF.
           </p>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            The charity bike ride to Amsterdam will be supporting the library campaign this year, and
-            some parents have generous corporate matching for sponsor donations. We will also be
-            holding smaller events throughout the term — keep an eye out for updates.
+            The charity bike ride to Amsterdam is supporting the library campaign this year — and at
+            least one rider&rsquo;s employer will match sponsor donations, doubling the impact.
+            We&rsquo;ll also be running smaller events throughout the term — keep an eye out for
+            updates.
           </p>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            If you are able and willing to make a particularly generous donation, there are opportunities
-            to sponsor certain elements of the library. Please get in touch to discuss the possibilities.
+            For larger gifts, there are sponsorship opportunities for individual library elements.
+            Get in touch to discuss.
           </p>
 
           <h2 className={`${heading} font-bold text-[30px] sm:text-[40px] tracking-tight leading-tight text-white mt-12 sm:mt-16`}>
             Other Ways to Contribute
           </h2>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            There are volunteer opportunities to support our libraries involving ongoing efforts to
-            upgrade the book stock, as well as our after-school library hours. Please email{" "}
+            We need volunteers to help process incoming book stock and run our after-school library
+            hours — please email{" "}
             <a href="mailto:shannon@espspta.org"
               className="font-bold underline decoration-2 underline-offset-4"
               style={{ color: yellow, textDecorationColor: red }}>
               shannon@espspta.org
             </a>{" "}
-            with interest. There will also be an opportunity for parents and pupils to contribute to
-            our library book wishlist later this term.
+            if you&rsquo;re interested. Later this term, parents and pupils will also be able to
+            contribute to our library book wishlist.
           </p>
         </div>
       </section>
