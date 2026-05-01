@@ -165,7 +165,11 @@ export default function LibraryPage() {
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             Inspired by nature, our vision is to create immersive environments that nurture imagination
             and growth. We are currently working with library suppliers on the final designs, which will
-            be shared later this term. Below are visuals shaping the design.
+            be shared later this term.
+          </p>
+          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+            We are hoping to be able to install the new libraries over the summer holiday. Below are
+            visuals shaping the design.
           </p>
         </div>
 
@@ -188,6 +192,73 @@ export default function LibraryPage() {
         </p>
       </section>
 
+      {/* Budget */}
+      <section className="px-6 sm:px-8 pt-2 pb-10 sm:pt-4 sm:pb-16">
+        <div className="text-center">
+          <span className={`${eyebrow} inline-block px-4 py-2 rounded-full`}
+            style={{ background: "rgba(255, 230, 215, 0.18)", color: "#FFE6D7" }}>
+            How We Get There
+          </span>
+        </div>
+        <div className="max-w-3xl mx-auto text-center mt-5 sm:mt-7">
+          <h2 className={`${heading} font-bold text-[30px] sm:text-[40px] tracking-tight leading-tight text-white`}>
+            The Budget
+          </h2>
+          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+            The budget is informed by a tender and design process with several library suppliers
+            throughout the spring term. We estimate the KS1 will cost about{" "}
+            <strong className="font-black" style={{ color: yellow }}>£20,000</strong>{" "}
+            and the KS2 library{" "}
+            <strong className="font-black" style={{ color: yellow }}>£30,000</strong>. The KS1 library
+            is a much smaller space but it needs new flooring, minor structural improvements, and
+            effective heating and cooling, which add to the cost.
+          </p>
+          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+            We are working with the school to ensure value for money. We will be focusing on upgrading
+            our book stock in the autumn, but if the total cost is less than we raise, excess funds
+            will be directed to books.
+          </p>
+        </div>
+      </section>
+
+      {/* Stretching Your Donation Further */}
+      <section className="px-6 sm:px-8 pt-2 pb-10 sm:pt-4 sm:pb-16">
+        <div className="text-center">
+          <span className={`${eyebrow} inline-block px-4 py-2 rounded-full`}
+            style={{ background: "rgba(255, 230, 215, 0.18)", color: "#FFE6D7" }}>
+            Building This Together
+          </span>
+        </div>
+        <div className="max-w-3xl mx-auto text-center mt-5 sm:mt-7">
+          <h2 className={`${heading} font-bold text-[30px] sm:text-[40px] tracking-tight leading-tight text-white`}>
+            Stretching Your Donation Further
+          </h2>
+          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+            We will be fundraising throughout this term for the library campaign. Direct donations are
+            hugely appreciated and can be made here.
+          </p>
+          <button onClick={() => setDonateSource("library_page")}
+            className="mt-5 inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-white text-[15px] sm:text-[16px] active:scale-[0.99] transition"
+            style={{ background: orange, boxShadow: "0 3px 0 #B8551F" }}>
+            Donate now →
+          </button>
+          <p className={`${heading} mt-6 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+            Opting into Gift Aid adds a 25% boost. If your employer matches charitable giving, please
+            let us know — even modest amounts make a big difference. We are registered with Benevity
+            and CAF.
+          </p>
+          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+            The charity bike ride to Amsterdam will be supporting the library campaign this year, and
+            some parents have generous corporate matching for sponsor donations. We will also be
+            holding smaller events throughout the term — keep an eye out for updates.
+          </p>
+          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
+            If you are able and willing to make a particularly generous donation, there are opportunities
+            to sponsor certain elements of the library. Please get in touch to discuss the possibilities.
+          </p>
+        </div>
+      </section>
+
       {/* Get in touch */}
       <section className="px-6 sm:px-8 py-12 sm:py-16">
         <div className="max-w-3xl mx-auto text-center">
@@ -201,16 +272,12 @@ export default function LibraryPage() {
           </h2>
           <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
             Please reach out to{" "}
-            <a href="mailto:shannon@espspta.org"
+            <a href="mailto:pta@espspta.org"
               className="font-bold underline decoration-2 underline-offset-4"
               style={{ color: yellow, textDecorationColor: red }}>
-              shannon@espspta.org
+              pta@espspta.org
             </a>{" "}
             with any questions.
-          </p>
-          <p className={`${heading} mt-4 text-white/85 text-[16px] sm:text-[17px] leading-[1.7] font-normal`}>
-            If you are able and willing to make a significant donation, there are opportunities to sponsor
-            reading nooks and cosy corners. Please email for more information.
           </p>
         </div>
       </section>
