@@ -8,7 +8,7 @@ import { DonateModal } from "./components/DonateModal";
 const DATA = {
   events: [
     { date: "8 May", shortDate: { day: "8", month: "May" }, title: "Y5 Cake Sale", description: "Year 5 are baking up a storm — pop by after pickup for a treat.", cta: "Save the date", tag: "Fundraiser" },
-    { date: "12 June", shortDate: { day: "12", month: "Jun" }, title: "Reception Cake Sale", description: "Support our youngest pupils at the last bake sale of the school year.", cta: "Save the date", tag: "Fundraiser" },
+    { date: "12 June", shortDate: { day: "12", month: "Jun" }, title: "Reception Cake Sale", description: "Reception families share homemade bakes — drop in after pickup to support our youngest year group.", cta: "Save the date", tag: "Fundraiser" },
     { date: "12–13 June", shortDate: { day: "12", month: "Jun" }, title: "ESPS Bike Ride to Amsterdam", description: "Our parents are cycling to Amsterdam to raise money for the library transformation. Novices welcome!", cta: "Sponsorship coming soon", tag: "Fundraiser" },
     { date: "27 June", shortDate: { day: "27", month: "Jun" }, title: "Summer Fair", time: "2–6pm", description: "Our biggest event of the year — stalls, games, food, live music and fun for the whole family.", cta: "Save the date", tag: "Community" },
   ],
@@ -255,7 +255,7 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
   return (
     <section id="library" className="px-4 lg:px-6 pb-2">
       <div className="max-w-3xl mx-auto">
-      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#234A3A" }}>
+      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1E5340" }}>
         <div className="relative p-5 lg:p-12 text-white">
           <span className="inline-block px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.18em] font-bold mb-2"
             style={{ background: "rgba(255, 230, 215, 0.18)", color: "#FFE6D7" }}>
@@ -263,7 +263,7 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
           </span>
           <h2 className={`${h} font-bold text-[32px] lg:text-[44px] leading-[1.0] tracking-tight mt-2`}>
             Let&rsquo;s{" "}
-            <span style={{ color: "#E0713E" }}>Transform</span>{" "}
+            <span style={{ color: "#F5C24B" }}>Transform</span>{" "}
             Our Libraries
           </h2>
           <p className="mt-3 text-white/90 text-[15px] lg:text-[16px] leading-relaxed">
