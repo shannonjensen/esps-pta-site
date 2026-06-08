@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
           donor_postcode: pi.metadata.donor_postcode || null,
           employer_match: pi.metadata.employer_match === "true",
           anonymous: pi.metadata.anonymous === "true",
+          message: pi.metadata.message || null,
           source: pi.metadata.source || null,
         },
         { onConflict: "stripe_payment_intent_id" }

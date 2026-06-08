@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
         donor_postcode: body.postcode || "",
         employer_match: body.employerMatch ? "true" : "false",
         anonymous: body.anonymous ? "true" : "false",
+        message: (body.message || "").toString().slice(0, 280),
         source: body.source || "",
       },
     });

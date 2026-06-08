@@ -50,6 +50,7 @@ export async function POST(req: NextRequest) {
       donor_postcode: body.postcode || null,
       employer_match: !!body.employerMatch,
       anonymous: !!body.anonymous,
+      message: (body.message || "").toString().slice(0, 280) || null,
       source: body.source || null,
     });
 

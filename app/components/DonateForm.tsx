@@ -16,6 +16,7 @@ type Props = {
   postcode: string;
   employerMatch: boolean;
   anonymous: boolean;
+  message: string;
   source: string | null;
   onSuccess: () => void;
   onBack: () => void;
@@ -39,6 +40,7 @@ export function DonateForm(props: Props) {
         postcode: props.postcode,
         employerMatch: props.employerMatch,
         anonymous: props.anonymous,
+        message: props.message,
         source: props.source,
       }),
     })
@@ -50,7 +52,7 @@ export function DonateForm(props: Props) {
       })
       .catch((e) => !cancelled && setError(e.message));
     return () => { cancelled = true; };
-  }, [props.amount, props.name, props.email, props.giftAid, props.address, props.postcode, props.employerMatch, props.anonymous, props.source]);
+  }, [props.amount, props.name, props.email, props.giftAid, props.address, props.postcode, props.employerMatch, props.anonymous, props.message, props.source]);
 
   if (!pubKey) {
     return (

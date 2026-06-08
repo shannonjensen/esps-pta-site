@@ -119,18 +119,27 @@ export default function LibraryPage() {
             const repeats = Math.max(2, Math.ceil(12 / recent.length));
             const items = Array.from({ length: repeats }).flatMap(() => recent);
             return (
-              <div className="mt-5 overflow-hidden border-t border-b border-stone-300 py-2.5">
-                <div className="ticker-track inline-block whitespace-nowrap text-[13px] text-stone-700">
-                  {[...items, ...items].map((d, i) => (
-                    <span key={i} className="px-4">
-                      <span className="font-bold">{d.name}</span>
-                      <span className="text-stone-500"> donated </span>
-                      <span className="font-bold" style={{ color: orange }}>£{d.amount.toLocaleString()}</span>
-                      <span className="text-stone-400 mx-1">·</span>
-                    </span>
-                  ))}
+              <>
+                <div className="mt-5 overflow-hidden border-t border-b border-stone-300 py-2.5">
+                  <div className="ticker-track inline-block whitespace-nowrap text-[13px] text-stone-700">
+                    {[...items, ...items].map((d, i) => (
+                      <span key={i} className="px-4">
+                        <span className="font-bold">{d.name}</span>
+                        <span className="text-stone-500"> donated </span>
+                        <span className="font-bold" style={{ color: orange }}>£{d.amount.toLocaleString()}</span>
+                        <span className="text-stone-400 mx-1">·</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+                <div className="mt-3 text-center">
+                  <Link href="/library/donations"
+                    className="inline-flex items-center gap-1.5 text-[13px] font-bold"
+                    style={{ color: green }}>
+                    See all donations →
+                  </Link>
+                </div>
+              </>
             );
           })()}
         </div>
@@ -331,6 +340,13 @@ export default function LibraryPage() {
           </p>
         </div>
       </section>
+
+      {/* Admin */}
+      <div className="px-6 pb-10 text-center">
+        <Link href="/admin" className="text-[11px] uppercase tracking-[0.18em] font-bold text-stone-400 hover:text-stone-600">
+          Admin
+        </Link>
+      </div>
 
       <DonateModal open={donateOpen} onClose={closeDonate} source={donateSource} />
     </div>

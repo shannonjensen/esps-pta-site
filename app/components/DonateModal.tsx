@@ -25,6 +25,7 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
   const [postcode, setPostcode] = useState("");
   const [employerMatch, setEmployerMatch] = useState(false);
   const [anonymous, setAnonymous] = useState(false);
+  const [message, setMessage] = useState("");
   const [bankSubmitting, setBankSubmitting] = useState(false);
   const [bankReference, setBankReference] = useState<string | null>(null);
   const [bankError, setBankError] = useState<string | null>(null);
@@ -115,6 +116,9 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
                 <span className="font-bold text-stone-900">My employer matches charitable donations.</span> Stretch your donation further. We&rsquo;ll follow up via email.
               </span>
             </label>
+            <textarea value={message} onChange={(e) => setMessage(e.target.value.slice(0, 280))} placeholder="Leave a message (optional)"
+              rows={2}
+              className={`${inputClass} mt-2.5 resize-none`} style={inputStyle} />
             <button onClick={() => canContinue && setStep("payment")}
               disabled={!canContinue}
               className="w-full mt-4 py-3.5 rounded-full font-bold text-white text-[15px] disabled:opacity-60"
@@ -143,6 +147,7 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
               postcode={postcode}
               employerMatch={employerMatch}
               anonymous={anonymous}
+              message={message}
               source={source}
               onSuccess={() => setStep("success")}
               onBack={() => setStep("amount")}
@@ -184,6 +189,7 @@ export function DonateModal({ open, onClose, source }: { open: boolean; onClose:
                               postcode,
                               employerMatch,
                               anonymous,
+                              message,
                               source,
                             }),
                           });
