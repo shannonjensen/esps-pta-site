@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { DonateModal } from "../components/DonateModal";
@@ -12,6 +12,14 @@ export default function LibraryPage() {
   const [donateSource, setDonateSource] = useState<string | null>(null);
   const donateOpen = donateSource !== null;
   const closeDonate = () => setDonateSource(null);
+
+  // Keep the donation ticker at a constant speed regardless of how many donors
+  // there are. The track scrolls one card-set per loop; its width grows with
+  // more donors, so we set the duration from the measured width to hold a fixed
+  // pixels-per-second pace (lower TICKER_SPEED = slower scroll).
+  const tickerRef = useRef<HTMLDivElement>(null);
+  const [tickerDuration, setTickerDuration] = useState<number | null>(null);
+  const TICKER_SPEED = 45; // px per second
   useEffect(() => {
     fetch("/api/totals")
       .then((r) => (r.ok ? r.json() : null))
@@ -30,6 +38,18 @@ export default function LibraryPage() {
       })
       .catch(() => {});
   }, []);
+  useEffect(() => {
+    const el = tickerRef.current;
+    if (!el) return;
+    const measure = () => {
+      const half = el.scrollWidth / 2; // one card-set (the track duplicates content)
+      if (half > 0) setTickerDuration(half / TICKER_SPEED);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [recent]);
+
   const loaded = stats !== null;
   const raised = stats?.raised ?? 0;
   const donors = stats?.donors ?? 0;
@@ -121,7 +141,9 @@ export default function LibraryPage() {
             return (
               <>
                 <div className="mt-5 overflow-hidden border-t border-b border-stone-300 py-2.5">
-                  <div className="ticker-track inline-block whitespace-nowrap text-[13px] text-stone-700">
+                  <div ref={tickerRef}
+                    style={tickerDuration ? { animationDuration: `${tickerDuration}s` } : undefined}
+                    className="ticker-track inline-block whitespace-nowrap text-[13px] text-stone-700">
                     {[...items, ...items].map((d, i) => (
                       <span key={i} className="px-4">
                         <span className="font-bold">{d.name}</span>
