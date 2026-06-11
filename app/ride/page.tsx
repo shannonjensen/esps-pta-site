@@ -100,7 +100,28 @@ export default function RidePage() {
           ? `${Math.round(ageMs / 60_000)} min ago`
           : `${Math.round(ageMs / 3_600_000)} hr ago`;
 
-  const pct = progress?.pct ?? 0;
+  // "They made it!" mode: automatic once they're within 1 km of the route's
+  // end; previewable any time with /ride?finished=1. Set in an effect so the
+  // server-rendered HTML matches the first client render.
+  const [previewFinished, setPreviewFinished] = useState(false);
+  useEffect(() => {
+    setPreviewFinished(new URLSearchParams(window.location.search).has("finished"));
+  }, []);
+  const finished =
+    previewFinished || (progress !== null && progress.remainingKm <= 1);
+
+  // When finished, clamp the displayed numbers to a clean 100% (also lets the
+  // ?finished=1 preview work without any location data).
+  const displayProgress = finished
+    ? {
+        doneKm: routeData.totalKm,
+        totalKm: routeData.totalKm,
+        remainingKm: 0,
+        pct: 100,
+      }
+    : progress;
+
+  const pct = displayProgress?.pct ?? 0;
 
   return (
     <div className="min-h-screen" style={{ background: bgWash, color: green }}>
@@ -124,16 +145,34 @@ export default function RidePage() {
           >
             ESPS PTA Library Campaign
           </span>
-          <h1 className={`${heading} font-bold tracking-tight leading-[1.02] text-[40px] sm:text-[58px] lg:text-[68px]`}>
-            London <span style={{ color: orange }}>&rarr;</span> Amsterdam
-          </h1>
-          <p className={`${heading} mt-4 text-[18px] sm:text-[24px] leading-[1.4] max-w-2xl mx-auto`}>
-            Our intrepid riders have set off on their{" "}
-            <strong className="font-black" style={{ color: orange }}>
-              {Math.round(routeData.totalKm).toLocaleString()} km
-            </strong>{" "}
-            journey to raise funds for our school libraries. Follow their progress.
-          </p>
+          {finished ? (
+            <>
+              <h1 className={`${heading} font-bold tracking-tight leading-[1.02] text-[40px] sm:text-[58px] lg:text-[68px]`}>
+                They <span style={{ color: orange }}>made it!</span> 🎉
+              </h1>
+              <p className={`${heading} mt-4 text-[18px] sm:text-[24px] leading-[1.4] max-w-2xl mx-auto`}>
+                Our intrepid riders have arrived in Amsterdam &mdash;{" "}
+                <strong className="font-black" style={{ color: orange }}>
+                  {Math.round(routeData.totalKm).toLocaleString()} km
+                </strong>{" "}
+                from London, all for our school libraries. Thank you to everyone
+                who cheered them on and donated!
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className={`${heading} font-bold tracking-tight leading-[1.02] text-[40px] sm:text-[58px] lg:text-[68px]`}>
+                London <span style={{ color: orange }}>&rarr;</span> Amsterdam
+              </h1>
+              <p className={`${heading} mt-4 text-[18px] sm:text-[24px] leading-[1.4] max-w-2xl mx-auto`}>
+                Our intrepid riders have set off on their{" "}
+                <strong className="font-black" style={{ color: orange }}>
+                  {Math.round(routeData.totalKm).toLocaleString()} km
+                </strong>{" "}
+                journey to raise funds for our school libraries. Follow their progress.
+              </p>
+            </>
+          )}
         </div>
       </section>
 
@@ -144,28 +183,33 @@ export default function RidePage() {
             <p className="text-[10px] uppercase tracking-[0.16em] font-bold text-stone-500">
               Ride progress
             </p>
-            {latest && (
+            {finished ? (
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.1em]"
+                style={{ color: orange }}>
+                Finished 🎉
+              </span>
+            ) : latest ? (
               <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.1em]"
                 style={{ color: isLive ? "#1d8a4a" : "#a8a29e" }}>
                 <span className="w-2 h-2 rounded-full"
                   style={{ background: isLive ? "#1d8a4a" : "#a8a29e", animation: isLive ? "pulse 2s infinite" : undefined }} />
                 {isLive ? "Live" : `Last seen ${lastSeen}`}
               </span>
-            )}
+            ) : null}
           </div>
 
-          {status === null ? (
+          {status === null && !finished ? (
             // First fetch still in flight — hold space so the "not set off"
             // message doesn't flash before live data arrives.
             <div className="mt-2 h-[72px]" aria-hidden />
-          ) : progress ? (
+          ) : displayProgress ? (
             <>
               <div className="mt-1 flex items-baseline justify-between flex-wrap gap-2">
                 <span className={`${heading} font-semibold text-[18px] sm:text-[22px] tracking-tight leading-none`} style={{ color: green }}>
-                  {progress.doneKm.toLocaleString()} km
+                  {displayProgress.doneKm.toLocaleString()} km
                 </span>
                 <span className={`${heading} text-[18px] sm:text-[22px] tracking-tight leading-none font-semibold`} style={{ color: green }}>
-                  of {progress.totalKm.toLocaleString()} km
+                  of {displayProgress.totalKm.toLocaleString()} km
                 </span>
               </div>
               <div className="mt-4 h-3 rounded-full overflow-hidden relative" style={{ background: "rgba(0,0,0,0.12)" }}>
@@ -174,8 +218,8 @@ export default function RidePage() {
               </div>
               <div className="mt-5 grid grid-cols-3 gap-4">
                 <Stat label="Completed" value={`${Math.round(pct)}%`} heading={heading} green={green} />
-                <Stat label="To go" value={`${progress.remainingKm.toLocaleString()} km`} heading={heading} green={green} align="center" />
-                <Stat label="Updated" value={lastSeen ?? "—"} heading={heading} green={green} align="right" />
+                <Stat label="To go" value={`${displayProgress.remainingKm.toLocaleString()} km`} heading={heading} green={green} align="center" />
+                <Stat label="Updated" value={finished ? "Arrived! 🚴" : (lastSeen ?? "—")} heading={heading} green={green} align="right" />
               </div>
             </>
           ) : (
