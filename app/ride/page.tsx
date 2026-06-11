@@ -170,8 +170,8 @@ export default function RidePage() {
               </div>
               <div className="mt-5 grid grid-cols-3 gap-4">
                 <Stat label="Completed" value={`${Math.round(pct)}%`} heading={heading} green={green} />
-                <Stat label="To go" value={`${progress.remainingKm.toLocaleString()} km`} heading={heading} green={green} />
-                <Stat label="Updated" value={lastSeen ?? "—"} heading={heading} green={green} />
+                <Stat label="To go" value={`${progress.remainingKm.toLocaleString()} km`} heading={heading} green={green} align="center" />
+                <Stat label="Updated" value={lastSeen ?? "—"} heading={heading} green={green} align="right" />
               </div>
             </>
           ) : (
@@ -273,14 +273,18 @@ function Stat({
   value,
   heading,
   green,
+  align = "left",
 }: {
   label: string;
   value: string;
   heading: string;
   green: string;
+  align?: "left" | "center" | "right";
 }) {
+  const alignClass =
+    align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left";
   return (
-    <div>
+    <div className={alignClass}>
       <p className="text-[10px] uppercase tracking-[0.14em] font-bold text-stone-500">{label}</p>
       <p className={`${heading} mt-1 font-semibold text-[18px] sm:text-[20px] tracking-tight`} style={{ color: green }}>
         {value}
