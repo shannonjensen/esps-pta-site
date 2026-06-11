@@ -128,11 +128,11 @@ export default function RidePage() {
             London <span style={{ color: orange }}>&rarr;</span> Amsterdam
           </h1>
           <p className={`${heading} mt-4 text-[18px] sm:text-[24px] leading-[1.4] max-w-2xl mx-auto`}>
-            Follow our parents live on their{" "}
+            Our intrepid riders have set off on their{" "}
             <strong className="font-black" style={{ color: orange }}>
               {Math.round(routeData.totalKm).toLocaleString()} km
             </strong>{" "}
-            journey, 12&ndash;13 June, riding for our school libraries.
+            journey to raise funds for our school libraries. Follow their progress here.
           </p>
         </div>
       </section>
