@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import dynamicImport from "next/dynamic";
 import routeData from "@/data/ride-route.json";
 
@@ -39,21 +40,11 @@ type Fundraising = {
   url: string;
 };
 
-type Photo = {
-  id: string;
-  src: string;
-  isVideo: boolean;
-  caption: string;
-  permalink: string;
-  timestamp: string;
-};
-
 const POLL_MS = 30_000;
 
 export default function RidePage() {
   const [status, setStatus] = useState<Status | null>(null);
   const [fundraising, setFundraising] = useState<Fundraising | null>(null);
-  const [photos, setPhotos] = useState<Photo[]>([]);
   const [now, setNow] = useState(() => Date.now());
 
   // Live position + progress, every 30s.
@@ -81,20 +72,6 @@ export default function RidePage() {
         .catch(() => {});
     load();
     const id = setInterval(load, 5 * 60_000);
-    return () => clearInterval(id);
-  }, []);
-
-  // Photos, every 2 minutes.
-  useEffect(() => {
-    const load = () =>
-      fetch("/api/ride/instagram")
-        .then((r) => (r.ok ? r.json() : null))
-        .then((d) => {
-          if (d && Array.isArray(d.photos)) setPhotos(d.photos);
-        })
-        .catch(() => {});
-    load();
-    const id = setInterval(load, 2 * 60_000);
     return () => clearInterval(id);
   }, []);
 
@@ -271,37 +248,22 @@ export default function RidePage() {
           <h2 className={`${heading} font-bold tracking-tight text-[26px] sm:text-[32px] px-1`}>
             From the road
           </h2>
-          {photos.length > 0 ? (
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {photos.map((p) => (
-                <a
-                  key={p.id}
-                  href={p.permalink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative block aspect-square rounded-2xl overflow-hidden bg-white transition-transform hover:scale-[1.02]"
-                  style={{ boxShadow: "0 6px 18px rgba(0,0,0,0.14)" }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={p.src}
-                    alt={p.caption || "Ride photo"}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  {p.isVideo && (
-                    <span className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/55 flex items-center justify-center">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z" /></svg>
-                    </span>
-                  )}
-                </a>
-              ))}
-            </div>
-          ) : (
-            <p className={`${heading} mt-3 px-1 text-[17px] sm:text-[19px] text-stone-600`}>
-              Photos from the road will appear here once the ride is underway.
-            </p>
-          )}
+          {/* Instagram feed via LightWidget (lightwidget.com) — the script
+              auto-resizes the iframe to fit its content. */}
+          <div
+            className="mt-4 rounded-3xl overflow-hidden bg-white p-2 sm:p-3"
+            style={{ boxShadow: "0 12px 32px rgba(0,0,0,0.18)" }}
+          >
+            <Script src="https://cdn.lightwidget.com/widgets/lightwidget.js" strategy="lazyOnload" />
+            <iframe
+              src="https://cdn.lightwidget.com/widgets/4e17426dcaa75662a4621e1c521cc14d.html"
+              scrolling="no"
+              allowTransparency
+              className="lightwidget-widget"
+              style={{ width: "100%", border: 0, overflow: "hidden" }}
+              title="Instagram feed — @esps.pta"
+            />
+          </div>
           {INSTAGRAM_URL && (
             <a
               href={INSTAGRAM_URL}

@@ -18,7 +18,6 @@ Vercel → Project → Settings → Environment Variables, add:
 | Var | Value |
 |---|---|
 | `RIDE_PING_SECRET` | same value as in `.env.local` |
-| `INSTAGRAM_ACCESS_TOKEN` | (optional — see step 4) |
 
 Then redeploy (`git push` does it).
 
@@ -43,25 +42,17 @@ Tips for the day:
 - Test the night before: open the app, tap the publish (up-arrow) button, then
   check `https://<your-domain>/ride` shows the dot at your house.
 
-### 4. Instagram token (optional, ~15 min)
+### 4. Instagram photos
 
-The photo grid uses the Instagram API with Instagram Login. The account
-posting ride photos must be a **Business or Creator** account (free switch in
-Instagram → Settings → Account type).
+The photo feed is a [LightWidget](https://lightwidget.com) embed of
+@esps.pta, configured in the "From the road" section of
+`app/ride/page.tsx`. Widget settings (layout, post count, refresh) are
+managed in the LightWidget dashboard, not in code. LightWidget refreshes
+the feed periodically on its side — new Instagram posts appear without any
+deploy.
 
-1. Go to <https://developers.facebook.com/> → My Apps → Create App → type
-   "Business" (any name, e.g. "ESPS Ride").
-2. In the app dashboard, add the product **Instagram → API setup with
-   Instagram login**.
-3. Under "Generate access tokens", add the Instagram account and log in —
-   this gives a **long-lived access token** (valid 60 days, plenty).
-4. Put the token in Vercel as `INSTAGRAM_ACCESS_TOKEN` and redeploy.
-
-Until the token is set, the page just shows "photos will appear here" — the
-tracker works fine without it.
-
-Also: set `INSTAGRAM_URL` at the top of `app/ride/page.tsx` to the account's
-URL to show a "Follow the ride" link.
+The "Follow the ride" link target is the `INSTAGRAM_URL` constant at the
+top of `app/ride/page.tsx`.
 
 ### 5. Real route GPX (recommended)
 
@@ -86,10 +77,9 @@ file order).
 - `GET /api/ride/justgiving` — scrapes the campaign page's embedded JSON for
   the live total. Cached 5 min. If JustGiving changes their page layout the
   card degrades to just the Donate button.
-- `GET /api/ride/instagram` — latest 24 posts via Graph API. Cached 2 min.
-  Degrades to nothing if unconfigured/expired.
-- `/ride` — polls status every 30s, fundraising every 5 min, photos every
-  2 min.
+- Photos — LightWidget iframe embed of @esps.pta (refreshes on
+  LightWidget's side, no code involved).
+- `/ride` — polls status every 30s, fundraising every 5 min.
 
 ## During the ride
 
