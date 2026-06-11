@@ -232,7 +232,7 @@ export default function RidePage() {
         {/* Photos */}
         <div>
           <h2 className={`${heading} font-bold tracking-tight text-[26px] sm:text-[32px] px-1`}>
-            From the road
+            Updates from the Road
           </h2>
           {/* Instagram feed via LightWidget (lightwidget.com) — the script
               auto-resizes the iframe to fit its content. */}
