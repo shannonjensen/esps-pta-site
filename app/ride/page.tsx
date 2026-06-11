@@ -154,7 +154,11 @@ export default function RidePage() {
             )}
           </div>
 
-          {progress ? (
+          {status === null ? (
+            // First fetch still in flight — hold space so the "not set off"
+            // message doesn't flash before live data arrives.
+            <div className="mt-2 h-[72px]" aria-hidden />
+          ) : progress ? (
             <>
               <div className="mt-1 flex items-baseline justify-between flex-wrap gap-2">
                 <span className={`${heading} font-semibold text-[18px] sm:text-[22px] tracking-tight leading-none`} style={{ color: green }}>
