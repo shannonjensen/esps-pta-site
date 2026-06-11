@@ -132,7 +132,7 @@ export default function RidePage() {
             <strong className="font-black" style={{ color: orange }}>
               {Math.round(routeData.totalKm).toLocaleString()} km
             </strong>{" "}
-            journey to raise funds for our school libraries. Follow their progress here.
+            journey to raise funds for our school libraries. Follow their progress.
           </p>
         </div>
       </section>
