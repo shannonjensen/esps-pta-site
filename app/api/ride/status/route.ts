@@ -14,7 +14,7 @@ export async function GET() {
     const supabase = supabaseAdmin();
     const { data, error } = await supabase
       .from("ride_locations")
-      .select("lat, lng, speed_kmh, battery, recorded_at")
+      .select("lat, lng, speed_kmh, recorded_at")
       .order("recorded_at", { ascending: true })
       .limit(10000);
 
@@ -75,7 +75,6 @@ export async function GET() {
               lat: latest.lat,
               lng: latest.lng,
               speedKmh: latest.speed_kmh,
-              battery: latest.battery,
               recordedAt: latest.recorded_at,
             }
           : null,

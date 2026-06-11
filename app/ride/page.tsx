@@ -20,7 +20,6 @@ type Status = {
     lat: number;
     lng: number;
     speedKmh: number | null;
-    battery: number | null;
     recordedAt: string;
   } | null;
   trail: [number, number][];
