@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Map as LeafletMap, Polyline, Marker } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -22,6 +22,10 @@ export function RideMap({ route, trail, latest }: Props) {
   const trailRef = useRef<Polyline | null>(null);
   const markerRef = useRef<Marker | null>(null);
   const didInitialFitRef = useRef(false);
+  // Map init is async (dynamic import) and often finishes AFTER the first
+  // data fetch — holding the map in state re-runs the update effect the
+  // moment it's ready, so the trail isn't stuck waiting for the next poll.
+  const [map, setMap] = useState<LeafletMap | null>(null);
 
   // Create the map once.
   useEffect(() => {
@@ -64,20 +68,22 @@ export function RideMap({ route, trail, latest }: Props) {
       }).addTo(map);
 
       mapRef.current = map;
+      setMap(map);
     })();
     return () => {
       cancelled = true;
       mapRef.current?.remove();
       mapRef.current = null;
+      setMap(null);
       didInitialFitRef.current = false;
     };
     // The route is static for the life of the page.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Update trail + live marker whenever new data arrives.
+  // Update trail + live marker whenever new data arrives (or the map
+  // finishes initializing).
   useEffect(() => {
-    const map = mapRef.current;
     if (!map) return;
     (async () => {
       const L = (await import("leaflet")).default;
@@ -108,7 +114,7 @@ export function RideMap({ route, trail, latest }: Props) {
         }
       }
     })();
-  }, [trail, latest]);
+  }, [map, trail, latest]);
 
   return (
     <>
