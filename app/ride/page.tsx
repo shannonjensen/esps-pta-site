@@ -19,7 +19,6 @@ type Status = {
   latest: {
     lat: number;
     lng: number;
-    speedKmh: number | null;
     recordedAt: string;
   } | null;
   trail: [number, number][];
@@ -28,7 +27,6 @@ type Status = {
     totalKm: number;
     remainingKm: number;
     pct: number;
-    avgSpeedKmh: number | null;
   } | null;
 };
 
@@ -170,20 +168,9 @@ export default function RidePage() {
                 <div className="h-full rounded-full transition-[width] duration-700"
                   style={{ width: pct + "%", background: `linear-gradient(90deg, ${yellow}, #FFE6A8)` }} />
               </div>
-              <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="mt-5 grid grid-cols-3 gap-4">
                 <Stat label="Completed" value={`${Math.round(pct)}%`} heading={heading} green={green} />
                 <Stat label="To go" value={`${progress.remainingKm.toLocaleString()} km`} heading={heading} green={green} />
-                <Stat
-                  label="Speed"
-                  value={
-                    latest?.speedKmh != null && isLive
-                      ? `${Math.round(latest.speedKmh)} km/h`
-                      : progress.avgSpeedKmh != null
-                        ? `~${Math.round(progress.avgSpeedKmh)} km/h`
-                        : "—"
-                  }
-                  heading={heading} green={green}
-                />
                 <Stat label="Updated" value={lastSeen ?? "—"} heading={heading} green={green} />
               </div>
             </>
