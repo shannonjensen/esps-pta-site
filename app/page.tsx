@@ -9,7 +9,7 @@ const DATA = {
   events: [
     { date: "8 May", shortDate: { day: "8", month: "May" }, title: "Y5 Cake Sale", description: "Year 5 are baking up a storm — pop by after pickup for a treat.", cta: "Save the date", tag: "Fundraiser" },
     { date: "12 June", shortDate: { day: "12", month: "Jun" }, title: "Reception Cake Sale", description: "Reception families share homemade bakes — drop in after pickup to support our youngest year group.", cta: "Save the date", tag: "Fundraiser" },
-    { date: "12–13 June", shortDate: { day: "12", month: "Jun" }, title: "ESPS Bike Ride to Amsterdam", description: "Our parents are cycling 255km to Amsterdam to raise money for the library transformation — and they're on the road right now!", cta: "Follow the ride live", href: "/ride", tag: "Fundraiser" },
+    { date: "12–13 June", shortDate: { day: "12", month: "Jun" }, title: "ESPS Bike Ride to Amsterdam", description: "Our parents cycled 255km from London to Amsterdam, raising money for the library transformation. They made it!", cta: "See their journey", href: "/ride", tag: "Fundraiser" },
     { date: "27 June", shortDate: { day: "27", month: "Jun" }, title: "Summer Fair", time: "2–6pm", description: "Our biggest event of the year — stalls, games, food, live music and fun for the whole family.", cta: "Save the date", tag: "Community" },
   ],
   achievements: [

@@ -135,15 +135,11 @@ export default function LibraryPage() {
             </button>
           </div>
 
-          {/* Live ride banner */}
+          {/* Ride banner */}
           <Link href="/ride"
             className="mt-4 flex items-center justify-center gap-2.5 rounded-3xl px-5 py-4 font-bold text-[15px] sm:text-[16px] text-white transition-transform hover:scale-[1.01] active:scale-[0.99]"
             style={{ background: green, boxShadow: "0 8px 24px rgba(0,0,0,0.18)" }}>
-            <span className="relative flex w-2.5 h-2.5">
-              <span className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping" style={{ background: yellow }} />
-              <span className="relative inline-flex w-2.5 h-2.5 rounded-full" style={{ background: yellow }} />
-            </span>
-            🚴 Our riders are cycling to Amsterdam right now — follow them live →
+            🚴 Our riders cycled 255km to Amsterdam — see their journey →
           </Link>
 
           {recent.length > 0 && (() => {
