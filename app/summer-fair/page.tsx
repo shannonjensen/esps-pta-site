@@ -244,38 +244,16 @@ export default function SummerFairPage() {
             Fair!
           </p>
 
-          {/* Date / time chips */}
-          <div className="mt-7 flex flex-wrap items-stretch justify-center gap-3 max-w-xl mx-auto">
+          {/* Date / time / entry chips */}
+          <div className="mt-7 flex flex-wrap items-stretch justify-center gap-3 max-w-2xl mx-auto">
             <div className="flex-1 min-w-[150px]">
               <InfoChip icon="📅" color={pink} label="When" value="Sat 27th June" />
             </div>
             <div className="flex-1 min-w-[150px]">
               <InfoChip icon="⏰" color={green} label="Time" value="2pm – 6pm" />
             </div>
-          </div>
-
-          {/* Entry badge */}
-          <div className="mt-6 flex justify-center">
-            <div
-              className="relative grid place-items-center text-white text-center"
-              style={{
-                width: 132,
-                height: 132,
-                borderRadius: "50%",
-                background: pink,
-                transform: "rotate(-7deg)",
-                boxShadow: "0 10px 26px rgba(230,57,138,0.4)",
-              }}
-            >
-              <div
-                className="absolute inset-[7px] rounded-full"
-                style={{ border: "2px dashed rgba(255,255,255,0.7)" }}
-              />
-              <div className="leading-tight px-2">
-                <div className="text-[11px] uppercase tracking-[0.14em] font-bold">Entry</div>
-                <div className={`${heading} font-black text-[40px] leading-none`}>£1</div>
-                <div className="text-[10px] uppercase tracking-[0.12em] font-bold">per person</div>
-              </div>
+            <div className="flex-1 min-w-[150px]">
+              <InfoChip icon="🎟️" color={purple} label="Entry" value="£1 per person" />
             </div>
           </div>
 
@@ -317,15 +295,6 @@ export default function SummerFairPage() {
               </div>
             </article>
           ))}
-        </div>
-      </section>
-
-      {/* Practical details */}
-      <section className="px-5 sm:px-6 pt-6 pb-8 max-w-3xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-          <InfoChip icon="📅" color={pink} label="Date" value="Saturday 27 June" />
-          <InfoChip icon="📍" color={blue} label="Where" value="ESPS school grounds" />
-          <InfoChip icon="🎟️" color={purple} label="Entry" value="£1 on the gate" />
         </div>
       </section>
 
