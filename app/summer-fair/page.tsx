@@ -166,7 +166,7 @@ const supportItems: {
   },
 ];
 
-const externalStalls: { name: string; note?: string; link?: string }[] = [
+const externalStalls: { name: string; note?: string; link?: string | null }[] = [
   { name: "Mathnasium", link: "https://www.mathnasium.com/uk/maths-centres/sheen" },
   { name: "Monkey Puzzle Nursery", link: "https://monkeypuzzleeastsheen.co.uk/" },
   { name: "Statement Jewellery" },
