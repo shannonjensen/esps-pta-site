@@ -91,11 +91,90 @@ const attractions: {
     awning: [purple, "#E2CDEF"],
   },
   {
-    emoji: "✨",
-    title: "…and much more",
-    blurb: "Plenty more stalls, treats and surprises waiting on the day.",
+    emoji: "🐛",
+    title: "Wild Encounters",
+    blurb: "Come and meet the creepy crawlies — if you dare!",
     awning: [yellow, "#FCEBB8"],
   },
+];
+
+// Sign-up / external links — fill these in when ready. Until then the page
+// shows a muted "link coming soon" note instead of a dead link.
+const LINKS: { openMic: string | null; robotics: string | null; silentAuction: string | null } = {
+  openMic: "/summer-fair/open-mic",
+  robotics: "https://activities.bookpebble.co.uk/activity/creative-iq-robotics-workshop-east-sheen-primary-school-london-5dc0afa2-dbae-416b-989c-e085f7587cf4",
+  silentAuction: "https://galabid.com/esps-summer2026",
+};
+
+const newThisYear: {
+  emoji: string;
+  title: string;
+  time: string;
+  blurb: string;
+  awning: [string, string];
+  link?: string | null;
+  linkLabel?: string;
+  poster?: string;
+}[] = [
+  { emoji: "🎸", title: "Rock Bandz", time: "2:45pm", blurb: "Pupil performances live on the Astro stage.", awning: [pink, "#FFD2E6"] },
+  { emoji: "🥁", title: "Year 5 Rock Band", time: "3:00pm", blurb: "Our Year 5 rockers take to the stage.", awning: [orange, "#FFD9B0"] },
+  { emoji: "💃", title: "Zumba", time: "3:30 & 4:30pm", blurb: "Get moving with two lively sessions on Putney Playground.", awning: [green, "#CFEEC4"] },
+  { emoji: "🤖", title: "Robotics Workshops", time: "2:30, 3:30 & 4:30pm", blurb: "Hands-on robotics for budding engineers. £5 per child.", awning: [blue, "#C7E8F6"], link: LINKS.robotics, linkLabel: "Book a place", poster: "/robotics-poster.jpg" },
+  { emoji: "🎤", title: "Open Mic", time: "5:15–6:00pm", blurb: "Kids and grown-ups welcome — take the stage and share your talent to round off the day.", awning: [purple, "#E2CDEF"], link: LINKS.openMic, linkLabel: "Sign up to perform" },
+];
+
+const schedule: [string, string, string][] = [
+  ["2:00", "Fair opens!", ""],
+  ["2:30", "Robotics — Session 1", "Classroom X"],
+  ["2:45", "Rock Bandz performances", "Astro"],
+  ["3:00", "Year 5 Band performance", "Astro"],
+  ["3:30", "Zumba with Tina", "Putney Playground"],
+  ["3:30", "Robotics — Session 2", "Classroom X"],
+  ["4:30", "Zumba with Tina", "Putney Playground"],
+  ["4:30", "Robotics — Session 3", "Classroom X"],
+  ["5:15", "Open Mic", "Astro"],
+  ["6:00", "Fair closes", ""],
+];
+
+const supportItems: {
+  emoji: string;
+  color: string;
+  title: string;
+  body: string;
+  link?: string | null;
+  linkLabel?: string;
+}[] = [
+  {
+    emoji: "📐",
+    color: blue,
+    title: "See the new designs",
+    body: "Visit the PTA booth to see the new library designs, learn more about the renovations, and suggest books you'd love to see on the shelves next year.",
+  },
+  {
+    emoji: "🏷️",
+    color: purple,
+    title: "Silent Auction",
+    body: "Our silent auction is live now — bid online, with all proceeds going to the library transformation.",
+    link: LINKS.silentAuction,
+    linkLabel: "Bid now",
+  },
+  {
+    emoji: "🎟️",
+    color: pink,
+    title: "Summer Raffle",
+    body: "Grab raffle tickets from your class reps. Prizes include £200 cash, a wine tasting for two and local vouchers — all proceeds to the library transformation.",
+  },
+];
+
+const externalStalls: { name: string; note?: string }[] = [
+  { name: "Mathnasium" },
+  { name: "Monkey Puzzle Nursery" },
+  { name: "Statement Jewellery" },
+  { name: "Homemade Lemonade" },
+  { name: "Bath Bombs" },
+  { name: "Wild Encounters" },
+  { name: "Creative IQ Robotics Workshops" },
+  { name: "Usborne Books", note: "every purchase helps the school earn free books" },
 ];
 
 function Bunting() {
@@ -296,6 +375,130 @@ export default function SummerFairPage() {
             </article>
           ))}
         </div>
+      </section>
+
+      {/* New this year */}
+      <section className="px-5 sm:px-6 pt-8 pb-6 max-w-4xl mx-auto">
+        <div className="text-center">
+          <span className="inline-block px-4 py-2 rounded-full text-[12px] uppercase tracking-[0.16em] font-bold"
+            style={{ background: `${pink}1F`, color: pink }}>
+            New This Year
+          </span>
+        </div>
+        <h2 className={`${heading} text-center font-black tracking-tight text-[30px] sm:text-[40px] mt-3`} style={{ color: navy }}>
+          Fresh fun for 2026
+        </h2>
+        <div className="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {newThisYear.map((a) => (
+            <article key={a.title} className="rounded-3xl overflow-hidden bg-white flex flex-col" style={{ boxShadow: "0 10px 26px rgba(0,0,0,0.10)" }}>
+              <div className="h-9 w-full" style={{ background: `repeating-linear-gradient(90deg, ${a.awning[0]} 0 18px, ${a.awning[1]} 18px 36px)` }} />
+              <div className="p-5 flex-1 flex flex-col items-center text-center">
+                <span className="text-[40px] -mt-9 mb-1 grid place-items-center w-16 h-16 rounded-full bg-white" style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.12)" }}>
+                  {a.emoji}
+                </span>
+                <h3 className={`${heading} font-black text-[21px] mt-1`} style={{ color: navy }}>{a.title}</h3>
+                <span className="mt-2 inline-block px-3 py-1 rounded-full text-[12px] font-bold" style={{ background: `${a.awning[0]}26`, color: navy }}>
+                  {a.time}
+                </span>
+                <p className="mt-2 text-[14px] leading-relaxed text-stone-600">{a.blurb}</p>
+                {a.link ? (
+                  <a href={a.link} target="_blank" rel="noopener noreferrer" className="mt-3 font-bold text-[14px]" style={{ color: a.awning[0] }}>
+                    {a.linkLabel} →
+                  </a>
+                ) : a.linkLabel ? (
+                  <span className="mt-3 text-[12px] font-semibold text-stone-400">{a.linkLabel} — link coming soon</span>
+                ) : null}
+                {a.poster && (
+                  <a href={a.poster} target="_blank" rel="noopener noreferrer" className="mt-1.5 text-[13px] font-semibold text-stone-500 underline underline-offset-2">
+                    View poster
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* For our libraries */}
+      <section className="px-5 sm:px-6 pt-4 pb-8 max-w-4xl mx-auto">
+        <div className="text-center">
+          <span className="inline-block px-4 py-2 rounded-full text-[12px] uppercase tracking-[0.16em] font-bold"
+            style={{ background: `${green}1F`, color: green }}>
+            For Our Libraries
+          </span>
+        </div>
+        <h2 className={`${heading} text-center font-black tracking-tight text-[30px] sm:text-[40px] mt-3`} style={{ color: navy }}>
+          Help transform our libraries
+        </h2>
+        <p className="text-center mt-3 text-[15px] sm:text-[16px] text-stone-600 max-w-xl mx-auto">
+          So much of the fun on the day raises money to completely transform our two school libraries.
+        </p>
+        <div className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {supportItems.map((s) => (
+            <div key={s.title} className="rounded-3xl bg-white p-6 flex flex-col" style={{ boxShadow: "0 10px 26px rgba(0,0,0,0.10)" }}>
+              <span className="grid place-items-center w-12 h-12 rounded-2xl text-[24px]" style={{ background: `${s.color}1F` }}>
+                {s.emoji}
+              </span>
+              <h3 className={`${heading} font-black text-[19px] mt-3`} style={{ color: navy }}>{s.title}</h3>
+              <p className="mt-1.5 text-[14px] leading-relaxed text-stone-600 flex-1">{s.body}</p>
+              {s.link ? (
+                <a href={s.link} target="_blank" rel="noopener noreferrer" className="mt-3 font-bold text-[14px]" style={{ color: s.color }}>
+                  {s.linkLabel} →
+                </a>
+              ) : s.linkLabel ? (
+                <span className="mt-3 text-[12px] font-semibold text-stone-400">{s.linkLabel} — link coming soon</span>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Running order */}
+      <section className="px-5 sm:px-6 pt-6 pb-8 max-w-2xl mx-auto">
+        <h2 className={`${heading} text-center font-black tracking-tight text-[30px] sm:text-[40px]`} style={{ color: navy }}>
+          Running Order
+        </h2>
+        <ol className="mt-7 bg-white rounded-3xl p-6 sm:p-8" style={{ boxShadow: "0 10px 26px rgba(0,0,0,0.10)" }}>
+          {schedule.map(([time, what, where], i) => {
+            const c = buntingColors[i % buntingColors.length];
+            return (
+              <li key={i} className="flex gap-4">
+                <div className="shrink-0 w-[58px] sm:w-[66px] text-right pt-0.5">
+                  <span className={`${heading} font-black text-[15px] sm:text-[17px]`} style={{ color: navy }}>{time}</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="w-3 h-3 rounded-full mt-1.5" style={{ background: c }} />
+                  {i < schedule.length - 1 && <span className="flex-1 w-[2px] my-1" style={{ background: "#0000001a" }} />}
+                </div>
+                <div className={i < schedule.length - 1 ? "pb-5" : ""}>
+                  <div className={`${heading} font-bold text-[16px] sm:text-[17px]`} style={{ color: navy }}>{what}</div>
+                  {where && <div className="text-[13px] text-stone-500 font-medium mt-0.5">{where}</div>}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
+
+      {/* External stalls */}
+      <section className="px-5 sm:px-6 pt-4 pb-8 max-w-4xl mx-auto">
+        <h2 className={`${heading} text-center font-black tracking-tight text-[30px] sm:text-[40px]`} style={{ color: navy }}>
+          Pop-Up Stalls
+        </h2>
+        <p className="text-center mt-3 text-[15px] sm:text-[16px] text-stone-600 max-w-xl mx-auto">
+          There&rsquo;ll be lots of brilliant stalls and activities to explore, including:
+        </p>
+        <ul className="mt-6 max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5">
+          {externalStalls.map((s, i) => (
+            <li key={s.name} className="flex items-start gap-2.5">
+              <span className="mt-2 w-2 h-2 rounded-full shrink-0" style={{ background: buntingColors[i % buntingColors.length] }} />
+              <span className="text-[15px] sm:text-[16px]" style={{ color: navy }}>
+                <span className="font-bold">{s.name}</span>
+                {s.note && <span className="text-stone-500"> &mdash; {s.note}</span>}
+              </span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Get involved */}
