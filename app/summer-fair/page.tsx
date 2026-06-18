@@ -282,7 +282,7 @@ export default function SummerFairPage() {
           <p className="mt-7 text-[16px] sm:text-[18px] leading-relaxed max-w-xl mx-auto text-stone-700">
             Our biggest event of the year is back! Join us for an afternoon of
             food, games, music and fun for the whole family &mdash; all raising
-            money for our school.
+            money for our school and the library renovations.
           </p>
         </div>
       </section>
