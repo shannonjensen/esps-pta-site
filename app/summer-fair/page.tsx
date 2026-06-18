@@ -118,7 +118,7 @@ const newThisYear: {
 }[] = [
   { emoji: "🎸", title: "Rock Bandz", time: "2:45pm", blurb: "Pupil performances live on the Astro stage.", awning: [pink, "#FFD2E6"] },
   { emoji: "🥁", title: "Year 5 Rock Band", time: "3:00pm", blurb: "Our Year 5 rockers take to the stage.", awning: [orange, "#FFD9B0"] },
-  { emoji: "💃", title: "Zumba with Tina", time: "3:30 & 4:30pm", blurb: "Get moving with two lively sessions on Putney Playground.", awning: [green, "#CFEEC4"] },
+  { emoji: "💃", title: "Zumba with Tina", time: "3:30 & 4:30pm", blurb: "Get moving with two lively 15 minute sessions on Putney Playground.", awning: [green, "#CFEEC4"] },
   { emoji: "🤖", title: "Robotics Workshops", time: "2:30, 3:30 & 4:30pm", blurb: "Hands-on robotics for budding engineers. £5 per child, with all proceeds going to the PTA.", awning: [blue, "#C7E8F6"], link: LINKS.robotics, linkLabel: "Book a place", poster: "/robotics-poster.jpg" },
   { emoji: "🎤", title: "Open Mic", time: "5:15–6:00pm", blurb: "Kids and grown-ups welcome — take the stage and share your talent to round off the day.", awning: [purple, "#E2CDEF"], link: LINKS.openMic, linkLabel: "Sign up to perform" },
 ];
@@ -166,15 +166,15 @@ const supportItems: {
   },
 ];
 
-const externalStalls: { name: string; note?: string }[] = [
-  { name: "Mathnasium" },
-  { name: "Monkey Puzzle Nursery" },
+const externalStalls: { name: string; note?: string; link?: string }[] = [
+  { name: "Mathnasium", link: "https://www.mathnasium.com/uk/maths-centres/sheen" },
+  { name: "Monkey Puzzle Nursery", link: "https://monkeypuzzleeastsheen.co.uk/" },
   { name: "Statement Jewellery" },
   { name: "Homemade Lemonade" },
   { name: "Bath Bombs" },
-  { name: "Wild Encounters" },
-  { name: "Creative IQ Robotics Workshops" },
-  { name: "Usborne Books", note: "every purchase helps the school earn free books" },
+  { name: "Wild Encounters", note: "meet the creepy crawlies", link: "https://wild-encounters.co.uk/" },
+  { name: "Creative IQ Robotics Workshops", link: LINKS.robotics },
+  { name: "Usborne Books", note: "every purchase helps the school earn free books", link: "https://www.instagram.com/emilysbookshop2025?igsh=MW5pczAwOXRkZGU1ag==" },
 ];
 
 function Bunting() {
@@ -483,7 +483,7 @@ export default function SummerFairPage() {
       {/* External stalls */}
       <section className="px-5 sm:px-6 pt-4 pb-8 max-w-4xl mx-auto">
         <h2 className={`${heading} text-center font-black tracking-tight text-[30px] sm:text-[40px]`} style={{ color: navy }}>
-          Pop-Up Stalls
+          External Providers
         </h2>
         <p className="text-center mt-3 text-[15px] sm:text-[16px] text-stone-600 max-w-xl mx-auto">
           There&rsquo;ll be lots of brilliant stalls and activities to explore, including:
@@ -493,7 +493,11 @@ export default function SummerFairPage() {
             <li key={s.name} className="flex items-start gap-2.5">
               <span className="mt-2 w-2 h-2 rounded-full shrink-0" style={{ background: buntingColors[i % buntingColors.length] }} />
               <span className="text-[15px] sm:text-[16px]" style={{ color: navy }}>
-                <span className="font-bold">{s.name}</span>
+                {s.link ? (
+                  <a href={s.link} target="_blank" rel="noopener noreferrer" className="font-bold underline underline-offset-2 hover:opacity-80">{s.name}</a>
+                ) : (
+                  <span className="font-bold">{s.name}</span>
+                )}
                 {s.note && <span className="text-stone-500"> &mdash; {s.note}</span>}
               </span>
             </li>
