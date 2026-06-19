@@ -115,10 +115,11 @@ const newThisYear: {
   link?: string | null;
   linkLabel?: string;
   poster?: string;
+  posterLabel?: string;
 }[] = [
   { emoji: "🎸", title: "Rock Bandz", time: "2:45pm", blurb: "Pupil performances live on the Astro stage.", awning: [pink, "#FFD2E6"] },
   { emoji: "🥁", title: "Year 5 Rock Band", time: "3:00pm", blurb: "Our Year 5 rockers take to the stage.", awning: [orange, "#FFD9B0"] },
-  { emoji: "💃", title: "Zumba with Tina", time: "3:30 & 4:30pm", blurb: "Get moving with two lively 15 minute sessions on Putney Playground.", awning: [green, "#CFEEC4"] },
+  { emoji: "💃", title: "Zumba with Tina", time: "3:30 & 4:30pm", blurb: "Get moving with two lively 15 minute sessions on Putney Playground.", awning: [green, "#CFEEC4"], poster: "/zumba-flyer.jpg", posterLabel: "View flyer" },
   { emoji: "🤖", title: "Robotics Workshops", time: "2:30, 3:30 & 4:30pm", blurb: "Hands-on robotics for budding engineers. £5 per child, with all proceeds going to the PTA.", awning: [blue, "#C7E8F6"], link: LINKS.robotics, linkLabel: "Book a place", poster: "/robotics-poster.jpg" },
   { emoji: "🎤", title: "Open Mic", time: "5:15–6:00pm", blurb: "Kids and grown-ups welcome — take the stage and share your talent to round off the day.", awning: [purple, "#E2CDEF"], link: LINKS.openMic, linkLabel: "Sign up to perform" },
 ];
@@ -171,7 +172,7 @@ const externalStalls: { name: string; note?: string; link?: string | null }[] = 
   { name: "Monkey Puzzle Nursery", link: "https://monkeypuzzleeastsheen.co.uk/" },
   { name: "Statement Jewellery" },
   { name: "Homemade Lemonade" },
-  { name: "Bath Bombs" },
+  { name: "Bomb Vivant", note: "bath bombs", link: "https://www.bombvivant.com" },
   { name: "Wild Encounters", note: "meet the creepy crawlies", link: "https://wild-encounters.co.uk/" },
   { name: "Creative IQ Robotics Workshops", link: LINKS.robotics },
   { name: "Usborne Books", note: "every purchase helps the school earn free books", link: "https://www.instagram.com/emilysbookshop2025?igsh=MW5pczAwOXRkZGU1ag==" },
@@ -410,7 +411,7 @@ export default function SummerFairPage() {
                 ) : null}
                 {a.poster && (
                   <a href={a.poster} target="_blank" rel="noopener noreferrer" className="mt-1.5 text-[13px] font-semibold text-stone-500 underline underline-offset-2">
-                    View poster
+                    {a.posterLabel ?? "View poster"}
                   </a>
                 )}
               </div>
