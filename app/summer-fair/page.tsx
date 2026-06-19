@@ -125,13 +125,13 @@ const newThisYear: {
 
 const schedule: [string, string, string][] = [
   ["2:00", "Fair opens!", ""],
-  ["2:30", "Robotics — Session 1", "Classroom X"],
+  ["2:30", "Robotics — Session 1", "Classroom 5M"],
   ["2:45", "Rock Bandz performances", "Astro"],
   ["3:00", "Year 5 Band performance", "Astro"],
   ["3:30", "Zumba with Tina", "Putney Playground"],
-  ["3:30", "Robotics — Session 2", "Classroom X"],
+  ["3:30", "Robotics — Session 2", "Classroom 5M"],
   ["4:30", "Zumba with Tina", "Putney Playground"],
-  ["4:30", "Robotics — Session 3", "Classroom X"],
+  ["4:30", "Robotics — Session 3", "Classroom 5M"],
   ["5:15", "Open Mic", "Astro"],
   ["6:00", "Fair closes", ""],
 ];
