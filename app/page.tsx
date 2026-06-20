@@ -7,8 +7,6 @@ import { DonateModal } from "./components/DonateModal";
 /* ── Data ── */
 const DATA = {
   events: [
-    { date: "8 May", shortDate: { day: "8", month: "May" }, title: "Y5 Cake Sale", description: "Year 5 are baking up a storm — pop by after pickup for a treat.", cta: "Save the date", tag: "Fundraiser" },
-    { date: "12 June", shortDate: { day: "12", month: "Jun" }, title: "Reception Cake Sale", description: "Reception families share homemade bakes — drop in after pickup to support our youngest year group.", cta: "Save the date", tag: "Fundraiser" },
     { date: "12–13 June", shortDate: { day: "12", month: "Jun" }, title: "ESPS Bike Ride to Amsterdam", description: "Our parents cycled 255km from London to Amsterdam, raising money for the library transformation. They made it!", cta: "See their journey", href: "/ride", tag: "Fundraiser" },
     { date: "27 June", shortDate: { day: "27", month: "Jun" }, title: "Summer Fair", time: "2–6pm", description: "Our biggest event of the year — BBQ, tombola, games, live music and fun for the whole family. Entry £1 per person.", cta: "Find out more", href: "/summer-fair", tag: "Community" },
   ],
@@ -232,6 +230,58 @@ function Hero() {
   );
 }
 
+/* ── Summer Fair promo (links to /summer-fair) ── */
+function SummerFairPromo() {
+  const fair = ["#E6398A", "#F07F2D", "#F4B81E", "#5BB54A", "#3FA9DC", "#8E4FA8"];
+  const summer: [string, string][] = [
+    ["S", "#E6398A"], ["U", "#F4B81E"], ["M", "#3FA9DC"],
+    ["M", "#5BB54A"], ["E", "#F07F2D"], ["R", "#8E4FA8"],
+  ];
+  return (
+    <section className="px-4 lg:px-6 pb-2">
+      <div className="max-w-3xl mx-auto">
+        <Link href="/summer-fair" className="group block rounded-3xl overflow-hidden relative transition-transform hover:scale-[1.01]"
+          style={{ background: "#FAF3E6", boxShadow: "0 12px 32px rgba(0,0,0,0.14)", border: "2px solid rgba(28,58,94,0.22)" }}>
+          {/* bunting */}
+          <div className="flex w-full" aria-hidden>
+            {Array.from({ length: 26 }).map((_, i) => (
+              <div key={i} style={{
+                width: 0, height: 0,
+                borderLeft: "min(2.6vw, 19px) solid transparent",
+                borderRight: "min(2.6vw, 19px) solid transparent",
+                borderTop: `min(3.6vw, 28px) solid ${fair[i % fair.length]}`,
+                marginLeft: i === 0 ? 0 : "auto",
+              }} />
+            ))}
+          </div>
+          <div className="px-5 py-6 lg:px-8 lg:py-8 text-center" style={{ color: "#1C3A5E" }}>
+            <span className="inline-block px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.18em] font-bold mb-3"
+              style={{ background: "rgba(230,57,138,0.12)", color: "#E6398A" }}>
+              Don&rsquo;t miss it!
+            </span>
+            <h2 className={`${h} font-black tracking-tight leading-[0.95] text-[34px] lg:text-[50px]`}>
+              {summer.map(([ch, c], i) => (
+                <span key={i} style={{ color: c, textShadow: "1.5px 1.5px 0 #fff, -1.5px 1.5px 0 #fff, 1.5px -1.5px 0 #fff, -1.5px -1.5px 0 #fff" }}>{ch}</span>
+              ))}
+              <span className="italic ml-2" style={{ color: "#1C3A5E" }}>Fair!</span>
+            </h2>
+            <p className={`${h} font-bold mt-2 text-[16px] lg:text-[20px]`} style={{ color: "#1C3A5E" }}>
+              Saturday 27 June &middot; 2&ndash;6pm &middot; £1 entry
+            </p>
+            <p className="mt-2 text-[14px] lg:text-[15px] text-stone-600 max-w-lg mx-auto">
+              BBQ, tombola, games, live music, gladiator duel and more &mdash; fun for the whole family.
+            </p>
+            <span className="mt-5 inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full font-bold text-white text-[14px]"
+              style={{ background: "#F07F2D", boxShadow: "0 3px 0 #C85B1C" }}>
+              Explore the Summer Fair &rarr;
+            </span>
+          </div>
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 /* ── Library campaign pulse ── */
 function LibraryPulse({ onDonate }: { onDonate: () => void }) {
   const goal = DATA.library.goal;
@@ -255,33 +305,33 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
   return (
     <section id="library" className="px-4 lg:px-6 pb-2">
       <div className="max-w-3xl mx-auto">
-      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#1E5340" }}>
-        <div className="relative p-5 lg:p-12 text-white">
-          <span className="inline-block px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.18em] font-bold mb-2"
-            style={{ background: "rgba(255, 230, 215, 0.18)", color: "#FFE6D7" }}>
+      <div className="rounded-3xl overflow-hidden relative" style={{ background: "#E8F0E5", border: "2px solid rgba(35,74,58,0.28)" }}>
+        <div className="relative p-5 lg:p-12" style={{ color: "#234A3A" }}>
+          <span className="block w-fit mx-auto px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.18em] font-bold mb-2"
+            style={{ background: "rgba(35,74,58,0.10)", color: "#234A3A" }}>
             The Library Campaign
           </span>
           <h2 className={`${h} font-bold text-[32px] lg:text-[44px] leading-[1.0] tracking-tight mt-2`}>
             Let&rsquo;s{" "}
-            <span style={{ color: "#F5C24B" }}>Transform</span>{" "}
+            <span style={{ color: "#E0713E" }}>Transform</span>{" "}
             Our Libraries
           </h2>
-          <p className="mt-3 text-white/90 text-[15px] lg:text-[16px] leading-relaxed">
-            We&rsquo;re raising <strong className="font-black" style={{ color: "#F5C24B" }}>£50,000</strong> to transform our KS1 and KS2 libraries into inspiring spaces where every child falls in love with reading.
+          <p className="mt-3 text-[15px] lg:text-[16px] leading-relaxed" style={{ color: "rgba(35,74,58,0.85)" }}>
+            We&rsquo;re raising <strong className="font-black" style={{ color: "#E0713E" }}>£50,000</strong> to transform our KS1 and KS2 libraries into inspiring spaces where every child falls in love with reading.
           </p>
-          <div className="mt-4 rounded-2xl p-3.5" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(6px)" }}>
+          <div className="mt-4 rounded-2xl p-3.5 bg-white" style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}>
             <div className="flex items-baseline justify-between mb-2">
-              <span className={`${h} font-semibold text-[18px] sm:text-[22px] tracking-tight leading-none`} style={{ minHeight: "1em" }}>
+              <span className={`${h} font-semibold text-[18px] sm:text-[22px] tracking-tight leading-none`} style={{ minHeight: "1em", color: "#234A3A" }}>
                 {loaded ? `£${raised.toLocaleString()}` : " "}
               </span>
-              <span className={`${h} text-[18px] sm:text-[22px] tracking-tight leading-none font-semibold text-white/85`}>of £{goal.toLocaleString()}</span>
+              <span className={`${h} text-[18px] sm:text-[22px] tracking-tight leading-none font-semibold`} style={{ color: "#234A3A" }}>of £{goal.toLocaleString()}</span>
             </div>
-            <div className="h-3 rounded-full overflow-hidden relative" style={{ background: "rgba(0,0,0,0.18)" }}>
+            <div className="h-3 rounded-full overflow-hidden relative" style={{ background: "rgba(0,0,0,0.12)" }}>
               <div className="h-full rounded-full relative transition-[width] duration-500" style={{ width: `${pct}%`, background: "linear-gradient(90deg, #F5C24B, #FFE6A8)" }}>
                 <div className="absolute right-0 top-1/2 -translate-y-1/2 -mr-1 w-3 h-3 rounded-full bg-white" style={{ boxShadow: "0 0 0 2px #F5C24B" }} />
               </div>
             </div>
-            <div className="flex justify-between mt-2 text-[11px] text-white/80">
+            <div className="flex justify-between mt-2 text-[11px]" style={{ color: "rgba(35,74,58,0.75)" }}>
               <span className="font-bold">{loaded ? `${pct}% there` : " "}</span>
               <span>{loaded ? `${donors} donors so far` : " "}</span>
             </div>
@@ -289,7 +339,7 @@ function LibraryPulse({ onDonate }: { onDonate: () => void }) {
           <div className="mt-4 grid grid-cols-2 gap-2">
             <Link href="/library"
               className="inline-flex items-center justify-center gap-1.5 px-3 py-3 rounded-full font-bold text-[13px] active:scale-[0.98] transition"
-              style={{ background: "transparent", border: "1.5px solid #F5C24B", color: "#F5C24B" }}>
+              style={{ background: "transparent", border: "1.5px solid #234A3A", color: "#234A3A" }}>
               Learn more →
             </Link>
             <button onClick={onDonate}
@@ -318,9 +368,9 @@ function WhatsOn() {
       <div className="max-w-3xl mx-auto">
       <div className="mb-5">
         <h2 className={`${h} font-black text-[26px] tracking-tight text-stone-900 leading-none`}>
-          What&rsquo;s{" "}
+          Recent &amp;{" "}
           <span className="relative inline-block">
-            coming up
+            upcoming
             <Squiggle color="#E0713E" className="absolute -bottom-1.5 left-0 w-full h-2.5" />
           </span>
         </h2>
@@ -684,6 +734,7 @@ export default function Home() {
       <DesktopHeader onDonate={() => setDonateSource("header")} />
       <MobileHeader onDonate={() => setDonateSource("header")} />
       <Hero />
+      <SummerFairPromo />
       <LibraryPulse onDonate={() => setDonateSource("campaign_card")} />
       <WhatsOn />
       <AboutPta />
