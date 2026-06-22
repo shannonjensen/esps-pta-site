@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 const cream = "#FAF3E6";
@@ -23,23 +23,7 @@ const YEAR_GROUPS = [
   "Family / grown-up",
 ];
 
-type Performer = {
-  position: number;
-  firstName: string;
-  yearGroup: string;
-  performerType: string;
-};
-
-const typeLabel: Record<string, string> = {
-  student: "Student",
-  parent: "Parent",
-  both: "Parent & child",
-};
-
 export default function OpenMicSignupPage() {
-  const [performers, setPerformers] = useState<Performer[]>([]);
-  const [count, setCount] = useState<number | null>(null);
-
   // form state
   const [performerName, setPerformerName] = useState("");
   const [yearGroup, setYearGroup] = useState("");
@@ -53,22 +37,6 @@ export default function OpenMicSignupPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [donePosition, setDonePosition] = useState<number | null>(null);
-
-  const loadLineup = useCallback(() => {
-    fetch("/api/open-mic/signups")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (d && Array.isArray(d.performers)) {
-          setPerformers(d.performers);
-          setCount(d.count ?? d.performers.length);
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    loadLineup();
-  }, [loadLineup]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,7 +62,6 @@ export default function OpenMicSignupPage() {
         setError(d.error || "Something went wrong — please try again.");
       } else {
         setDonePosition(d.position ?? null);
-        loadLineup();
       }
     } catch {
       setError("Something went wrong — please try again.");
@@ -259,37 +226,6 @@ export default function OpenMicSignupPage() {
             </button>
           </form>
         )}
-      </section>
-
-      {/* Lineup */}
-      <section className="px-5 sm:px-6 pt-4 pb-12 max-w-2xl mx-auto">
-        <div className="rounded-3xl bg-white p-5 sm:p-6" style={{ boxShadow: "0 8px 24px rgba(0,0,0,0.08)" }}>
-          <div className="flex items-center justify-between">
-            <h2 className={`${heading} font-black text-[20px] sm:text-[22px]`} style={{ color: navy }}>The line-up so far</h2>
-            <span className="px-3 py-1 rounded-full text-[13px] font-bold" style={{ background: `${purple}1F`, color: purple }}>
-              {count ?? "—"} signed up
-            </span>
-          </div>
-          {count === 0 ? (
-            <p className="mt-4 text-[15px] text-stone-600">No one yet — be the first to take the stage!</p>
-          ) : (
-            <ol className="mt-4 space-y-2">
-              {performers.map((p) => (
-                <li key={p.position} className="flex items-center gap-3 rounded-xl px-3 py-2.5" style={{ background: cream }}>
-                  <span className={`${heading} font-black text-[15px] w-6 shrink-0`} style={{ color: purple }}>{p.position}</span>
-                  <span className="font-bold text-[15px]" style={{ color: navy }}>{p.firstName}</span>
-                  <span className="text-[13px] text-stone-500">{p.yearGroup}</span>
-                  <span className="ml-auto text-[12px] font-semibold px-2 py-0.5 rounded-full" style={{ background: "#0000000a", color: navy }}>
-                    {typeLabel[p.performerType] ?? p.performerType}
-                  </span>
-                </li>
-              ))}
-            </ol>
-          )}
-          <p className="mt-4 text-[12px] text-stone-400">
-            Only first names and year groups are shown here — act details stay private.
-          </p>
-        </div>
       </section>
     </div>
   );
