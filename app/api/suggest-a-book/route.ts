@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const supabase = bookWishlistAdmin();
-    const { error } = await supabase.from("book_suggestions").insert({
+    const { error } = await supabase.from("library_suggestions").insert({
       title: title.slice(0, 300) || null,
       author: author.slice(0, 200) || null,
       suggested_by: suggestedBy.slice(0, 120) || null,
