@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" fill="none" role="img" aria-label="Microphone illustration">
+  <defs>
+    <linearGradient id="omPanel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3EAF8"/>
+      <stop offset="1" stop-color="#E2CDEF"/>
+    </linearGradient>
+    <linearGradient id="omMic" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A368BE"/>
+      <stop offset="1" stop-color="#7E3F97"/>
+    </linearGradient>
+  </defs>
+
+  <!-- panel -->
+  <rect x="0" y="0" width="320" height="400" fill="url(#omPanel)"/>
+
+  <!-- music notes -->
+  <g transform="translate(50 64)" fill="#8E4FA8" opacity="0.5">
+    <circle cx="0" cy="42" r="11"/>
+    <rect x="9" y="-2" width="6" height="44" rx="3"/>
+    <path d="M12 -2 q24 5 19 28" stroke="#8E4FA8" stroke-width="6" fill="none" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(244 92)" fill="#F07F2D" opacity="0.7">
+    <circle cx="0" cy="30" r="9"/>
+    <rect x="7" y="-4" width="5" height="34" rx="2.5"/>
+  </g>
+
+  <!-- microphone -->
+  <g transform="rotate(-12 160 210)">
+    <!-- handle + base -->
+    <rect x="142" y="190" width="36" height="152" rx="18" fill="#5B2E70"/>
+    <rect x="150" y="300" width="20" height="40" rx="9" fill="#4A2459"/>
+    <!-- collar -->
+    <rect x="136" y="194" width="48" height="18" rx="9" fill="#6E3686"/>
+    <!-- head -->
+    <rect x="116" y="56" width="88" height="152" rx="44" fill="url(#omMic)"/>
+    <!-- horizontal grille -->
+    <g stroke="#FFFFFF" stroke-opacity="0.38" stroke-width="4" stroke-linecap="round">
+      <line x1="130" y1="92" x2="190" y2="92"/>
+      <line x1="124" y1="116" x2="196" y2="116"/>
+      <line x1="124" y1="140" x2="196" y2="140"/>
+      <line x1="130" y1="164" x2="190" y2="164"/>
+    </g>
+    <!-- vertical grille -->
+    <g stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="3">
+      <line x1="148" y1="72" x2="148" y2="186"/>
+      <line x1="172" y1="72" x2="172" y2="186"/>
+    </g>
+    <!-- highlight -->
+    <rect x="129" y="74" width="15" height="112" rx="7.5" fill="#FFFFFF" opacity="0.28"/>
+  </g>
+</svg>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { HighlightsCarousel, type HighlightSlide } from "./HighlightsCarousel";
 
 const ogDescription =
   "Saturday 27 June, 2–6pm. BBQ, tombola, games, live music, gladiator duel and more — fun for the whole family. Entry £1 per person.";
@@ -105,6 +106,94 @@ const LINKS: { openMic: string | null; robotics: string | null; silentAuction: s
   robotics: "https://activities.bookpebble.co.uk/activity/creative-iq-robotics-workshop-east-sheen-primary-school-london-5dc0afa2-dbae-416b-989c-e085f7587cf4",
   silentAuction: "https://galabid.com/esps-summer2026",
 };
+
+// Rotating "Fair Highlights" carousel at the top of the page.
+const highlightSlides: HighlightSlide[] = [
+  {
+    emoji: "🍛",
+    eyebrow: "Colour, spice & everything nice",
+    title: "South Asian Food & Henna",
+    blurb:
+      "The Ahmadiyya Muslim Women's Association take you on a journey through the subcontinent — from your favourite take-away dishes to intricate henna designs.",
+    color: blue,
+    accent: "#C7E8F6",
+    poster: "/south-asian-flyer.jpg",
+    posterAlt: "South Asian food & henna stall poster",
+    posterW: 882,
+    posterH: 1246,
+    link: "/south-asian-flyer.jpg",
+    linkLabel: "View the poster",
+    external: true,
+  },
+  {
+    emoji: "🤖",
+    eyebrow: "2:30, 3:30 & 4:30pm",
+    title: "Robotics Workshops",
+    blurb: "Hands-on robotics for budding engineers. £5 per child, with all proceeds going to the PTA.",
+    color: green,
+    accent: "#CFEEC4",
+    poster: "/robotics-poster.jpg",
+    posterAlt: "Creative IQ robotics workshop poster",
+    posterW: 1000,
+    posterH: 1412,
+    link: LINKS.robotics,
+    linkLabel: "Book a place",
+    external: true,
+  },
+  {
+    emoji: "💃",
+    eyebrow: "3:30 & 4:30pm",
+    title: "Zumba with Tina",
+    blurb: "Get moving with two lively 15-minute sessions on Putney Playground — fun for all the family.",
+    color: pink,
+    accent: "#FFD2E6",
+    poster: "/zumba-flyer.jpg",
+    posterAlt: "Zumba with Tina flyer",
+    posterW: 1054,
+    posterH: 1492,
+    link: "/zumba-flyer.jpg",
+    linkLabel: "View the flyer",
+    external: true,
+  },
+  {
+    emoji: "🎤",
+    eyebrow: "Live on the Astro stage",
+    title: "Student Performances",
+    blurb: (
+      <>
+        Cheer on our young performers throughout the afternoon — from{" "}
+        <strong style={{ color: purple }}>RockBandz</strong> and the{" "}
+        <strong style={{ color: purple }}>5C Stars Band</strong> to our crowd-pleasing{" "}
+        <strong style={{ color: purple }}>Open Mic</strong> to round off the day.
+      </>
+    ),
+    color: purple,
+    accent: "#E2CDEF",
+    poster: "/open-mic-mic.svg",
+    posterAlt: "Microphone illustration",
+    posterW: 320,
+    posterH: 400,
+    posterDecorative: true,
+    link: LINKS.openMic,
+    linkLabel: "Sign up for Open Mic",
+  },
+  {
+    emoji: "📐",
+    eyebrow: "At the PTA booth",
+    title: "Final Library Designs Revealed",
+    blurb:
+      "See the finished designs for our two transformed libraries, learn about the renovations and suggest books for the shelves.",
+    color: blue,
+    accent: "#C7E8F6",
+    poster: "/library/library-render-fair.jpg",
+    posterAlt: "Concept design for the transformed ESPS library — arched shelving and a cosy reading nook",
+    posterW: 1505,
+    posterH: 1045,
+    posterWide: true,
+    link: "/library",
+    linkLabel: "Explore the campaign",
+  },
+];
 
 const newThisYear: {
   emoji: string;
@@ -343,6 +432,17 @@ export default function SummerFairPage() {
             money for our school and a complete transformation of our libraries.
           </p>
         </div>
+      </section>
+
+      {/* Fair Highlights carousel */}
+      <section className="px-5 sm:px-6 pt-6 pb-2 max-w-3xl mx-auto">
+        <div className="text-center mb-5">
+          <span className="inline-block px-4 py-2 rounded-full text-[12px] uppercase tracking-[0.16em] font-bold"
+            style={{ background: `${pink}1F`, color: pink }}>
+            ✨ Fair Highlights
+          </span>
+        </div>
+        <HighlightsCarousel slides={highlightSlides} />
       </section>
 
       {/* What's on */}
