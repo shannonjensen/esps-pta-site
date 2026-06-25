@@ -111,7 +111,6 @@ const LINKS: { openMic: string | null; robotics: string | null; silentAuction: s
 const highlightSlides: HighlightSlide[] = [
   {
     emoji: "🍛",
-    eyebrow: "Colour, spice & everything nice",
     title: "South Asian Food & Henna",
     blurb:
       "The Ahmadiyya Muslim Women's Association take you on a journey through the subcontinent — from your favourite take-away dishes to intricate henna designs.",
