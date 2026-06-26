@@ -92,8 +92,7 @@ export default function SuggestABookPage() {
         </h1>
         <p className={`${heading} mt-5 text-center font-normal text-[18px] sm:text-[21px] leading-[1.45] text-stone-700`}>
           Help us fill our new libraries with books our children will love.
-          Tell us a title you&rsquo;d love to see on the shelves — and we&rsquo;ll
-          add it to our wishlist.
+          Tell us a title you&rsquo;d love to see on the shelves.
         </p>
       </section>
 
